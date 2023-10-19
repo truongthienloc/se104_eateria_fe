@@ -13,9 +13,13 @@ Currently, two official plugins are available:
 
 ### Clone code
 
+To clone code from git repo, use this command:
+
 ```shell
-git clone 
+git clone https://github.com/truongthienloc/se104_eateria_fe.git
 ```
+
+After clone code successfully, use this command to install essential packages:
 
 ```shell
 npm install
@@ -23,6 +27,33 @@ npm install
 
 ### Run code
 
+Use this command to run code in dev environment:
+
+```shell
+npm run dev
+```
+
+## Folder Structure
+
+![Folder structure](/docs/folder_structure.png)
+
+- components
+    - Các components dùng chung cho nhiều pages nên được đặt trong thư mục components
+    - Đặt tên cho components phải tường minh, dễ hiểu và viết hoa chữ cái đầu của Components. Ví dụ: SubFooter.tsx
+- containers
+    - Chứa các component được dùng để xử lí dữ liệu và không có chức năng render
+- pages
+    - Các page phải được khai báo tại thư mục pages
+- layouts
+    - Các layout được xử dụng trong website
+- routes
+    - Tất cả các routes điều hướng nên được đặt vào thư mục routes
+- styles
+    - Các bạn có thể sử dụng css hoặc sass theo dạng module, hoặc viết tất cả các css/sass vào thư mục styles
+- helpers
+    - Chứa các function hỗ trợ xử lí cho project
+- services
+    - Chứa các dịch vụ hỗ trợ cho project
 
 ## Production
 
