@@ -1,4 +1,5 @@
 import './styles/App.scss'
+import 'react-toastify/dist/ReactToastify.css';
 import {BrowserRouter} from 'react-router-dom'
 import RootRoute from './routes/RootRoute'
 
