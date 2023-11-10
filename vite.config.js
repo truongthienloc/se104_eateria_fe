@@ -9,7 +9,7 @@ export default defineConfig({
 
     alias: {
 
-        "~/": path.resolve(__dirname, "./src/"),
+        "~": `${path.resolve(__dirname, "./src")}`,
 
         routes: `${path.resolve(__dirname, "./src/routes/")}`,
 
