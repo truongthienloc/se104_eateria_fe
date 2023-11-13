@@ -1,6 +1,6 @@
 import React from 'react'
-import {Routes, Route} from 'react-router-dom'
-import {Homepage} from '~/pages/Homepage'
+import { Routes, Route } from 'react-router-dom'
+import { Homepage } from '~/pages/Homepage'
 import { DefaultLayout } from '~/layouts/DefaultLayout'
 
 function RootRoute() {
@@ -8,7 +8,6 @@ function RootRoute() {
 		<DefaultLayout>
 			<Routes>
 				<Route path='/' element={<Homepage />} />
-
 			</Routes>
 		</DefaultLayout>
 	)
