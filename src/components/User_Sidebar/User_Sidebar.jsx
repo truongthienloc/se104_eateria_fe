@@ -10,11 +10,11 @@ const menu = [
     label: 'Ưu đãi'
   },
   {
-    href: '/user/call_waiter',
+    href: '/user/call-waiter',
     label: 'Gọi phục vụ'
   },
   {
-    href: '/user/receipt_history',
+    href: '/user/receipt-history',
     label: 'Lịch sử hóa đơn'
   },
   {
@@ -22,7 +22,7 @@ const menu = [
     label: 'Thông tin đặt bàn'
   },
   {
-    href: '/user/change_password',
+    href: '/user/change-password',
     label: 'Thay đổi mật khẩu'
   },
   {

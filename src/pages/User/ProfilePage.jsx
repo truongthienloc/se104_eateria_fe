@@ -1,9 +1,8 @@
 import React from 'react'
+import { UserLayout } from '~/layouts/User/UserLayout'
 
 export const ProfilePage = () => {
   return (
-    <div>ProfilePage
-      
-    </div>
+    <div>Profile Page</div>
   )
 }

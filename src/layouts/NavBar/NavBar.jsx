@@ -30,9 +30,9 @@ function NavBar() {
 					</div>
 					{/* Update các endpoint vào của các trang vào đây */}
 					<NavItem href={'/'} text={'TRANG CHỦ'} />
-					<NavItem href={'/'} text={'SẢN PHẨM'} />
+					<NavItem href={'/product'} text={'SẢN PHẨM'} />
 					<NavItem href={'/'} text={'ĐẶT BÀN'} />
-					<NavItem href={'/'} text={'GIỚI THIỆU'} />
+					<NavItem href={'/about'} text={'GIỚI THIỆU'} />
 
 					{/* Update endpoint của trang giỏ hàng vào đây */}
 					<Link
