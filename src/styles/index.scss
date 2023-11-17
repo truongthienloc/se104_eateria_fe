@@ -18,6 +18,10 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-text-size-adjust: 100%;
+	--primary: #FE5621;
+    --second: #2A435D;
+    --third:#FFF8EE;
+    --link: #4BFF3C;
 }
 
 a {
@@ -72,5 +76,15 @@ button:focus-visible {
 	}
 	button {
 		background-color: #f9f9f9;
+	}
+}
+
+.active{
+	background-color: var(--primary);
+	color: var(--third);
+	transition: all 0.2s ease;
+	&:hover {
+		color: var(--third) !important;
+		opacity: 0.8;
 	}
 }
