@@ -28,7 +28,6 @@ function RootRoute() {
 				</Route>
 				<Route path='/about' element={<AboutPage />} />
 				<Route path='/product' element={<ProductPage />} />
-				<Route path='/about' element={<AboutPage />} />
 				<Route index element={<Navigate to={'/home'} replace/>} />
 			</Routes>
 		</DefaultLayout>
