@@ -80,3 +80,13 @@ button:focus-visible {
 		background-color: #f9f9f9;
 	}
 }
+
+.active{
+	background-color: var(--primary);
+	color: var(--third);
+	transition: all 0.2s ease;
+	&:hover {
+		color: var(--third) !important;
+		opacity: 0.8;
+	}
+}
