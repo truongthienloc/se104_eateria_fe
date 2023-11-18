@@ -1,6 +1,7 @@
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { Homepage } from '~/pages/Homepage'
+import { LoginPage } from '~/pages/LoginPage'
 import { DefaultLayout } from '~/layouts/DefaultLayout'
 import { UserLayout } from '~/layouts/User/UserLayout'
 import { ProfilePage } from '~/pages/User/ProfilePage'
@@ -16,6 +17,8 @@ function RootRoute() {
 	return (
 		<DefaultLayout>
 			<Routes>
+				<Route path='/' element={<Homepage />} />
+				<Route path='/login' element={<LoginPage />} />
 				<Route path='/home' element={<Homepage />} />
 				<Route path='/user' element={<UserLayout />}>
 					<Route path='profile' element={<ProfilePage />} />
