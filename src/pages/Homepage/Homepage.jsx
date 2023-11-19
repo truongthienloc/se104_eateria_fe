@@ -1,5 +1,4 @@
 import { FoodItem } from '~/components/FoodItems/FoodItem'
-import Test from '~/components/Test'
 
 function Homepage() {
 	return (

@@ -12,6 +12,7 @@ import { ReceiptHistoryPage } from '~/pages/User/ReceiptHistoryPage'
 import { ReservationInfoPage } from '~/pages/User/ReservationInfoPage'
 import { AboutPage } from '~/pages/AboutPage'
 import { ProductPage } from '~/pages/ProductPage'
+import { SignupPage } from '~/pages/SignupPage'
 
 function RootRoute() {
 	return (
@@ -19,6 +20,7 @@ function RootRoute() {
 			<Routes>
 				<Route path='/' element={<Homepage />} />
 				<Route path='/login' element={<LoginPage />} />
+				<Route path='/signup' element={<SignupPage />} />
 				<Route path='/home' element={<Homepage />} />
 				<Route path='/user' element={<UserLayout />}>
 					<Route path='profile' element={<ProfilePage />} />
