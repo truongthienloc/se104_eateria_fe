@@ -20,10 +20,10 @@
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-text-size-adjust: 100%;
 
-	--primary-color: #FE5621;
-	--second-color: #2A435D;
-	--third-color: #FFF8EE;
-	--link-color: #4BFF3C;
+	--primary-color: #fe5621;
+	--second-color: #2a435d;
+	--third-color: #fff8ee;
+	--link-color: #4bff3c;
 }
 
 a {
@@ -81,7 +81,7 @@ button:focus-visible {
 	}
 }
 
-.active{
+.active {
 	background-color: var(--primary);
 	color: var(--third);
 	transition: all 0.2s ease;
