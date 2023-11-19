@@ -23,11 +23,11 @@ const FormInput = styled(OutlinedInput)`
 `
 
 export default function SignupPage() {
-    const [showPassword, setShowPassword] = useState(false)
-    const [showRePassword, setShowRePassword] = useState(false);
+	const [showPassword, setShowPassword] = useState(false)
+	const [showRePassword, setShowRePassword] = useState(false)
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show)
-    const handleClickShowRePassword = () => setShowRePassword((show) => !show)
+	const handleClickShowRePassword = () => setShowRePassword((show) => !show)
 
 	const handleMouseDownPassword = (event) => {
 		event.preventDefault()
@@ -35,20 +35,26 @@ export default function SignupPage() {
 
 	return (
 		<div className='flex flex-row font justify-evenly py-16'>
-			<AuthBar type={'signup'}/>
+			<AuthBar type={'signup'} />
 
 			<div className='flex flex-col gap-4 p-14 bg-[#FFEFD5] border-primary border-[2px] items-center rounded-lg'>
 				<h2 className='font-bold text-2xl'>ĐĂNG KÝ</h2>
 				<div className='flex flex-col gap-1'>
-					<label htmlFor='phone-number-input'>Vui lòng nhập số điện thoại *</label>
-					<FormInput id='phone-number-input' color='primary' placeholder='090xxxx'/>
+					<label htmlFor='phone-number-input'>
+						Vui lòng nhập số điện thoại *
+					</label>
+					<FormInput
+						id='phone-number-input'
+						color='primary'
+						placeholder='090xxxx'
+					/>
 				</div>
 				<div className='flex flex-col gap-1'>
 					<label htmlFor='password-input'>Nhập mật khẩu *</label>
 					<FormInput
 						id='password-input'
 						type={showPassword ? 'text' : 'password'}
-						sx={{letterSpacing: '0.1rem'}}
+						sx={{ letterSpacing: '0.1rem' }}
 						color='primary'
 						placeholder='Input password'
 						endAdornment={
@@ -64,12 +70,12 @@ export default function SignupPage() {
 						}
 					/>
 				</div>
-                <div className='flex flex-col gap-1'>
+				<div className='flex flex-col gap-1'>
 					<label htmlFor='re-password-input'>Xác nhận lại mật khẩu *</label>
 					<FormInput
 						id='re-password-input'
 						type={showRePassword ? 'text' : 'password'}
-						sx={{letterSpacing: '0.1rem'}}
+						sx={{ letterSpacing: '0.1rem' }}
 						color='primary'
 						placeholder=''
 						endAdornment={

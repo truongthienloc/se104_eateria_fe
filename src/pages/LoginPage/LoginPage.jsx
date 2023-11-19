@@ -34,20 +34,24 @@ export default function LoginPage() {
 
 	return (
 		<div className='flex flex-row font justify-evenly py-16'>
-			<AuthBar type={'login'}/>
+			<AuthBar type={'login'} />
 
 			<div className='flex flex-col gap-4 p-14 bg-[#FFEFD5] border-primary border-[2px] items-center rounded-lg'>
 				<h2 className='font-bold text-2xl'>ĐĂNG NHẬP</h2>
 				<div className='flex flex-col gap-1'>
 					<label htmlFor='phone-number-input'>Số điện thoại *</label>
-					<FormInput id='phone-number-input' color='primary' placeholder='090xxxx'/>
+					<FormInput
+						id='phone-number-input'
+						color='primary'
+						placeholder='090xxxx'
+					/>
 				</div>
 				<div className='flex flex-col gap-1'>
 					<label htmlFor='password-input'>Mật khẩu *</label>
 					<FormInput
 						id='password-input'
 						type={showPassword ? 'text' : 'password'}
-						sx={{letterSpacing: '0.1rem'}}
+						sx={{ letterSpacing: '0.1rem' }}
 						color='primary'
 						placeholder='Input password'
 						endAdornment={
@@ -62,25 +66,30 @@ export default function LoginPage() {
 							</InputAdornment>
 						}
 					/>
-					<a href="/forgot-password"
-						className='text-second hover:text-second hover:opacity-60'
-					>
+					<a
+						href='/forgot-password'
+						className='text-second hover:text-second hover:opacity-60'>
 						Quên mật khẩu?
 					</a>
 				</div>
 
-				<div className="w-full flex flex-row gap-2 items-center">
-					<input type="checkbox" name="remember-me" id="remember-me" 
+				<div className='w-full flex flex-row gap-2 items-center'>
+					<input
+						type='checkbox'
+						name='remember-me'
+						id='remember-me'
 						className='w-5 h-5 cursor-pointer'
 					/>
-					<label htmlFor="remember-me" className='cursor-pointer'>Remember me</label>
+					<label htmlFor='remember-me' className='cursor-pointer'>
+						Remember me
+					</label>
 				</div>
 
 				<button className='px-6 py-3 bg-primary text-white text-lg'>
 					Đăng nhập
 				</button>
 				<button className='w-full flex flex-row items-center justify-center gap-5 font-bold text-lg border-primary'>
-					<img src={googleIcon} alt="google icon" />
+					<img src={googleIcon} alt='google icon' />
 					<p>Đăng nhập với Google</p>
 				</button>
 			</div>

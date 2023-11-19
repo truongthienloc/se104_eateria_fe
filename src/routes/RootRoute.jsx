@@ -29,11 +29,11 @@ function RootRoute() {
 					<Route path='receipt-history' element={<ReceiptHistoryPage />} />
 					<Route path='reservation' element={<ReservationInfoPage />} />
 					<Route path='change-password' element={<ChangePasswordPage />} />
-					<Route index element={<Navigate to={'profile'} replace/>} />
+					<Route index element={<Navigate to={'profile'} replace />} />
 				</Route>
 				<Route path='/about' element={<AboutPage />} />
 				<Route path='/product' element={<ProductPage />} />
-				<Route index element={<Navigate to={'/home'} replace/>} />
+				<Route index element={<Navigate to={'/home'} replace />} />
 			</Routes>
 		</DefaultLayout>
 	)
