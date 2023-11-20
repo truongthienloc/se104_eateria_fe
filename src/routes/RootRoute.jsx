@@ -13,6 +13,7 @@ import { ReservationInfoPage } from '~/pages/User/ReservationInfoPage'
 import { AboutPage } from '~/pages/AboutPage'
 import { ProductPage } from '~/pages/ProductPage'
 import { SignupPage } from '~/pages/SignupPage'
+import { ForgotPasswordPage } from '~/pages/ForgotPasswordPage'
 
 function RootRoute() {
 	return (
@@ -21,6 +22,7 @@ function RootRoute() {
 				<Route path='/' element={<Homepage />} />
 				<Route path='/login' element={<LoginPage />} />
 				<Route path='/signup' element={<SignupPage />} />
+				<Route path='/forgot-password' element={<ForgotPasswordPage />} />
 				<Route path='/home' element={<Homepage />} />
 				<Route path='/user' element={<UserLayout />}>
 					<Route path='profile' element={<ProfilePage />} />
