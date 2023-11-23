@@ -1,7 +1,5 @@
 import React from 'react'
 
 export const ReservationInfoPage = () => {
-  return (
-    <div>ReservationInfoPage</div>
-  )
+	return <div>ReservationInfoPage</div>
 }

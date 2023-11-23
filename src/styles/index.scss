@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import './variables';
 
 :root {
 	font-family: 'Roboto', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -18,10 +19,11 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-text-size-adjust: 100%;
-	--primary: #FE5621;
-    --second: #2A435D;
-    --third:#FFF8EE;
-    --link: #4BFF3C;
+
+	--primary-color: #fe5621;
+	--second-color: #2a435d;
+	--third-color: #fff8ee;
+	--link-color: #4bff3c;
 }
 
 a {
@@ -79,12 +81,12 @@ button:focus-visible {
 	}
 }
 
-.active{
-	background-color: var(--primary);
-	color: var(--third);
+.active {
+	background-color: var(--primary-color);
+	color: var(--third-color);
 	transition: all 0.2s ease;
 	&:hover {
-		color: var(--third) !important;
+		color: var(--third-color) !important;
 		opacity: 0.8;
 	}
 }
