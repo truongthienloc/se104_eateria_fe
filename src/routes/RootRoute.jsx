@@ -15,35 +15,41 @@ import { ProductPage } from '~/pages/ProductPage'
 import { SignupPage } from '~/pages/SignupPage'
 import { ForgotPasswordPage } from '~/pages/ForgotPasswordPage'
 import { AdminLayout } from '~/layouts/Admin/AdminLayout'
-import WebLayout from '~/layouts/WebLayout/WebLayout'
 import { CartPage } from '~/pages/CartPage/CartPage'
 import { ReservationPage } from '~/pages/ReservationPage/ReservationPage'
+import { AdminLoginPage } from '~/pages/Admin/AdminLoginPage'
 
 function RootRoute() {
 	return (
-			<DefaultLayout>
+		<>
 				<Routes>
-					<Route path='/' element={<Homepage />} />
-					<Route path='/login' element={<LoginPage />} />
-					<Route path='/signup' element={<SignupPage />} />
-					<Route path='/forgot-password' element={<ForgotPasswordPage />} />
-					<Route path='/home' element={<Homepage />} />
-					<Route path='/user' element={<UserLayout />}>
-						<Route path='profile' element={<ProfilePage />} />
-						<Route path='coupon' element={<CouponPage />} />
-						<Route path='call-waiter' element={<CallWaiterPage />} />
-						<Route path='receipt-history' element={<ReceiptHistoryPage />} />
-						<Route path='reservation' element={<ReservationInfoPage />} />
-						<Route path='change-password' element={<ChangePasswordPage />} />
-						<Route index element={<Navigate to={'profile'} replace />} />
+					<Route path='/admin' element={<AdminLayout />}>
+						<Route path='login' element={<AdminLoginPage />} />
+						<Route index element={<Navigate to={'login'} replace />} />
 					</Route>
-					<Route path='/about' element={<AboutPage />} />
-					<Route path='/product' element={<ProductPage />} />
-					<Route path='/reservation' element={<ReservationPage />} />
-					<Route path='/cart' element={<CartPage />} />
-					<Route index element={<Navigate to={'/home'} replace />} />
+					<Route path='/' element={<DefaultLayout />}>
+						<Route path='/' element={<Homepage />} />
+						<Route path='/login' element={<LoginPage />} />
+						<Route path='/signup' element={<SignupPage />} />
+						<Route path='/forgot-password' element={<ForgotPasswordPage />} />
+						<Route path='/home' element={<Homepage />} />
+						<Route path='/user' element={<UserLayout />}>
+							<Route path='profile' element={<ProfilePage />} />
+							<Route path='coupon' element={<CouponPage />} />
+							<Route path='call-waiter' element={<CallWaiterPage />} />
+							<Route path='receipt-history' element={<ReceiptHistoryPage />} />
+							<Route path='reservation' element={<ReservationInfoPage />} />
+							<Route path='change-password' element={<ChangePasswordPage />} />
+							<Route index element={<Navigate to={'profile'} replace />} />
+						</Route>
+						<Route path='/about' element={<AboutPage />} />
+						<Route path='/product' element={<ProductPage />} />
+						<Route path='/reservation' element={<ReservationPage />} />
+						<Route path='/cart' element={<CartPage />} />
+						<Route index element={<Navigate to={'/home'} replace />} />
+					</Route>
 				</Routes>
-			</DefaultLayout>
+		</>
 	)
 }
 
