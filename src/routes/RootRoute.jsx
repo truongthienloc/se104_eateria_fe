@@ -23,10 +23,10 @@ function RootRoute() {
 	return (
 		<>
 				<Routes>
-					<Route path='/admin' element={<AdminLayout />}>
-						<Route path='login' element={<AdminLoginPage />} />
+						<Route path='/admin/login' element={<AdminLoginPage />} />
+					{/* <Route path='/admin' element={<AdminLayout />}>
 						<Route index element={<Navigate to={'login'} replace />} />
-					</Route>
+					</Route> */}
 					<Route path='/' element={<DefaultLayout />}>
 						<Route path='/' element={<Homepage />} />
 						<Route path='/login' element={<LoginPage />} />

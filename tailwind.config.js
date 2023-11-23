@@ -15,6 +15,7 @@ export default {
         'third': '#FFFFFF',
         'fourth': '#FFF8EE',
         'link': '#4BFF3C',
+        
       },
       boxShadow: {
         'fadeBottom': 'rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset',
