@@ -32,7 +32,7 @@ export function AdminLoginPage() {
 						type='text'
 						placeholder='Nhập tài khoản'
 					/>
-					<div className='text-second bg-third w-[300px] h-[42px] cursor-text flex flex-row justify-center items-center border-2 border-primary border-solid rounded-md px-5 bg-third'>
+					<div className='text-second bg-third w-[300px] h-[42px] cursor-text flex flex-row justify-center items-center border-2 border-primary border-solid rounded-md px-5'>
 						<input
 							id='pass'
 							className='bg-third h-full w-full outline-none'
