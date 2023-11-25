@@ -33,6 +33,20 @@ function RootRoute() {
 		<>
 			<Routes>
 				<Route path='/admin/login' element={<AdminLoginPage />} />
+				<Route path='/admin' element={<AdminLayout />} >
+						<Route path='sales-info' element={<SalesInfoPage />} />
+						<Route path='manage-statistic' element={<StatisticPage />} />
+						<Route path='manage-booking' element={<ManageBookingPage />} />
+						<Route path='manage-dish' element={<ManageDishPage />} />
+						<Route path='manage-staff' element={<ManageStaffPage />} />
+						<Route path='manage-client' element={<ManageClientPage />} />
+						<Route path='manage-promotion' element={<ManagePromotionPage />}/>
+						<Route path='notification' element={<NotificationPage />} />
+						<Route path='change-password' element={<ChangePasswordPage />} />
+						<Route path='manage-warehouse' element={<ChangePasswordPage />} />
+						<Route path='logout' element={<AdminLogoutPage />} />
+						<Route index element={<Navigate to={'login'} replace />} />
+				</Route>
 				<Route path='/' element={<DefaultLayout />}>
 					<Route path='/' element={<Homepage />} />
 					<Route path='/login' element={<LoginPage />} />
@@ -47,22 +61,6 @@ function RootRoute() {
 						<Route path='reservation' element={<ReservationInfoPage />} />
 						<Route path='change-password' element={<ChangePasswordPage />} />
 						<Route index element={<Navigate to={'profile'} replace />} />
-					</Route>
-					<Route path='/admin' element={<AdminLayout />}>
-						<Route path='sales-info' element={<SalesInfoPage />} />
-						<Route path='manage-statistic' element={<StatisticPage />} />
-						<Route path='manage-booking' element={<ManageBookingPage />} />
-						<Route path='manage-dish' element={<ManageDishPage />} />
-						<Route path='manage-staff' element={<ManageStaffPage />} />
-						<Route path='manage-client' element={<ManageClientPage />} />
-						<Route
-							path='manage-promotion'
-							element={<ManagePromotionPage />}
-						/>
-						<Route path='notification' element={<NotificationPage />} />
-						<Route path='change-password' element={<ChangePasswordPage />} />
-						<Route path='manage-warehouse' element={<ChangePasswordPage />} />
-						<Route path='logout' element={<AdminLogoutPage />} />
 					</Route>
 					<Route path='/about' element={<AboutPage />} />
 					<Route path='/product' element={<ProductPage />} />

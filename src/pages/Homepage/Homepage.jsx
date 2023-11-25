@@ -32,8 +32,9 @@ function Homepage() {
 		setTag(e.target.id)
 	}
 	return (
-		<div className='flex-1 font-roboto font-bold '>
+		<div className='flex-1 font-roboto font-bold bg-third'>
 			<div>
+				{/* slide banner */}
 				<div className='khanh'>
 					<div className='flex overflow-hidden relative'>
 						<img src={slide_1} alt='' />
@@ -42,6 +43,7 @@ function Homepage() {
 						<img src={slide_4} alt='' />
 					</div>
 				</div>
+
 				<div className='mt-14 flex flex-col items-center'>
 					<p className='text-4xl mb-10 text-second font-bold'>
 						Món Ăn Phổ Biến
