@@ -3,11 +3,6 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 
 export function AdminLoginPage() {
-	// const [status, setStatus] = useState('eyeOpen')
-	// const Show = (e) => {
-	//   setStatus(e.target.id)
-	//   document.getElementById('pass').type='text'
-	// }
 	var x = true
 	const Show = (e) => {
 		if (x) {
