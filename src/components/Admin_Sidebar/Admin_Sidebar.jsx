@@ -77,12 +77,13 @@ export const Admin_Sidebar = () => {
 			{menu.map((item) => {
 				return (
 					<NavLink
+						id='user-sidebar'
 						key={item.href}
 						to={item.href}
 						className={
-							'flex gap-4 text-lg text-second font-normal hover:text-primary'
+							'px-[5px] py-[10px] flex gap-4 text-lg text-second font-normal hover:text-primary rounded-sm'
 						}>
-						<img className='' src={item.src} alt='' />
+						<img className='primary' src={item.src} />
 						{item.label}
 					</NavLink>
 				)
