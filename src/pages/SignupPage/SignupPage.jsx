@@ -25,12 +25,24 @@ const FormInput = styled(OutlinedInput)`
 export default function SignupPage() {
 	const [showPassword, setShowPassword] = useState(false)
 	const [showRePassword, setShowRePassword] = useState(false)
+	const [email, setEmail] = useState('');
+	const [fullName, setFullName] = useState('');
+	const [password, setPassword] = useState('');
+	const [rePassword, setRePassword] = useState('');
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show)
 	const handleClickShowRePassword = () => setShowRePassword((show) => !show)
+	const handleChangeEmail = e => setEmail(e.target.value);
+	const handleChangeFullName = e => setFullName(e.target.value);
+	const handleChangePassword = e => setPassword(e.target.value);
+	const handleChangeRePassword = e => setRePassword(e.target.value);
 
 	const handleMouseDownPassword = (event) => {
 		event.preventDefault()
+	}
+
+	const handleSubmit = () => {
+
 	}
 
 	return (
@@ -41,12 +53,24 @@ export default function SignupPage() {
 				<h2 className='font-bold text-2xl'>ĐĂNG KÝ</h2>
 				<div className='flex flex-col gap-1'>
 					<label htmlFor='phone-number-input'>
-						Vui lòng nhập số điện thoại *
+						Vui lòng nhập Email *
 					</label>
 					<FormInput
 						id='phone-number-input'
 						color='primary'
-						placeholder='090xxxx'
+						placeholder='example@gmail.com'
+						value={email}
+						onChange={handleChangeEmail}
+					/>
+				</div>
+				<div className='flex flex-col gap-1'>
+					<label htmlFor='name-input'>Họ và tên *</label>
+					<FormInput
+						id='name-input'
+						color='primary'
+						placeholder='Your fullname'
+						value={fullName}
+						onChange={handleChangeFullName}
 					/>
 				</div>
 				<div className='flex flex-col gap-1'>
@@ -57,6 +81,8 @@ export default function SignupPage() {
 						sx={{ letterSpacing: '0.1rem' }}
 						color='primary'
 						placeholder='Input password'
+						value={password}
+						onChange={handleChangePassword}
 						endAdornment={
 							<InputAdornment position='end'>
 								<IconButton
@@ -78,6 +104,8 @@ export default function SignupPage() {
 						sx={{ letterSpacing: '0.1rem' }}
 						color='primary'
 						placeholder=''
+						value={rePassword}
+						onChange={handleChangeRePassword}
 						endAdornment={
 							<InputAdornment position='end'>
 								<IconButton
@@ -92,7 +120,9 @@ export default function SignupPage() {
 					/>
 				</div>
 
-				<button className='mt-8 px-8 py-3 bg-primary text-white text-lg'>
+				<button className='mt-8 px-8 py-3 bg-primary text-white text-lg'
+					onClick={handleSubmit}
+				>
 					Đăng ký
 				</button>
 			</div>
