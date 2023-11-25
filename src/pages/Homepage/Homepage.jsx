@@ -18,12 +18,9 @@ import info_card3 from '~/assets/images/homePage/info/card1-1.svg'
 import info_card2 from '~/assets/images/homePage/info/card1-2.svg'
 import info_card1 from '~/assets/images/homePage/info/card1.svg'
 
-import slide_1 from '~/assets/images/homePage/slider/Group 1000002349.svg'
-import slide_2 from '~/assets/images/homePage/slider/Frame 1 Home page.svg'
-import slide_3 from '~/assets/images/homePage/slider/Frame 2 Home page.svg'
-import slide_4 from '~/assets/images/homePage/slider/Frame 3 Home page.svg'
 
 import { useState } from 'react'
+import HomeBanner from '~/components/Carousel/HomeBanner'
 // const slides = ['slide_1', 'slide_2', 'slide_3', 'slide_4']
 function Homepage() {
 	const [tag, setTag] = useState('mainMenu')
@@ -32,20 +29,13 @@ function Homepage() {
 		setTag(e.target.id)
 	}
 	return (
-		<div className='flex-1 font-roboto font-bold bg-third'>
+		<div className='flex-1 font-roboto font-bold bg-third select-none'>
 			<div>
-				{/* slide banner */}
-				<div className='khanh'>
-					<div className='flex overflow-hidden relative'>
-						<img src={slide_1} alt='' />
-						<img src={slide_2} alt='' />
-						<img src={slide_3} alt='' />
-						<img src={slide_4} alt='' />
-					</div>
-				</div>
+				
+				<HomeBanner />
 
 				<div className='mt-14 flex flex-col items-center'>
-					<p className='text-4xl mb-10 text-second font-bold'>
+					<p className='text-4xl mb-10 text-second font-bold '>
 						Món Ăn Phổ Biến
 					</p>
 					<div className='flex gap-x-5'>
@@ -195,7 +185,7 @@ function Homepage() {
 						</div>
 					</div>
 
-					<div className='w-[1174px] h-[384px] my-16 rounded-2xl border-4 border-primary flex flex-row py-9 px-16 gap-7 flex flex-row'>
+					<div className='w-[1174px] h-[384px] my-16 rounded-2xl border-4 border-primary flex flex-row py-9 px-16 gap-7 '>
 						<div className='justify-center flex-1 '>
 							<p className='mb-5 text-4xl font-bold text-primary flex justify-center'>
 								TÌM KIẾM DỄ DÀNG
@@ -213,7 +203,7 @@ function Homepage() {
 						</div>
 					</div>
 
-					<div className='w-[1174px] h-[384px] my-16 rounded-2xl border-4 border-primary flex flex-row py-11 px-7 gap-12 flex flex-row'>
+					<div className='w-[1174px] h-[384px] my-16 rounded-2xl border-4 border-primary flex flex-row py-11 px-7 gap-12 '>
 						<div className='flex-2 items-center flex'>
 							<img src={info_picture3} alt='' />
 						</div>
@@ -230,7 +220,7 @@ function Homepage() {
 						</div>
 					</div>
 
-					<div className='w-[1174px] h-[384px] my-16 rounded-2xl border-4 border-primary flex flex-row py-9 px-16 gap-7 flex flex-row'>
+					<div className='w-[1174px] h-[384px] my-16 rounded-2xl border-4 border-primary flex flex-row py-9 px-16 gap-7'>
 						<div className='justify-center flex-1 '>
 							<p className='mb-5 text-4xl font-bold text-primary flex justify-center'>
 								BÌNH LUẬN VÀ ĐÁNH GIÁ
