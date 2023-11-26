@@ -43,6 +43,7 @@ export const User_Sidebar = () => {
 			{menu.map((item) => {
 				return (
 					<NavLink
+						id='user-sidebar'
 						key={item.href}
 						to={item.href}
 						className={

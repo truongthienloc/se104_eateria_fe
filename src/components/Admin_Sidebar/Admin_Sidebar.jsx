@@ -1,7 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import promotionIcon from '~/assets/images/AdminSidebar/Subtract.svg'
-import warehouseIcon from '~/assets/images/AdminSidebar/bag-tick-2 (1).svg'
 import clientIcon from '~/assets/images/AdminSidebar/Accepted Profile.svg'
 import bookTableIcon from '~/assets/images/AdminSidebar/clipboard-tick.svg'
 import fourBlocksIcon from '~/assets/images/AdminSidebar/element-3.svg'
@@ -49,18 +48,14 @@ const menu = [
 		label: 'Khuyến mãi',
 		src: promotionIcon,
 	},
-	{
-		href: '/admin/manage-warehouse',
-		label: 'Nhập xuất kho',
-		src: warehouseIcon,
-	},
+
 	{
 		href: '/admin/change-password',
 		label: 'Đổi mật khẩu',
 		src: changePassIcon,
 	},
 	{
-		href: '/admin/logout',
+		href: '',
 		label: 'Đăng xuất',
 		src: logOutIcon,
 	},
@@ -68,19 +63,20 @@ const menu = [
 
 export const Admin_Sidebar = () => {
 	return (
-		<div className='pl-6 pt-8 mb-20 mr-9 w-[232px] h-[800px] bg-[#f8f8f8] flex flex-col gap-10'>
+		<div className='pl-8 pt-8 mb-20 w-[234px] h-full bg-[#f8f8f8] flex flex-col gap-10'>
 			<div className=' flex gap-5 '>
 				<img src={fourBlocksIcon} alt='' />
 				<p className='font-normal text-primary text-2xl'>Admin</p>
 			</div>
-
+		
 			{menu.map((item) => {
 				return (
 					<NavLink
+						id='admin-sidebar'
 						key={item.href}
 						to={item.href}
 						className={
-							'flex gap-4 text-lg text-second font-normal hover:text-primary'
+							'flex gap-4 text-lg text-second font-normal hover:text-primary focus:text-primary'
 						}>
 						<img className='' src={item.src} alt='' />
 						{item.label}
