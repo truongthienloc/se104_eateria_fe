@@ -18,7 +18,7 @@ export function AdminLoginPage() {
 		}
 	}
 	return (
-		<div className='bg-third w-full h-full flex flex-col items-center justify-center'>
+		<div className='bg-third w-full min-h-screen flex flex-col items-center justify-center '>
 			<div className='bg-primary text-white w-full mx-auto max-w-full flex flex-row justify-center'>
 				<p>4Food's Administrator</p>
 			</div>

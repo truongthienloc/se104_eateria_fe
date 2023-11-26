@@ -25,7 +25,6 @@ import { ManagePromotionPage } from '~/pages/Admin/ManagePromotionPage'
 import { ManageDishPage } from '~/pages/Admin/ManageDishPage'
 import { ManageClientPage } from '~/pages/Admin/ManageClientPage'
 import { ManageBookingPage } from '~/pages/Admin/ManageBookingPage'
-import { AdminLogoutPage } from '~/pages/Admin/AdminLogoutPage'
 import { StatisticPage } from '~/pages/Admin/StatisticPage'
 
 function RootRoute() {
@@ -43,8 +42,6 @@ function RootRoute() {
 						<Route path='manage-promotion' element={<ManagePromotionPage />}/>
 						<Route path='notification' element={<NotificationPage />} />
 						<Route path='change-password' element={<ChangePasswordPage />} />
-						<Route path='manage-warehouse' element={<ChangePasswordPage />} />
-						<Route path='logout' element={<AdminLogoutPage />} />
 						<Route index element={<Navigate to={'login'} replace />} />
 				</Route>
 				<Route path='/' element={<DefaultLayout />}>
