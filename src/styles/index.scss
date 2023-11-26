@@ -81,7 +81,7 @@ button:focus-visible {
 	}
 }
 
-.active {
+#user-sidebar.active {
 	background-color: var(--primary-color);
 	color: var(--third-color);
 	transition: all 0.2s ease;
@@ -89,4 +89,8 @@ button:focus-visible {
 		color: var(--third-color) !important;
 		opacity: 0.8;
 	}
+}
+
+#admin-sidebar.active {
+	
 }

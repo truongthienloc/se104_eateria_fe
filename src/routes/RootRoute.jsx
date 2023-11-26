@@ -19,13 +19,11 @@ import { CartPage } from '~/pages/CartPage/CartPage'
 import { ReservationPage } from '~/pages/ReservationPage/ReservationPage'
 import { AdminLoginPage } from '~/pages/Admin/AdminLoginPage'
 import { SalesInfoPage } from '~/pages/Admin/SalesInfoPage'
-import { NotificationPage } from '~/pages/Admin/NotificationPage'
 import { ManageStaffPage } from '~/pages/Admin/ManageStaffPage'
 import { ManagePromotionPage } from '~/pages/Admin/ManagePromotionPage'
 import { ManageDishPage } from '~/pages/Admin/ManageDishPage'
 import { ManageClientPage } from '~/pages/Admin/ManageClientPage'
 import { ManageBookingPage } from '~/pages/Admin/ManageBookingPage'
-import { AdminLogoutPage } from '~/pages/Admin/AdminLogoutPage'
 import { StatisticPage } from '~/pages/Admin/StatisticPage'
 
 function RootRoute() {
@@ -33,6 +31,18 @@ function RootRoute() {
 		<>
 			<Routes>
 				<Route path='/admin/login' element={<AdminLoginPage />} />
+				<Route path='/admin' element={<AdminLayout />}>
+					<Route path='sales-info' element={<SalesInfoPage />} />
+					<Route path='manage-statistic' element={<StatisticPage />} />
+					<Route path='manage-booking' element={<ManageBookingPage />} />
+					<Route path='manage-dish' element={<ManageDishPage />} />
+					<Route path='manage-staff' element={<ManageStaffPage />} />
+					<Route path='manage-client' element={<ManageClientPage />} />
+					<Route
+						path='manage-promotion'	element={<ManagePromotionPage />}
+					/>
+					<Route path='change-password' element={<ChangePasswordPage />} />
+				</Route>
 				<Route path='/' element={<DefaultLayout />}>
 					<Route path='/' element={<Homepage />} />
 					<Route path='/login' element={<LoginPage />} />
@@ -47,22 +57,6 @@ function RootRoute() {
 						<Route path='reservation' element={<ReservationInfoPage />} />
 						<Route path='change-password' element={<ChangePasswordPage />} />
 						<Route index element={<Navigate to={'profile'} replace />} />
-					</Route>
-					<Route path='/admin' element={<AdminLayout />}>
-						<Route path='sales-info' element={<SalesInfoPage />} />
-						<Route path='manage-statistic' element={<StatisticPage />} />
-						<Route path='manage-booking' element={<ManageBookingPage />} />
-						<Route path='manage-dish' element={<ManageDishPage />} />
-						<Route path='manage-staff' element={<ManageStaffPage />} />
-						<Route path='manage-client' element={<ManageClientPage />} />
-						<Route
-							path='manage-promotion'
-							element={<ManagePromotionPage />}
-						/>
-						<Route path='notification' element={<NotificationPage />} />
-						<Route path='change-password' element={<ChangePasswordPage />} />
-						<Route path='manage-warehouse' element={<ChangePasswordPage />} />
-						<Route path='logout' element={<AdminLogoutPage />} />
 					</Route>
 					<Route path='/about' element={<AboutPage />} />
 					<Route path='/product' element={<ProductPage />} />
