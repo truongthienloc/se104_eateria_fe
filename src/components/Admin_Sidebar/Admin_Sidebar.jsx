@@ -63,7 +63,7 @@ const menu = [
 
 export const Admin_Sidebar = () => {
 	return (
-		<div className='pl-6 pt-8 mb-20 w-[290px] h-[800px] bg-[#f8f8f8] flex flex-col gap-10'>
+		<div className='pl-8 pt-8 mb-20 w-[234px] h-full bg-[#f8f8f8] flex flex-col gap-10'>
 			<div className=' flex gap-5 '>
 				<img src={fourBlocksIcon} alt='' />
 				<p className='font-normal text-primary text-2xl'>Admin</p>
