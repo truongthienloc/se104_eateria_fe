@@ -3,11 +3,6 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 
 export function AdminLoginPage() {
-	// const [status, setStatus] = useState('eyeOpen')
-	// const Show = (e) => {
-	//   setStatus(e.target.id)
-	//   document.getElementById('pass').type='text'
-	// }
 	var x = true
 	const Show = (e) => {
 		if (x) {
@@ -23,24 +18,24 @@ export function AdminLoginPage() {
 		}
 	}
 	return (
-		<>
-			<div className='bg-primary text-white w-full mx-auto max-w-full flex flex-row pl-24 py-1 gap-14 justify-center'>
+		<div className='bg-third w-full h-full flex flex-col items-center justify-center'>
+			<div className='bg-primary text-white w-full mx-auto max-w-full flex flex-row justify-center'>
 				<p>4Food's Administrator</p>
 			</div>
 			<div className='w-full h-full flex flex-col items-center justify-center '>
 				<div className='w-[420px] h-[390px] flex flex-col items-center bg-[#FFEFD5] border-2 border-primary border-solid rounded-xl'>
 					<p className='pt-14 text-2xl text-second font-medium mb-11'>
-						ĐĂNG NHẬP ADMIN
+						ĐĂNG NHẬP
 					</p>
 					<input
-						className='w-[300px] h-[42px] border-2 border-primary border-solid rounded-md mb-11 px-5 outline-none'
+						className='text-second bg-third w-[300px] h-[42px] border-2 border-primary border-solid rounded-md mb-11 px-5 outline-none'
 						type='text'
 						placeholder='Nhập tài khoản'
 					/>
-					<div className='w-[300px] h-[42px] cursor-text flex flex-row justify-center items-center border-2 border-primary border-solid rounded-md px-5 bg-third'>
+					<div className='text-second bg-third w-[300px] h-[42px] cursor-text flex flex-row justify-center items-center border-2 border-primary border-solid rounded-md px-5'>
 						<input
 							id='pass'
-							className='h-full w-full outline-none'
+							className='bg-third h-full w-full outline-none'
 							type='password'
 							placeholder='Nhập mật khẩu'></input>
 						<div className='cursor-pointer' id='eyeOpen' onClick={Show}>
@@ -58,6 +53,6 @@ export function AdminLoginPage() {
 					</button>
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }

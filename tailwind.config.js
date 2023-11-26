@@ -15,7 +15,7 @@ export default {
         'third': '#FFFFFF',
         'fourth': '#FFF8EE',
         'link': '#4BFF3C',
-        'button':'#FFEFD5',
+        'button': '#FFEFD5',
         'sub1': '#D9D9D9',
         'sub2': '#CCCCCC'
       },
@@ -26,7 +26,18 @@ export default {
       },
       fontFamily: {
         'roboto': 'Roboto'
-      }
+      },
+      animation: {
+        "fadeIn": "fadeIn 0.5s ease-in-out",
+      },
+
+      // that is actual animation
+      keyframes: (theme) => ({
+        fadeIn: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
+      }),
     },
   },
   plugins: [],
