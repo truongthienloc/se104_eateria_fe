@@ -50,11 +50,6 @@ const menu = [
 		src: promotionIcon,
 	},
 	{
-		href: '/admin/manage-warehouse',
-		label: 'Nhập xuất kho',
-		src: warehouseIcon,
-	},
-	{
 		href: '/admin/change-password',
 		label: 'Đổi mật khẩu',
 		src: changePassIcon,
@@ -68,22 +63,22 @@ const menu = [
 
 export const Admin_Sidebar = () => {
 	return (
-		<div className='pl-6 pt-8 mb-20 mr-9 w-[232px] h-[800px] bg-[#f8f8f8] flex flex-col gap-10'>
+		<div className='pl-6 pt-8 mb-20 mr-9 w-[280px] h-full bg-[#f8f8f8] flex flex-col gap-10'>
 			<div className=' flex gap-5 '>
 				<img src={fourBlocksIcon} alt='' />
 				<p className='font-normal text-primary text-2xl'>Admin</p>
 			</div>
-
+	
 			{menu.map((item) => {
 				return (
 					<NavLink
-						id='user-sidebar'
+						id='admin-sidebar'
 						key={item.href}
 						to={item.href}
 						className={
 							'px-[5px] py-[10px] flex gap-4 text-lg text-second font-normal hover:text-primary rounded-sm'
 						}>
-						<img className='primary' src={item.src} />
+						<img className='primary pl-5' src={item.src} />
 						{item.label}
 					</NavLink>
 				)
