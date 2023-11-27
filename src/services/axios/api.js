@@ -3,9 +3,9 @@ import axios from 'axios'
 const api = axios.create({
 	baseURL: import.meta.env.VITE_API_URL,
 	timeout: 10000,
+	mode: 'cors',
 	headers: {
-		"Content-Type": "application/x-www-form-urlencoded",
-		// "Access-Control-Allow-Credentials": true,
+		"Content-Type": "application/json",
 	}
 })
 
