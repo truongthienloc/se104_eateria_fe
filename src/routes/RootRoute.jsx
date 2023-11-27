@@ -18,37 +18,54 @@ import { AdminLayout } from '~/layouts/Admin/AdminLayout'
 import { CartPage } from '~/pages/CartPage/CartPage'
 import { ReservationPage } from '~/pages/ReservationPage/ReservationPage'
 import { AdminLoginPage } from '~/pages/Admin/AdminLoginPage'
+import { SalesInfoPage } from '~/pages/Admin/SalesInfoPage'
+import { NotificationPage } from '~/pages/Admin/NotificationPage'
+import { ManageStaffPage } from '~/pages/Admin/ManageStaffPage'
+import { ManagePromotionPage } from '~/pages/Admin/ManagePromotionPage'
+import { ManageDishPage } from '~/pages/Admin/ManageDishPage'
+import { ManageClientPage } from '~/pages/Admin/ManageClientPage'
+import { ManageBookingPage } from '~/pages/Admin/ManageBookingPage'
+import { StatisticPage } from '~/pages/Admin/StatisticPage'
 
 function RootRoute() {
 	return (
 		<>
-				<Routes>
-						<Route path='/admin/login' element={<AdminLoginPage />} />
-					{/* <Route path='/admin' element={<AdminLayout />}>
+			<Routes>
+				<Route path='/admin/login' element={<AdminLoginPage />} />
+				<Route path='/admin' element={<AdminLayout />} >
+						<Route path='sales-info' element={<SalesInfoPage />} />
+						<Route path='manage-statistic' element={<StatisticPage />} />
+						<Route path='manage-booking' element={<ManageBookingPage />} />
+						<Route path='manage-dish' element={<ManageDishPage />} />
+						<Route path='manage-staff' element={<ManageStaffPage />} />
+						<Route path='manage-client' element={<ManageClientPage />} />
+						<Route path='manage-promotion' element={<ManagePromotionPage />}/>
+						<Route path='notification' element={<NotificationPage />} />
+						<Route path='change-password' element={<ChangePasswordPage />} />
 						<Route index element={<Navigate to={'login'} replace />} />
-					</Route> */}
-					<Route path='/' element={<DefaultLayout />}>
-						<Route path='/' element={<Homepage />} />
-						<Route path='/login' element={<LoginPage />} />
-						<Route path='/signup' element={<SignupPage />} />
-						<Route path='/forgot-password' element={<ForgotPasswordPage />} />
-						<Route path='/home' element={<Homepage />} />
-						<Route path='/user' element={<UserLayout />}>
-							<Route path='profile' element={<ProfilePage />} />
-							<Route path='coupon' element={<CouponPage />} />
-							<Route path='call-waiter' element={<CallWaiterPage />} />
-							<Route path='receipt-history' element={<ReceiptHistoryPage />} />
-							<Route path='reservation' element={<ReservationInfoPage />} />
-							<Route path='change-password' element={<ChangePasswordPage />} />
-							<Route index element={<Navigate to={'profile'} replace />} />
-						</Route>
-						<Route path='/about' element={<AboutPage />} />
-						<Route path='/product' element={<ProductPage />} />
-						<Route path='/reservation' element={<ReservationPage />} />
-						<Route path='/cart' element={<CartPage />} />
-						<Route index element={<Navigate to={'/home'} replace />} />
+				</Route>
+				<Route path='/' element={<DefaultLayout />}>
+					<Route path='/' element={<Homepage />} />
+					<Route path='/login' element={<LoginPage />} />
+					<Route path='/signup' element={<SignupPage />} />
+					<Route path='/forgot-password' element={<ForgotPasswordPage />} />
+					<Route path='/home' element={<Homepage />} />
+					<Route path='/user' element={<UserLayout />}>
+						<Route path='profile' element={<ProfilePage />} />
+						<Route path='coupon' element={<CouponPage />} />
+						<Route path='call-waiter' element={<CallWaiterPage />} />
+						<Route path='receipt-history' element={<ReceiptHistoryPage />} />
+						<Route path='reservation' element={<ReservationInfoPage />} />
+						<Route path='change-password' element={<ChangePasswordPage />} />
+						<Route index element={<Navigate to={'profile'} replace />} />
 					</Route>
-				</Routes>
+					<Route path='/about' element={<AboutPage />} />
+					<Route path='/product' element={<ProductPage />} />
+					<Route path='/reservation' element={<ReservationPage />} />
+					<Route path='/cart' element={<CartPage />} />
+					<Route index element={<Navigate to={'/home'} replace />} />
+				</Route>
+			</Routes>
 		</>
 	)
 }

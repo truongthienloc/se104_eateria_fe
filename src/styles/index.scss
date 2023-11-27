@@ -12,7 +12,7 @@
 
 	color-scheme: light dark;
 	color: rgba(255, 255, 255, 0.87);
-	background-color: #242424;
+	background-color: white;
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
@@ -56,9 +56,8 @@ button {
 	font-size: 1em;
 	font-weight: 500;
 	font-family: inherit;
-	background-color: #1a1a1a;
-	cursor: pointer;
-	transition: border-color 0.25s;
+	// background-color: #1a1a1a;
+	// transition: border-color 0.25s;
 }
 button:hover {
 	border-color: #646cff;
@@ -81,7 +80,16 @@ button:focus-visible {
 	}
 }
 
-.active {
+#user-sidebar.active {
+	background-color: var(--primary-color);
+	color: var(--third-color);
+	transition: all 0.2s ease;
+	&:hover {
+		color: var(--third-color) !important;
+		opacity: 0.8;
+	}
+}
+#admin-sidebar.active {
 	background-color: var(--primary-color);
 	color: var(--third-color);
 	transition: all 0.2s ease;
