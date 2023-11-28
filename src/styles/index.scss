@@ -90,11 +90,6 @@ button:focus-visible {
 	}
 }
 #admin-sidebar.active {
-	background-color: var(--primary-color);
-	color: var(--third-color);
-	transition: all 0.2s ease;
-	&:hover {
-		color: var(--third-color) !important;
-		opacity: 0.8;
-	}
+	color: var(--primary-color);
+	
 }
