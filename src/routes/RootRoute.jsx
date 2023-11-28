@@ -19,7 +19,6 @@ import { CartPage } from '~/pages/CartPage/CartPage'
 import { ReservationPage } from '~/pages/ReservationPage/ReservationPage'
 import { AdminLoginPage } from '~/pages/Admin/AdminLoginPage'
 import { SalesInfoPage } from '~/pages/Admin/SalesInfoPage'
-import { NotificationPage } from '~/pages/Admin/NotificationPage'
 import { ManageStaffPage } from '~/pages/Admin/ManageStaffPage'
 import { ManagePromotionPage } from '~/pages/Admin/ManagePromotionPage'
 import { ManageDishPage } from '~/pages/Admin/ManageDishPage'
@@ -40,7 +39,6 @@ function RootRoute() {
 						<Route path='manage-staff' element={<ManageStaffPage />} />
 						<Route path='manage-client' element={<ManageClientPage />} />
 						<Route path='manage-promotion' element={<ManagePromotionPage />}/>
-						<Route path='notification' element={<NotificationPage />} />
 						<Route path='change-password' element={<ChangePasswordPage />} />
 						<Route index element={<Navigate to={'login'} replace />} />
 				</Route>

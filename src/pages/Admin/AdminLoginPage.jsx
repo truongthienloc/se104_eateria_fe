@@ -18,11 +18,12 @@ export function AdminLoginPage() {
 		}
 	}
 	return (
-		<div className='bg-third w-full min-h-screen flex flex-col items-center justify-center '>
+		<div className='bg-third w-full min-h-screen flex flex-col gap-48'>
+			{/* chỗ này tui hard code gap, ae nào biết chỉ với */}
 			<div className='bg-primary text-white w-full mx-auto max-w-full flex flex-row justify-center'>
 				<p>4Food's Administrator</p>
 			</div>
-			<div className='w-full h-full flex flex-col items-center justify-center '>
+			<div className='w-full flex justify-center '>
 				<div className='w-[420px] h-[390px] flex flex-col items-center bg-[#FFEFD5] border-2 border-primary border-solid rounded-xl'>
 					<p className='pt-14 text-2xl text-second font-medium mb-11'>
 						ĐĂNG NHẬP
