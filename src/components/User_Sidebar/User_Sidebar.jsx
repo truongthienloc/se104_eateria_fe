@@ -33,7 +33,7 @@ const menu = [
 
 export const User_Sidebar = () => {
 	return (
-		<div className='flex flex-col items-center gap-8 bg-third shadow-lg w-[400px] h-[800px] ml-[40px] rounded-lg my-8 border-slate-900 border'>
+		<div className='flex flex-col items-center gap-8 bg-third shadow-lg w-[340px] h-[800px] ml-[40px] rounded-lg my-8 border-slate-900 border flex-shrink-0'>
 			<div>
 				<div className='w-[120px] rounded-[50%] overflow-hidden mt-[30px]'>
 					<img src='https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=' />
@@ -43,6 +43,7 @@ export const User_Sidebar = () => {
 			{menu.map((item) => {
 				return (
 					<NavLink
+						id='user-sidebar'
 						key={item.href}
 						to={item.href}
 						className={

@@ -1,0 +1,4 @@
+{
+    "login": "/auth/login",
+    "signup": "/auth/register"
+}

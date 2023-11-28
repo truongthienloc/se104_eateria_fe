@@ -1,5 +1,9 @@
 import React from 'react'
 
 export const CouponPage = () => {
-	return <div>CouponPage</div>
+	return (
+		<div className='w-full h-full pl-10 pt-10'>
+			CouponPage
+		</div>
+	)
 }

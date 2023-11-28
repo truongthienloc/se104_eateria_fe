@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { OutlinedInput, InputAdornment, IconButton, styled } from '@mui/material'
 import { VisibilityOff, Visibility } from '@mui/icons-material'
+import { useNavigate } from 'react-router-dom'
 import { AuthBar } from '~/components/AuthBar'
+import { toast } from 'react-toastify'
 import googleIcon from '~/assets/images/google.svg'
+import { api } from '~/services/axios'
 
 const FormInput = styled(OutlinedInput)`
 	width: 300px;
@@ -24,12 +27,75 @@ const FormInput = styled(OutlinedInput)`
 `
 
 export default function LoginPage() {
+	const navigate = useNavigate()
 	const [showPassword, setShowPassword] = useState(false)
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show)
+	const handleChangeEmail = (e) => setEmail(e.target.value)
+	const handleChangePassword = (e) => setPassword(e.target.value)
 
 	const handleMouseDownPassword = (event) => {
 		event.preventDefault()
+	}
+
+	const handleEmailKeyDown = (e) => {
+		if (e.key !== 'Enter') {
+			return
+		}
+
+		e.preventDefault()
+		document.querySelector('#password-input').focus()
+	}
+
+	const handlePasswordKeyDown = (e) => {
+		if (e.key !== 'Enter') {
+			return
+		}
+
+		e.preventDefault()
+		handleSubmit()
+	}
+
+	const handleSubmit = async () => {
+		if (email === '') {
+			toast.error('Không được để trống email')
+			return
+		}
+		if (password === '') {
+			toast.error('Không được để trống password')
+			return
+		}
+
+		try {
+			const res = await toast.promise(
+				api.post('/auth/login', {
+					email: email,
+					password: password,
+				}),
+				{
+					pending: 'Đang đăng nhập',
+					success: 'Đăng nhập thành công',
+					error: 'Đăng nhập thất bại',
+				}
+			)
+
+			const token = res.data.accessToken
+			localStorage.setItem('access-token', token)
+
+			setTimeout(() => {
+				navigate('/')
+			}, 3000)
+		} catch (error) {
+			console.log('error: ', error)
+			if (error.response) {
+				const status = error.response.status
+				if (status === 401) {
+					toast.error('Sai email hoặc password')
+				}
+			}
+		}
 	}
 
 	return (
@@ -39,11 +105,14 @@ export default function LoginPage() {
 			<div className='flex flex-col gap-4 p-14 bg-[#FFEFD5] border-primary border-[2px] items-center rounded-lg'>
 				<h2 className='font-bold text-2xl'>ĐĂNG NHẬP</h2>
 				<div className='flex flex-col gap-1'>
-					<label htmlFor='phone-number-input'>Số điện thoại *</label>
+					<label htmlFor='email-input'>Email *</label>
 					<FormInput
-						id='phone-number-input'
+						id='email-input'
 						color='primary'
-						placeholder='090xxxx'
+						placeholder='example@gmail.com'
+						value={email}
+						onChange={handleChangeEmail}
+						onKeyDown={handleEmailKeyDown}
 					/>
 				</div>
 				<div className='flex flex-col gap-1'>
@@ -54,6 +123,9 @@ export default function LoginPage() {
 						sx={{ letterSpacing: '0.1rem' }}
 						color='primary'
 						placeholder='Input password'
+						value={password}
+						onChange={handleChangePassword}
+						onKeyDown={handlePasswordKeyDown}
 						endAdornment={
 							<InputAdornment position='end'>
 								<IconButton
@@ -85,7 +157,9 @@ export default function LoginPage() {
 					</label>
 				</div>
 
-				<button className='px-6 py-3 bg-primary text-white text-lg'>
+				<button
+					className='px-6 py-3 bg-primary text-white text-lg'
+					onClick={handleSubmit}>
 					Đăng nhập
 				</button>
 				<button className='w-full flex flex-row items-center justify-center gap-5 font-bold text-lg border-primary'>
