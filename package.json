@@ -11,8 +11,8 @@
     "format": "prettier --config .prettierrc --write ./src/**/*.{js,jsx,css,scss,sass,json}"
   },
   "dependencies": {
-    "@emotion/react": "11.11.1",
-    "@emotion/styled": "11.11.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "5.14.16",
     "@mui/material": "5.14.16",
     "@mui/x-date-pickers": "6.18.2",

@@ -31,13 +31,13 @@ function NavBar() {
 					{/* Update các endpoint vào của các trang vào đây */}
 					<NavItem href={'/'} text={'TRANG CHỦ'} />
 					<NavItem href={'/product'} text={'SẢN PHẨM'} />
-					<NavItem href={'/'} text={'ĐẶT BÀN'} />
+					<NavItem href={'/reservation'} text={'ĐẶT BÀN'} />
 					<NavItem href={'/about'} text={'GIỚI THIỆU'} />
 
 					{/* Update endpoint của trang giỏ hàng vào đây */}
 					<Link
 						className='bg-second text-white w-14 h-14 rounded-full flex flex-col items-center justify-center transition-opacity hover:opacity-40 hover:text-white'
-						to={'/'}>
+						to={'/cart'}>
 						<p className='font-bold'>0</p>
 						<ShoppingCartIcon />
 					</Link>
