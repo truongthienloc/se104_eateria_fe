@@ -1,10 +1,11 @@
 import React from 'react'
 import testImg from '~/assets/images/homePage/popularDishes/image_Dishes_5.svg'
-import EditNoteIcon from '@mui/icons-material/EditNote'
+import DishDetail from '~/components/DishDetail_ManageDish/DishDetail'
 export const ManageDishPage = () => {
 	const [showModalAdd, setShowModalAdd] = React.useState(false)
-	const [showModalEdit, setShowModalEdit] = React.useState(false)
+	const [showModalEdit, setShowModalEdit] = React.useState(false	)
 	const [showModalRemove, setShowModalRemove] = React.useState(false)
+	const [modalData, setModalData] = React.useState({name:'', kind:'', price:'', img:[] })
 	return (
 			<div className='pt-9 w-[1200px]	pl-10 h-full bg-[#f8f8f8]'>
 			<div className='mb-12'>
@@ -38,94 +39,15 @@ export const ManageDishPage = () => {
 							</th>
 						</thead>
 						<tbody>
-							<tr>
-								<td className='py-4 px-2 border-b border-gray-200 text-lg text-primary'>
-									<input className='mr-4' type='checkbox' /> 1
-								</td>
-								<td className='py-4 px-2 border-b border-gray-200'>
-									Thực đơn chính
-								</td>
-								<td className='py-4 px-2 border-b border-gray-200'>
-									Phở bò
-								</td>
-								<td className='py-4 border-b border-gray-200 '>
-									<div className='flex justify-around '>
-										<img src={testImg} alt="" className='w-24'/>
-										<img src={testImg} alt="" className='w-24'/>
-										<img src={testImg} alt="" className='w-24'/>
-									</div>
-								</td>	
-								<td className='py-4 px-2 border-b border-gray-200 '>
-									<p className='' >
-										Phở bò là một món ăn truyền thống của Việt Nam. Chúng ta có thể thấy hihihhaha.
-									</p>
-								</td>
-								<td className='py-4 px-2 border-b border-gray-200'>
-									<div className='flex gap-6 font-medium'>
-										<p className=' text-primary'>50.000</p>										
-										<EditNoteIcon onClick={() => setShowModalEdit(true)} className='hover:cursor-pointer'/> 
-									</div>
-								</td>	
-							</tr>
-							<tr>
-								<td className='py-4 px-2 border-b border-gray-200 text-lg text-primary'>
-									<input className='mr-4' type='checkbox' /> 1
-								</td>
-								<td className='py-4 px-2 border-b border-gray-200'>
-									Thực đơn chính
-								</td>
-								<td className='py-4 px-2 border-b border-gray-200'>
-									Phở bò
-								</td>
-								<td className='py-4 border-b border-gray-200 '>
-									<div className='flex justify-around '>
-										<img src={testImg} alt="" className='w-24'/>
-										<img src={testImg} alt="" className='w-24'/>
-										<img src={testImg} alt="" className='w-24'/>
-									</div>
-								</td>	
-								<td className='py-4 px-2 border-b border-gray-200 '>
-									<p className='' >
-										Phở bò là một món ăn truyền thống của Việt Nam. Chúng ta có thể thấy hihihhaha.
-									</p>
-								</td>
-								<td className='py-4 px-2 border-b border-gray-200'>
-									<div className='flex gap-6 font-medium'>
-										<p className=' text-primary'>50.000</p>										
-										<EditNoteIcon onClick={() => setShowModalEdit(true)} className='hover:cursor-pointer'/> 
-									</div>
-								</td>	
-							</tr>
-							<tr>
-								<td className='py-4 px-2 border-b border-gray-200 text-lg text-primary'>
-									<input className='mr-4' type='checkbox' /> 1
-								</td>
-								<td className='py-4 px-2 border-b border-gray-200'>
-									Thực đơn chính
-								</td>
-								<td className='py-4 px-2 border-b border-gray-200'>
-									Phở bò
-								</td>
-								<td className='py-4 border-b border-gray-200 '>
-									<div className='flex justify-around '>
-										<img src={testImg} alt="" className='w-24'/>
-										<img src={testImg} alt="" className='w-24'/>
-										<img src={testImg} alt="" className='w-24'/>
-									</div>
-								</td>	
-								<td className='py-4 px-2 border-b border-gray-200 '>
-									<p className='' >
-										Phở bò là một món ăn truyền thống của Việt Nam. Chúng ta có thể thấy hihihhaha.
-									</p>
-								</td>
-								<td className='py-4 px-2 border-b border-gray-200'>
-									<div className='flex gap-6 font-medium'>
-										<p className=' text-primary'>50.000</p>										
-										<EditNoteIcon onClick={() => setShowModalEdit(true)} className='hover:cursor-pointer'/> 
-									</div>
-								</td>	
-							</tr>
-
+							<DishDetail kind='Thực đơn chính' name='Phở bò' 
+										description='Phở bò là một món ăn truyền thống của Việt Nam. Chúng ta có thể thấy hihihhaha.'
+										price='50.000' img1={testImg} img2={testImg} img3={testImg} onEditButtonClick={() => setShowModalEdit(true)}/>
+							<DishDetail kind='Thực đơn chính' name='Phở bò' 
+										description='Phở bò là một món ăn truyền thống của Việt Nam. Chúng ta có thể thấy hihihhaha.'
+										price='50.000' img1={testImg} img2={testImg} img3={testImg} onEditButtonClick={() => setShowModalEdit(true)}/>
+							<DishDetail kind='Thực đơn chính' name='Phở bò' 
+										description='Phở bò là một món ăn truyền thống của Việt Nam. Chúng ta có thể thấy hihihhaha.'
+										price='50.000' img1={testImg} img2={testImg} img3={testImg} onEditButtonClick={() => setShowModalEdit(true)}/>
 						</tbody>
 					</table>
 				</div>
@@ -204,8 +126,7 @@ export const ManageDishPage = () => {
 								<div className='opacity-25 fixed inset-0 z-40 bg-black'></div>
 							</div>
 						) : null}
-
-						{showModalEdit ? (
+						{ showModalEdit ? (
 							<div>
 								<div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
 									<div className='relative my-6'>
