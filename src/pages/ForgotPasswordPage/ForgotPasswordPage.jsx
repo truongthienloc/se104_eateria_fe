@@ -1,5 +1,8 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { OutlinedInput, styled } from '@mui/material'
+import { api } from '~/services/axios'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 const FormInput = styled(OutlinedInput)`
 	width: 300px;
@@ -21,25 +24,66 @@ const FormInput = styled(OutlinedInput)`
 `
 
 export default function ForgotPasswordPage() {
+	const navigate = useNavigate();
+	const [email, setEmail] = useState('');
+
+	const handleChangeEmail = (e) => setEmail(e.target.value);
+
+	const handleSubmit = async () => {
+		if (email === '') {
+			toast.error('Email không được để trống')
+			return
+		}
+
+		try {
+			const res = await toast.promise(
+				api.post('/user/forgot-password', {
+					email: email
+				}),
+				{
+					pending: 'Đang gửi yêu cầu',
+					success: 'Gửi thành công, vui lòng check mail',
+					error: 'Gửi thất bại'
+				}
+			)
+
+			setTimeout(() => {
+				navigate('/login')
+			}, 1000)
+			
+		} catch (error) {
+			console.log(error);
+			if (error.response) {
+				const status = error.response.status
+				if (status === 404) {
+					toast.error('Email không tồn tại');
+				}
+			}
+		}
+	}
+
 	return (
 		<div className='flex flex-row font justify-evenly py-16'>
+
 			<div className='flex flex-col gap-4 p-14 bg-[#FFEFD5] border-primary border-[2px] items-center rounded-lg'>
 				<h2 className='font-bold text-2xl'>QUÊN MẬT KHẨU</h2>
 				<div className='flex flex-col gap-1 items-center'>
-					<label htmlFor='phone-number-input'>
-						Vui lòng nhập số điện thoại của bạn *
-					</label>
+					<label htmlFor='email-input'>Vui lòng nhập email của bạn *</label>
 					<FormInput
-						id='phone-number-input'
+						id='email-input'
 						color='primary'
-						placeholder='090xxxx'
+						placeholder='example@gmail.com'
+						value={email}
+						onChange={handleChangeEmail}
 					/>
 				</div>
+				
+                <p>Mật khẩu mới sẽ được gửi đến email của bạn!</p>
 
-				<p>Mật khẩu mới sẽ được gửi đến số điện thoại của bạn!</p>
-
-				<button className='px-6 py-3 bg-primary text-white text-lg'>
-					Đăng nhập
+				<button className='px-6 py-3 bg-primary text-white text-lg'
+					onClick={handleSubmit}
+				>
+					Gửi mật khẩu
 				</button>
 			</div>
 		</div>
