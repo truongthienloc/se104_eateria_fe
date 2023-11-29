@@ -6,7 +6,7 @@ import { ScrollToTopButton } from '~/components/ScrollToTop'
 function DefaultLayout() {
 	return (
 		<div className='flex flex-col min-h-screen overflow-x-hidden box-border font-roboto text-second'>
-			<NavBar />
+			<NavBar_Login />
 			<Outlet />
 			<Footer />
 			<ScrollToTopButton />
