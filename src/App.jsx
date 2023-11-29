@@ -10,23 +10,25 @@ import RootRoute from './routes/RootRoute'
 
 function App() {
 	return (
-		<ThemeProvider theme={defaultTheme}>
-			<BrowserRouter>
-				<RootRoute />
-			</BrowserRouter>
-			<ToastContainer
-				position='top-right'
-				autoClose={3000}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss={false}
-				draggable
-				pauseOnHover={false}
-				theme='light'
-			/>
-		</ThemeProvider>
+		<LocalizationProvider dateAdapter={AdapterDayjs}>
+			<ThemeProvider theme={defaultTheme}>
+				<BrowserRouter>
+					<RootRoute />
+				</BrowserRouter>
+				<ToastContainer
+					position='top-right'
+					autoClose={3000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss={false}
+					draggable
+					pauseOnHover={false}
+					theme='light'
+				/>
+			</ThemeProvider>
+		</LocalizationProvider>
 	)
 }
 
