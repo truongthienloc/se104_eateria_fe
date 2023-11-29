@@ -25,6 +25,7 @@ import { ManageDishPage } from '~/pages/Admin/ManageDishPage'
 import { ManageClientPage } from '~/pages/Admin/ManageClientPage'
 import { ManageBookingPage } from '~/pages/Admin/ManageBookingPage'
 import { StatisticPage } from '~/pages/Admin/StatisticPage'
+import { PayPage } from '~/pages/PayPage/PayPage'
 
 function RootRoute() {
 	return (
@@ -44,10 +45,11 @@ function RootRoute() {
 				</Route>
 				<Route path='/' element={<DefaultLayout />}>
 					<Route path='/' element={<Homepage />} />
+					<Route path='/home' element={<Homepage />} />
 					<Route path='/login' element={<LoginPage />} />
 					<Route path='/signup' element={<SignupPage />} />
 					<Route path='/forgot-password' element={<ForgotPasswordPage />} />
-					<Route path='/home' element={<Homepage />} />
+					<Route path='/pay' element={<PayPage />} />
 					<Route path='/user' element={<UserLayout />}>
 						<Route path='profile' element={<ProfilePage />} />
 						<Route path='coupon' element={<CouponPage />} />
