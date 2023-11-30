@@ -1,10 +1,29 @@
-import React from 'react'
+import React  from 'react'
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
+import { useState, useEffect } from 'react';
+import { api } from '~/services/axios'
+import BookingDetail from '~/components/BookingDetail_ManageBooking/BookingDetail'
+
 export function ManageBookingPage() {
-	const [showModalAdd, setShowModalAdd] = React.useState(false)
-	const [showModalRemove, setShowModalRemove] = React.useState(false)
-	const [showModalCancel, setShowModalCancel] = React.useState(false)
-	const [isHovered, setIsHovered] = React.useState(false);
+	const [showModalAdd, setShowModalAdd] = useState(false)
+	const [showModalRemove, setShowModalRemove] = useState(false)
+	const [showModalCancel, setShowModalCancel] = useState(false)
+	const [isHovered, setIsHovered] = useState(false);
+	const [bookingData, setBookingData] = useState([])
+
+	const fetchBooking = async () => {
+		try {
+			const res = await api.get('/bill/all')
+			const booking = res.data.data
+			setBookingData(booking)
+		} catch (error) {
+			console.log(error)
+		}
+	}
+	useEffect(() => {
+		fetchBooking()
+	}, [])
+
 	const handleMouseEnter = () => {
 	  setIsHovered(true);
 	};
@@ -73,131 +92,13 @@ export function ManageBookingPage() {
 							</th>
 						</thead>
 						<tbody>
-							<tr>
-								<td className='py-4 px-4  border-b border-gray-200 text-lg text-primary'>
-									<input className='mr-6' type='checkbox' /> RV001
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									Bàn 1
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									<span className='bg-green-100 text-green-800 py-1 px-2 rounded-full text-base'>
-										Trống
-									</span>
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									19:40 - 08/11/2023
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									4
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									Lê Tuấn Anh
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									0256516941
-								</td>
-							</tr>
-							<tr>
-								<td className='py-4 px-4  border-b border-gray-200 text-lg text-primary'>
-									<input className='mr-6' type='checkbox' /> RV001
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									Bàn 1
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									<span className='bg-green-100 text-green-800 py-1 px-2 rounded-full text-base'>
-										Trống
-									</span>
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									19:40 - 08/11/2023
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									4
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									Lê Tuấn Anh
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									0256516941
-								</td>
-							</tr>
-							<tr>
-								<td className='py-4 px-4  border-b border-gray-200 text-lg text-primary'>
-									<input className='mr-6' type='checkbox' /> RV001
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									Bàn 1
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									<span className='bg-red-100 text-red-800 py-1 px-2 rounded-full text-base'>
-										Đã được đặt
-									</span>
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									19:40 - 08/11/2023
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									4
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									Lê Tuấn Anh
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									0256516941
-								</td>
-							</tr>
-							<tr>
-								<td className='py-4 px-4  border-b border-gray-200 text-lg text-primary'>
-									<input className='mr-6' type='checkbox' /> RV001
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									Bàn 1
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									<span className='bg-green-100 text-green-800 py-1 px-2 rounded-full text-base'>
-										Trống
-									</span>
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									19:40 - 08/11/2023
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									4
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									Lê Tuấn Anh
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									0256516941
-								</td>
-							</tr>
-							<tr>
-								<td className='py-4 px-4  border-b border-gray-200 text-lg text-primary'>
-									<input className='mr-6' type='checkbox' /> RV001
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									Bàn 1
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									<span className='bg-red-100 text-red-800 py-1 px-2 rounded-full text-base'>
-										Đã được đặt
-									</span>
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									19:40 - 08/11/2023
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									4
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									Lê Tuấn Anh
-								</td>
-								<td className='py-4 px-4 text-center border-b border-gray-200'>
-									0256516941
-								</td>
-							</tr>
+							{bookingData.map((booking) => (
+								<BookingDetail 
+									key = {booking.id}
+									id = {booking.id}
+									
+								/>
+							))}
 							
 							
 						</tbody>

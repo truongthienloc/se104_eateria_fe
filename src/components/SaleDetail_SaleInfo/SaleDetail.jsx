@@ -10,9 +10,11 @@ function SaleDetail({billId, time, name, price, status1, status2}) {
 			<td className='py-4 px-8 border-b border-gray-200'>
                 <span className='bg-green-100 text-green-800 rounded-full text-base'>
 					{status1}
+					{/* Đã thanh toán */}
 				</span>
 				<span className='bg-red-100 text-red-800 rounded-full text-base'>
 					{status2}
+					{/* Chưa thanh toán */}
 				</span>
 			</td>
 		</tr>

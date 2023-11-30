@@ -1,9 +1,11 @@
 import EditNoteIcon from '@mui/icons-material/EditNote'
-function DishDetail({kind, name, description, price, img1, img2, img3, onEditButtonClick}) {
+
+function DishDetail({id, kind, name, description, price, imgs, onEditButtonClick}) {
+    console.log(imgs);
     return (
             <tr>
                 <td className='py-4 px-2 border-b border-gray-200 text-lg text-primary'>
-                    <input className='mr-4' type='checkbox' /> 1
+                    <input className='mr-4' type='checkbox' /> {id}
                 </td>
                 <td className='py-4 px-2 border-b border-gray-200'>
                     {kind}
@@ -12,10 +14,12 @@ function DishDetail({kind, name, description, price, img1, img2, img3, onEditBut
                     {name}
                 </td>
                 <td className='py-4 border-b border-gray-200 '>
-                    <div className='flex justify-around '>
-                        <img src={img1} alt="" className='w-24'/>
-                        <img src={img2} alt="" className='w-24'/>
-                        <img src={img3} alt="" className='w-24'/>
+                    <div className='flex gap-1 flex-wrap '>
+                    {
+                        imgs && imgs.map(img => (
+                            <img src={img.imageLink} key={img.id} className='w-[130px]' />
+                        ))
+                    }
                     </div>
                 </td>	
                 <td className='py-4 px-2 border-b border-gray-200 '>
