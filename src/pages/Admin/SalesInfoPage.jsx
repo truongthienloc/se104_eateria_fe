@@ -1,8 +1,23 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
+import { api } from '~/services/axios'
 // import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined'
 import SaleDetail from '~/components/SaleDetail_SaleInfo/SaleDetail'
 export function SalesInfoPage() {
-	const [showModal, setShowModal] = React.useState(false)
+	const [showModal, setShowModal] = useState(false)
+	const [saleData, setSaleData] = useState([])
+	const fetchSale = async() => {
+		try {
+			const res = await api.get('/bill/all')
+			const sale = res.data.data
+			setSaleData(sale)
+		} catch (error) {
+			console.log(error)
+		}
+	}
+	useEffect(()=>{
+		fetchSale()
+	},[])
 	return (
 		<div className='pt-9 w-[1130px] pl-10 h-full bg-[#f8f8f8]'>
 			<div className=''>
@@ -77,12 +92,16 @@ export function SalesInfoPage() {
 							</th>
 						</thead>
 						<tbody>
-							<SaleDetail billId='#Abc1' time='19:40 - 08/11/2023' name='Lê Tuấn Anh'
-										 price='159.000 VND' status1='Đã thanh toán' />
-							<SaleDetail billId='#Abc2' time='19:40 - 08/11/2023' name='Lê Tuấn Anh'
-										 price='159.000 VND' status1='Đã thanh toán' />
-							<SaleDetail billId='#Abc3' time='19:40 - 08/11/2023' name='Lê Tuấn Anh'
-										 price='159.000 VND' status2='Ch thanh toán' />
+							{saleData.map((sale)=> (
+								<SaleDetail
+								key={sale.id}
+								billId={sale.id}
+								time={sale.createdAt}
+								name={sale.user.username}
+								price={sale.totalMoney}
+								status1={sale.billPayed}
+								/>
+							))}
 						</tbody>
 					</table>
 				</div>

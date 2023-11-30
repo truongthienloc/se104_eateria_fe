@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import testImg from '~/assets/images/homePage/popularDishes/image_Dishes_5.svg'
 import DishDetail from '~/components/DishDetail_ManageDish/DishDetail'
 import { api } from '~/services/axios'
 import useEditDishModal from '~/hooks/useEditDishModal'
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import { EditDishModal } from '~/components/Modal/EditDishModal'
 import { toast } from 'react-toastify'
 
 export const ManageDishPage = () => {
-	const [showModalAdd, setShowModalAdd] = React.useState(false)
-	const [showModalEdit, setShowModalEdit] = React.useState(false)
+	const [showModalAdd, setShowModalAdd] = useState(false)
+	const [showModalEdit, setShowModalEdit] = useState(false)
+	const [showModalRemove, setShowModalRemove] = useState(false)
 	const [dishesData, setDishesData] = useState([])
-	const [showModalRemove, setShowModalRemove] = React.useState(false)
 	const editDishModal = useEditDishModal()
 
 	const fetchDish = async () => {
 		try {
 			const res = await api.get('/dish/')
-
 			const dishes = res.data.data
 			setDishesData(dishes)
 		} catch (error) {
@@ -69,10 +68,10 @@ export const ManageDishPage = () => {
 	}
 
 	return (
-		<div className='pt-9 w-[1200px]	pl-10 h-full bg-[#f8f8f8]'>
+		<div className='pt-9 w-[1280px]	pl-10 h-full bg-[#f8f8f8]'>
 			<div className='mb-12'>
 				<p className='text-primary text-2xl font-normal'>Quản lý món ăn</p>
-				{/* <NotificationsNoneOutlinedIcon className=''/> */}
+				<NotificationsNoneOutlinedIcon sx={{width: '100px', height: '100px'}}/>
 			</div>
 
 			<div className='rounded-3xl border-third border-8 px-3 bg-third mb-16'>
@@ -80,15 +79,15 @@ export const ManageDishPage = () => {
 					<table className='text-lg bg-third '>
 						<thead className='text-primary text-left'>
 							<th className='py-4 px-2 text-left border-b border-gray-200'>
-								STT
+								<center>STT</center>
 							</th>
 							<th className='py-4 px-2 text-left border-b border-gray-200'>
-								Phân loại
+								<center>Phân loại</center>
 							</th>
 							<th className='py-4 px-2 text-left border-b border-gray-200'>
-								Tên
+								<center>Tên</center>
 							</th>
-							<th className='py-4 px-2 text-left border-b border-gray-200 '>
+							<th className='py-4 px-2 text-left border-b w-[300px] border-gray-200 '>
 								<center>Hình ảnh</center>
 							</th>
 							<th className='py-4 px-4 w-[380px] text-left border-b border-gray-200 '>
@@ -102,6 +101,7 @@ export const ManageDishPage = () => {
 							{dishesData.map((dish) => (
 								<DishDetail
 									key={dish.id}
+									id={dish.id}
 									kind={dish.menu.menuName}
 									name={dish.dishName}
 									description={dish.dishDescription}
