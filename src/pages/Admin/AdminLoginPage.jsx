@@ -58,6 +58,15 @@ export function AdminLoginPage() {
 		}
 	}
 
+	const handlePasswordKeyDown = (e) => {
+		if (e.key !== 'Enter') {
+			return 
+		}
+
+		e.preventDefault()
+		handleSubmit()
+	}
+
 	return (
 		<div className='bg-third w-full min-h-screen flex flex-col gap-48'>
 			{/* chỗ này tui hard code gap, ae nào biết chỉ với */}
@@ -80,10 +89,11 @@ export function AdminLoginPage() {
 						<input
 							id='pass'
 							className='bg-third h-full w-full outline-none'
-							type='password'
+							type={showPassword ? 'text' : 'password'}
 							placeholder='Nhập mật khẩu'
 							value={password}
 							onChange={handleChangePassword}
+							onKeyDown={handlePasswordKeyDown}
 						/>
 						<div
 							className='cursor-pointer'

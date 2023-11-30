@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 
 function useEditDishModal() {
+    const [id, setId] = useState(-1);
     const [name, setName] = useState('');
     const [kind, setKind] = useState('');
     const [imgs, setImgs] = useState([]);
@@ -12,7 +13,8 @@ function useEditDishModal() {
     const handleChangePrice = e => setPrice(e.target.value)
     const handleChangeDescription = e => setDescription(e.target.value)
 
-    const setAll = (name, kind, imgs, price, description) => {
+    const setAll = (id, name, kind, imgs, price, description) => {
+        setId(id)
         setName(name)
         setKind(kind)
         setImgs(imgs)
@@ -21,6 +23,7 @@ function useEditDishModal() {
     }
 
     return ({
+        id, setId,
         name, handleChangeName,
         kind, handleChangeKind,
         imgs, setImgs,
