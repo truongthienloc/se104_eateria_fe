@@ -2,6 +2,8 @@ import WatchLaterIcon from '@mui/icons-material/WatchLater'
 import CallIcon from '@mui/icons-material/Call'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import logo from '~/assets/images/logo.svg'
+import defaultProfileImg from '~/assets/images/default_profile_image.svg'
+import defaultAvatar from '~/assets/images/m10.jpg'
 import deliveryImg from '~/assets/images/delivery.svg'
 import { Link } from 'react-router-dom'
 
@@ -36,24 +38,23 @@ function NavBar_Login() {
 
 					{/* Update endpoint của trang giỏ hàng vào đây */}
 					<Link
-						className='bg-second text-white w-14 h-14 rounded-full flex flex-col items-center justify-center transition-opacity hover:opacity-40 hover:text-white'
+						className='bg-second text-white w-14 h-14 rounded-full flex flex-col items-center justify-center transition-opacity hover:opacity-70 hover:text-white'
 						to={'/cart'}>
-						<p className='font-bold'>0</p>
+						<p className='font-bold'>10</p>
 						<ShoppingCartIcon />
 					</Link>
 
-					<div className='flex flex-col text-second'>
-						<p className='font-bold text-xl'>Giao Hàng</p>
-						<p className='text-base'>+84 344444404</p>
+					<div className='flex flex-1'>
+						<div className='w-[65px] h-[65px] rounded-[50%] border-primary border-[1px] flex items-center justify-center overflow-hidden ml-auto'>
+							<Link to={'/user'} className='my-0 mx-auto '>
+								<img
+									src={defaultAvatar}
+									alt='Profile Image'
+									className='w-full h-full object-contain'
+								/>
+							</Link>
+						</div>
 					</div>
-
-					<img src={deliveryImg} alt='delivery' />
-
-					<Link
-						className='py-1 px-3 bg-primary text-white font-bold rounded-lg transition-opacity hover:opacity-40 hover:text-white'
-						to={'/login'}>
-						Đăng nhập
-					</Link>
 				</div>
 			</div>
 		</div>
