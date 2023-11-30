@@ -8,24 +8,24 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { useNavigate } from 'react-router-dom'
+import { Accordion, TextField } from '@mui/material'
+import PayMethod from '~/components/Modal/PayMethod'
 import { OrderSuccess } from '~/components/Modal/OrderSuccess'
+import { useNavigate } from 'react-router-dom'
 
-export const CartPage = () => {
+export const PayPage = () => {
 	let Total = 0
-	const navigate = useNavigate();
+	let Discount = 0
+	const navigate = useNavigate()
 	const [openModal, setopenModal] = useState(false)
-	const [openMessage, setopenMessage] = useState(false);
 	const handleRemoveCartItem = (productID) => {
 		// Xóa sản phẩm khỏi giỏ hàng
 	}
-	const handleOrderBtn = () => {
+	const handleOpenModal = () => {
 		setopenModal(true)
+		setTimeout(handleCloseModal, 3000)
 	}
 	const handleCloseModal = () => {
-		setopenModal(false)
-	}
-	const handleCloseMessage = () => {
 		setopenMessage(false)
 		navigate('/home')
 		window.scrollTo({
@@ -70,10 +70,12 @@ export const CartPage = () => {
 	return (
 		<div className='flex flex-col pb-10 pt-1 items-center'>
 			<div className='w-full h-[160px] mt-1 mb-5 bg-headerBanner bg-no-repeat bg-cover flex justify-center items-center'>
-				<p className='uppercase text-third font-bold text-3xl'>Giỏ hàng</p>
+				<p className='uppercase text-third font-bold text-3xl'>Thanh toán</p>
 				{/* <img className="w-full h-full object-contain" src={banner}/> */}
 			</div>
-
+			<div className='flex w-[1000px] py-4'>
+				<p className='text-second font-bold text-2xl mr-auto'>Giỏ hàng của bạn</p>
+			</div>
 			<div>
 				<TableContainer
 					component={Paper}
@@ -90,7 +92,6 @@ export const CartPage = () => {
 								<StyledTableCell>Đơn giá</StyledTableCell>
 								<StyledTableCell>Số lượng</StyledTableCell>
 								<StyledTableCell>Thành tiền</StyledTableCell>
-								<StyledTableCell>Hủy chọn</StyledTableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>
@@ -111,72 +112,53 @@ export const CartPage = () => {
 									<StyledTableCell>{row.price}</StyledTableCell>
 									<StyledTableCell>{row.quantity}</StyledTableCell>
 									<StyledTableCell>{row.total}</StyledTableCell>
-									<StyledTableCell>
-										<button
-											className='cursor-pointer'
-											onClick={handleRemoveCartItem}
-											id='cart-remove-button'>
-											<DeleteIcon className='hover:text-red-500 transition-all' />
-										</button>
-									</StyledTableCell>
 								</StyledTableRow>
 							))}
 						</TableBody>
 					</Table>
 				</TableContainer>
 			</div>
-			<div className='flex flex-col w-[1000px] py-5 items-center gap-10'>
-				<p className='font-bold text-xl ml-auto'>Tổng tiền: {Total}.000 VND</p>
-				<button
-					className='bg-primary text-third round w-40'
-					onClick={handleOrderBtn}>
-					{' '}
-					Gọi món{' '}
-				</button>
+			<div className='flex flex-col w-[1000px] py-10'>
+				<p className='text-second font-bold text-2xl mr-auto'>Thanh toán</p>
+				<div className='flex flex-row w-full justify-between'>
+					<div className='flex-[0.4]'>
+						<p>Phương thức thanh toán</p>
+						<PayMethod />
+					</div>
+					<div className='flex flex-col flex-[0.4] gap-5'>
+						<TextField
+							id='coupon-filled-search'
+							label='Mã giảm giá'
+							type='search'
+							variant='filled'
+						/>
+						<div className='flex flex-row justify-between'>
+							<p>Tổng tiền</p>
+							<p>{Total}.000 VND</p>
+						</div>
+						<div className='flex flex-row justify-between'>
+							<p>Giảm giá</p>
+							<p>{Discount}.000 VND</p>
+						</div>
+						<div className='bg-primary w-full h-1 '></div>
+						<div className='flex flex-row justify-between'>
+							<p>Tổng tiền</p>
+							<p>{Total - Discount}.000 VND</p>
+						</div>
+						<button
+							className='bg-primary text-third'
+							onClick={handleOpenModal}>
+							Đã hoàn tất thanh toán
+						</button>
+					</div>
+				</div>
 			</div>
-
 			{openModal && (
 				<>
 					<div className='fixed inset-0 bg-black opacity-50 backdrop-filter backdrop-blur-lg z-50'></div>
 					<div className='fixed inset-0 flex items-center justify-center z-50'>
-						<div className='modal-container bg-fourth py-8 px-20 rounded-md'>
-							<h2 className='text-2xl font-bold mb-8'>Bạn muốn ?</h2>
-							<p className='italic mb-8'>*Lưu ý: Mã giảm giá chỉ có thể áp dụng khi thanh toán trực tuy</p>
-							<div className='flex justify-center flex-col items-center gap-10'>
-								<div className='flex flex-row'>
-									<button
-										className='bg-primary text-third font-semibold w-[280px] h-[44px] rounded mx-5 border-primary border-[1px]'
-										onClick={() => {
-											handleCloseModal();
-											setopenMessage(true);
-											setTimeout(handleCloseMessage,3000);
-										}}>
-										Thanh toán bằng tiền mặt sau
-									</button>
-									<button
-										className='bg-primary text-third font-semibold w-[280px] h-[44px] rounded mx-5 border-primary border-[1px]'
-										onClick={() => {
-											navigate('/pay')
-										}}>
-										Thanh toán trực tuyến ngay
-									</button>
-								</div>
-								<button
-									className='bg-third text-primary font-semibold w-[120px] h-[44px] rounded mx-5 border-primary border-[1px]'
-									onClick={handleCloseModal}>
-									Quay lại
-								</button>
-							</div>
-						</div>
-					</div>
-				</>
-			)}
-			{openMessage && (
-				<>
-				<div className='fixed inset-0 bg-black opacity-50 backdrop-filter backdrop-blur-lg z-50'></div>
-				<div className='fixed inset-0 flex items-center justify-center z-50'>
 						<OrderSuccess />
-				</div>
+					</div>
 				</>
 			)}
 		</div>
