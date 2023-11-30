@@ -1,5 +1,6 @@
 import React from 'react'
 // import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined'
+import SaleDetail from '~/components/SaleDetail_SaleInfo/SaleDetail'
 export function SalesInfoPage() {
 	const [showModal, setShowModal] = React.useState(false)
 	return (
@@ -76,120 +77,12 @@ export function SalesInfoPage() {
 							</th>
 						</thead>
 						<tbody>
-							<tr>
-								<td className='py-4 px-8 border-b border-gray-200 text-lg text-primary'>
-									<input className='mr-6' type='checkbox' /> #Abc1
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									19:40 - 08/11/2023
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									Lê Tuấn Anh
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									159.000 VND
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									<span className='bg-green-100 text-green-800 py-1 px-2 rounded-full text-base'>
-										Đã thanh toán
-									</span>
-								</td>
-							</tr>
-							<tr>
-								<td className='py-4 px-8 border-b border-gray-200 text-lg text-primary'>
-									<input className='mr-6' type='checkbox' /> #Abc2
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									19:40 - 08/11/2023
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									Lê Tuấn Anh
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									159.000 VND
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200 '>
-									<span className='bg-red-100 text-red-800 py-1 px-2 rounded-full text-base'>
-										Chưa thanh toán
-									</span>
-								</td>
-							</tr>
-							<tr>
-								<td className='py-4 px-8 border-b border-gray-200 text-lg text-primary'>
-									<input className='mr-6' type='checkbox' /> #Abc3
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									19:40 - 08/11/2023
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									Lê Tuấn Anh
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									159.000 VND
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									<span className='bg-green-100 text-green-800 py-1 px-2 rounded-full text-base'>
-										Đã thanh toán
-									</span>
-								</td>
-							</tr>
-							<tr>
-								<td className='py-4 px-8 border-b border-gray-200 text-lg text-primary'>
-									<input className='mr-6' type='checkbox' /> #Abc4
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									19:40 - 08/11/2023
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									Lê Tuấn Anh
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									159.000 VND
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									<span className='bg-red-100 text-red-800 py-1 px-2 rounded-full text-base'>
-										Chưa thanh toán
-									</span>
-								</td>
-							</tr>
-							<tr>
-								<td className='py-4 px-8 border-b border-gray-200 text-lg text-primary'>
-									<input className='mr-6' type='checkbox' /> #Abc5
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									19:40 - 08/11/2023
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									Lê Tuấn Anh
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									159.000 VND
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									<span className='bg-red-100 text-red-800 py-1 px-2 rounded-full text-base'>
-										Chưa thanh toán
-									</span>
-								</td>
-							</tr>
-							<tr>
-								<td className='py-4 px-8 border-b border-gray-200 text-lg text-primary'>
-									<input className='mr-6' type='checkbox' /> #Abc6
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200 '>
-									19:40 - 08/11/2023
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									Lê Tuấn Anh
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									159.000 VND
-								</td>
-								<td className='py-4 px-8 border-b border-gray-200'>
-									<span className='bg-red-100 text-red-800 py-1 px-2 rounded-full text-base'>
-										Chưa thanh toán
-									</span>
-								</td>
-							</tr>
+							<SaleDetail billId='#Abc1' time='19:40 - 08/11/2023' name='Lê Tuấn Anh'
+										 price='159.000 VND' status1='Đã thanh toán' />
+							<SaleDetail billId='#Abc2' time='19:40 - 08/11/2023' name='Lê Tuấn Anh'
+										 price='159.000 VND' status1='Đã thanh toán' />
+							<SaleDetail billId='#Abc3' time='19:40 - 08/11/2023' name='Lê Tuấn Anh'
+										 price='159.000 VND' status2='Ch thanh toán' />
 						</tbody>
 					</table>
 				</div>

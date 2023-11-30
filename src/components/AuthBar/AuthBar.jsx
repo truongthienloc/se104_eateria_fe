@@ -9,11 +9,11 @@ export default function AuthBar({ type }) {
 			<Link
 				to={'/login'}
 				className={clsx(
-					'w-64 bg-[#D9D9D9] text-2xl text-black hover:opacity-80 hover:text-white',
+					'w-64 bg-[#D9D9D9] text-2xl text-second hover:opacity-80 hover:text-second transition-opacity',
 					styles['auth-item'],
 					{
 						[styles['active']]: type === 'login',
-						'bg-primary text-white': type === 'login',
+						'bg-primary text-white hover:text-white': type === 'login',
 					}
 				)}>
 				Đăng nhập
@@ -21,11 +21,11 @@ export default function AuthBar({ type }) {
 			<Link
 				to={'/signup'}
 				className={clsx(
-					'w-64 bg-[#D9D9D9] text-2xl text-black hover:opacity-80 hover:text-black',
+					'w-64 bg-[#D9D9D9] text-2xl text-second hover:opacity-80 hover:text-second transition-opacity',
 					styles['auth-item'],
 					{
 						[styles['active']]: type === 'signup',
-						'bg-primary text-white': type === 'signup',
+						'bg-primary text-white hover:text-white': type === 'signup',
 					}
 				)}>
 				Đăng ký

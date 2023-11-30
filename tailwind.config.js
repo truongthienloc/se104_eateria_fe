@@ -17,7 +17,10 @@ export default {
         'link': '#4BFF3C',
         'button': '#FFEFD5',
         'sub1': '#D9D9D9',
-        'sub2': '#CCCCCC'
+        'sub2': '#CCCCCC',
+        'unreserve': '#E7392E',
+        'reserved': '#2767E2',
+        
       },
       boxShadow: {
         'fadeBottom': 'rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset',
