@@ -12,6 +12,7 @@ import { ReceiptHistoryPage } from '~/pages/User/ReceiptHistoryPage'
 import { ReservationInfoPage } from '~/pages/User/ReservationInfoPage'
 import { AboutPage } from '~/pages/AboutPage'
 import { ProductPage } from '~/pages/ProductPage'
+import { ProductDetail } from '~/pages/ProductDetail'
 import { SignupPage } from '~/pages/SignupPage'
 import { ForgotPasswordPage } from '~/pages/ForgotPasswordPage'
 import { AdminLayout } from '~/layouts/Admin/AdminLayout'
@@ -61,6 +62,7 @@ function RootRoute() {
 					</Route>
 					<Route path='/about' element={<AboutPage />} />
 					<Route path='/product' element={<ProductPage />} />
+					<Route path='/product-detail' element={<ProductDetail />} />
 					<Route path='/reservation' element={<ReservationPage />} />
 					<Route path='/cart' element={<CartPage />} />
 					<Route index element={<Navigate to={'/home'} replace />} />
