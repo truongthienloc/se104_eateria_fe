@@ -6,7 +6,8 @@ import { AuthBar } from '~/components/AuthBar'
 import { toast } from 'react-toastify'
 import googleIcon from '~/assets/images/google.svg'
 import { api } from '~/services/axios'
-
+import { useDispatch } from 'react-redux'
+import { initUserValue } from '~/features/user/userSlice'
 const FormInput = styled(OutlinedInput)`
 	width: 300px;
 	background-color: white;
@@ -31,7 +32,7 @@ export default function LoginPage() {
 	const [showPassword, setShowPassword] = useState(false)
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-
+	const dispatch = useDispatch()
 	const handleClickShowPassword = () => setShowPassword((show) => !show)
 	const handleChangeEmail = (e) => setEmail(e.target.value)
 	const handleChangePassword = (e) => setPassword(e.target.value)
@@ -82,6 +83,14 @@ export default function LoginPage() {
 			)
 
 			const token = res.data.accessToken
+			if ( token) {
+				const resUserInfo = await api.get('user/me/info',{
+					headers: {
+						Authorization: `bearer ${token}`
+					}
+				})
+				dispatch(initUserValue(resUserInfo.data.data))
+			}
 			localStorage.setItem('access-token', token)
 
 			setTimeout(() => {
