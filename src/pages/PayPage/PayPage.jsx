@@ -26,7 +26,8 @@ export const PayPage = () => {
 		setTimeout(handleCloseModal, 3000)
 	}
 	const handleCloseModal = () => {
-		setopenMessage(false)
+		setopenModal(false)
+
 		navigate('/home')
 		window.scrollTo({
 			top: 0,
