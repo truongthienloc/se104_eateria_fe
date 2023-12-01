@@ -54,7 +54,6 @@ function RootRoute() {
 					<Route path='/user' element={<UserLayout />}>
 						<Route path='profile' element={<ProfilePage />} />
 						<Route path='coupon' element={<CouponPage />} />
-						<Route path='call-waiter' element={<CallWaiterPage />} />
 						<Route path='receipt-history' element={<ReceiptHistoryPage />} />
 						<Route path='reservation' element={<ReservationInfoPage />} />
 						<Route path='change-password' element={<ChangePasswordPage />} />

@@ -10,10 +10,6 @@ const menu = [
 		label: 'Ưu đãi',
 	},
 	{
-		href: '/user/call-waiter',
-		label: 'Gọi phục vụ',
-	},
-	{
 		href: '/user/receipt-history',
 		label: 'Lịch sử hóa đơn',
 	},
