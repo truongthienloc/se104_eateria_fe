@@ -12,7 +12,7 @@ export default function AddDishModal({ isOpen, onClose, onSubmit, addDishModal }
 			const file = e.target.files[0]
 			// console.log(file);
 			if (file) {
-				addDishModal.handleAddImgs(file)
+				addDishModal.handleAddImageFiles(file)
 			}
 
 			input.removeEventListener('change', handleFileChange)
@@ -22,7 +22,8 @@ export default function AddDishModal({ isOpen, onClose, onSubmit, addDishModal }
 	}
 
 	useEffect(() => {
-		const newImages = addDishModal.imgs.map((image) => {
+		// console.log(addDishModal);
+		const newImages = addDishModal.imageFiles.map((image) => {
 			const link = URL.createObjectURL(image)
 
 			return {
@@ -38,7 +39,7 @@ export default function AddDishModal({ isOpen, onClose, onSubmit, addDishModal }
 				URL.revokeObjectURL(image.imageLink)
 			}
 		}
-	}, [addDishModal.imgs])
+	}, [addDishModal.imageFiles])
 
 	const handleDeleteImage = (id) => {
 		const index = images.findIndex((value) => value.id === id)
@@ -46,7 +47,7 @@ export default function AddDishModal({ isOpen, onClose, onSubmit, addDishModal }
 			return
 		}
 
-		addDishModal.handleRemoveImgs(addDishModal.imgs[index])
+		addDishModal.handleRemoveImageFiles(addDishModal.imageFiles[index])
 	}
 
 	if (!isOpen) return null
@@ -97,6 +98,7 @@ export default function AddDishModal({ isOpen, onClose, onSubmit, addDishModal }
 									{images.length > 0 &&
 										images.map((image) => (
 											<ImageItem
+												key={image.id}
 												image={image}
 												onDeleteClick={() =>
 													handleDeleteImage(image.id)

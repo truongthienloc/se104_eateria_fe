@@ -102,8 +102,8 @@ export const ManageDishPage = () => {
 			formData.append('menuName', addDishModal.kind)
 			formData.append('dishPrice', addDishModal.price)
 			formData.append('dishDescription', addDishModal.description)
-			console.log(addDishModal.imgs);
-			for (const image of addDishModal.imgs) {
+			console.log(addDishModal.imageFiles);
+			for (const image of addDishModal.imageFiles) {
 				console.log(image);
 				formData.append('images', image)
 			}

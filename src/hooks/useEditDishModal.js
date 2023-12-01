@@ -8,18 +8,29 @@ function useEditDishModal() {
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
 
+    const [imageFiles, setImageFiles] = useState([]);
+    const [deletedImages, setDeletedImages] = useState([]);
+
     const handleChangeName = e => setName(e.target.value)
     const handleChangeKind = e => setKind(e.target.value)
     const handleChangePrice = e => setPrice(e.target.value)
     const handleChangeDescription = e => setDescription(e.target.value)
 
-    const handleAddImgs = image => {
-        setImgs([...imgs, image]);
+    const handleAddImageFiles = image => {
+        setImageFiles([...imageFiles, image]);
     }
 
-    const handleRemoveImgs = image => {
-        const newImgs = imgs.filter(value => value !== image);
-        setImgs([...newImgs]);
+    const handleRemoveImageFiles = image => {
+        const newImageFiles = imageFiles.filter(value => value !== image);
+        setImageFiles([...newImageFiles]);
+    }
+
+    const handleDeleteImage = (id) => {
+        const image = imgs.find(value => value.id === id)
+
+        const newImgs = imgs.filter(value => value.id !== id)
+        setImgs(newImgs)
+        setDeletedImages([...deletedImages, image])
     }
 
     const setAll = (id, name, kind, imgs, price, description) => {
@@ -29,13 +40,17 @@ function useEditDishModal() {
         setImgs(imgs)
         setPrice(price)
         setDescription(description)
+        setImageFiles([])
+        setDeletedImages([])
     }
 
     return ({
         id, setId,
         name, handleChangeName,
         kind, handleChangeKind,
-        imgs, handleAddImgs, handleRemoveImgs,
+        imgs, 
+        imageFiles, handleAddImageFiles, handleRemoveImageFiles,
+        deletedImages, handleDeleteImage,
         price, handleChangePrice,
         description, handleChangeDescription,
         setAll
