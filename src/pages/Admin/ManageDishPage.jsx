@@ -61,13 +61,35 @@ export const ManageDishPage = () => {
 			formData.append('menuName', editDishModal.kind)
 			formData.append('dishPrice', editDishModal.price)
 			formData.append('dishDescription', editDishModal.description)
+			for (const image of editDishModal.imageFiles) {
+				formData.append('images', image)
+			}
+
+			const excutePromise = new Promise(async (resolve, reject) => {
+				try {
+					if (editDishModal.deletedImages.length > 0) {
+						await Promise.all(editDishModal.deletedImages.map(async (image) => {
+							console.log(image);
+							// await api.delete(`/images/${image.id}`)
+							// await api.delete(`/images/${editDishModal.id}`)
+						}))
+					}
+
+					const res = await api.put(`/dish/${editDishModal.id}`, formData, {
+						headers: {
+							'Content-Type': 'multipart/form-data',
+						},
+					})
+
+					resolve(res)
+				} catch (error) {
+					reject(error)
+				}
+			})
+
 
 			const res = await toast.promise(
-				api.put(`/dish/${editDishModal.id}`, formData, {
-					headers: {
-						'Content-Type': 'multipart/form-data',
-					},
-				}),
+				excutePromise,
 				{
 					pending: 'Đang sửa thông tin món ăn',
 					success: 'Sửa thông tin món ăn thành công',
@@ -102,7 +124,7 @@ export const ManageDishPage = () => {
 			formData.append('menuName', addDishModal.kind)
 			formData.append('dishPrice', addDishModal.price)
 			formData.append('dishDescription', addDishModal.description)
-			console.log(addDishModal.imageFiles);
+			// console.log(addDishModal.imageFiles);
 			for (const image of addDishModal.imageFiles) {
 				console.log(image);
 				formData.append('images', image)
