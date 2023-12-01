@@ -3,7 +3,7 @@ import { ReservationGroup, ReservationExp } from '~/components/ReservationGroup'
 import { ReservationForm } from '~/components/ReservationForm'
 import { useSelector} from 'react-redux'
 import { toast } from 'react-toastify'
-
+import { Navigate } from 'react-router-dom'
 const tableData = {
 	floor1: [
 		{
