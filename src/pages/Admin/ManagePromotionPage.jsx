@@ -73,14 +73,14 @@ export const ManagePromotionPage = () => {
 							<tbody>
 							{promotionData.map((pro)=> (
 									<PromotionDetail
-										key={pro.discountCode}
-										id={pro.discountCode}
+										key={pro.id}
+										id={pro.id}
 										description={pro.discountDescription}
 										percent={pro.discountPercent}
 										startDay={pro.startDay}
 										endDay={pro.endDay}
 										onEditButtonClick={() => 
-											handleEditButtonClick(pro.discountCode)}
+											handleEditButtonClick(pro.id)}
 									/>
 								))
 							}
