@@ -70,7 +70,7 @@ export const ManageDishPage = () => {
 					if (editDishModal.deletedImages.length > 0) {
 						await Promise.all(editDishModal.deletedImages.map(async (image) => {
 							console.log(image);
-							// await api.delete(`/images/${image.id}`)
+							await api.delete(`/dish/images/${image.id}`)
 							// await api.delete(`/images/${editDishModal.id}`)
 						}))
 					}

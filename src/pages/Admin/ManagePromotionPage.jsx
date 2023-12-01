@@ -54,6 +54,7 @@ export const ManagePromotionPage = () => {
 					<div className='grid '>
 						<table className='text-lg bg-third '>
 							<thead className='text-primary '>
+								<th className='py-4 px-2 text-left border-b border-gray-200'></th>
 								<th className='py-4 px-2 text-left border-b w-[180px] border-gray-200'>
 									<center>Mã</center>
 								</th>
@@ -69,6 +70,7 @@ export const ManagePromotionPage = () => {
 								<th className='py-4 px-4 w-[160px] text-left border-b border-gray-200 '>
 									<center>Ngày kết thúc</center>
 								</th>
+								<th className='py-4 px-4 text-left border-b border-gray-200' />
 							</thead>
 							<tbody>
 							{promotionData.map((pro)=> (
