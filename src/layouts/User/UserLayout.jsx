@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 
 export const UserLayout = () => {
 	const user = useSelector((state) =>state.user);
+	const cart = useSelector((state) =>state.cart);
 	if (!user.id) {
 		toast.error('Bạn cần đăng nhập để thực hiện chức năng này!!!',{toastId: 'needLoginID'})
 		return (<Navigate to={'/login'} replace />)
