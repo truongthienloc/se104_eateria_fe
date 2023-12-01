@@ -6,7 +6,8 @@ import { AuthBar } from '~/components/AuthBar'
 import { toast } from 'react-toastify'
 import googleIcon from '~/assets/images/google.svg'
 import { api } from '~/services/axios'
-
+import { useDispatch } from 'react-redux'
+import { initUserValue } from '~/features/user/userSlice'
 const FormInput = styled(OutlinedInput)`
 	width: 300px;
 	background-color: white;
@@ -31,7 +32,7 @@ export default function LoginPage() {
 	const [showPassword, setShowPassword] = useState(false)
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-
+	const dispatch = useDispatch()
 	const handleClickShowPassword = () => setShowPassword((show) => !show)
 	const handleChangeEmail = (e) => setEmail(e.target.value)
 	const handleChangePassword = (e) => setPassword(e.target.value)
@@ -82,7 +83,15 @@ export default function LoginPage() {
 			)
 
 			const token = res.data.accessToken
-			localStorage.setItem('access-token', token)
+			if (token) {
+				localStorage.setItem('access-token', token)
+				/**
+				 * Cái api nó tự động đính kèm token khi gửi request nên không cần thêm token ngay chổ này
+				 */
+				const resUserInfo = await api.get('user/me/info')
+				dispatch(initUserValue(resUserInfo.data.data))
+			}
+			
 
 			setTimeout(() => {
 				navigate('/')

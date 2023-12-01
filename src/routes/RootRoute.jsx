@@ -12,6 +12,7 @@ import { ReceiptHistoryPage } from '~/pages/User/ReceiptHistoryPage'
 import { ReservationInfoPage } from '~/pages/User/ReservationInfoPage'
 import { AboutPage } from '~/pages/AboutPage'
 import { ProductPage } from '~/pages/ProductPage'
+import { ProductDetail } from '~/pages/ProductDetail'
 import { SignupPage } from '~/pages/SignupPage'
 import { ForgotPasswordPage } from '~/pages/ForgotPasswordPage'
 import { AdminLayout } from '~/layouts/Admin/AdminLayout'
@@ -25,6 +26,7 @@ import { ManageDishPage } from '~/pages/Admin/ManageDishPage'
 import { ManageClientPage } from '~/pages/Admin/ManageClientPage'
 import { ManageBookingPage } from '~/pages/Admin/ManageBookingPage'
 import { StatisticPage } from '~/pages/Admin/StatisticPage'
+import { PayPage } from '~/pages/PayPage/PayPage'
 
 function RootRoute() {
 	return (
@@ -44,10 +46,11 @@ function RootRoute() {
 				</Route>
 				<Route path='/' element={<DefaultLayout />}>
 					<Route path='/' element={<Homepage />} />
+					<Route path='/home' element={<Homepage />} />
 					<Route path='/login' element={<LoginPage />} />
 					<Route path='/signup' element={<SignupPage />} />
 					<Route path='/forgot-password' element={<ForgotPasswordPage />} />
-					<Route path='/home' element={<Homepage />} />
+					<Route path='/pay' element={<PayPage />} />
 					<Route path='/user' element={<UserLayout />}>
 						<Route path='profile' element={<ProfilePage />} />
 						<Route path='coupon' element={<CouponPage />} />
@@ -59,6 +62,7 @@ function RootRoute() {
 					</Route>
 					<Route path='/about' element={<AboutPage />} />
 					<Route path='/product' element={<ProductPage />} />
+					<Route path='/product-detail' element={<ProductDetail />} />
 					<Route path='/reservation' element={<ReservationPage />} />
 					<Route path='/cart' element={<CartPage />} />
 					<Route index element={<Navigate to={'/home'} replace />} />

@@ -33,6 +33,9 @@ export default {
       animation: {
         "fadeIn": "fadeIn 0.5s ease-in-out",
       },
+      backgroundImage: {
+        "headerBanner": "url('~/assets/images/banner.svg')"
+      },
 
       // that is actual animation
       keyframes: (theme) => ({
