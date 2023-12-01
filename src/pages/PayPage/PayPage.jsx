@@ -11,9 +11,16 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import { Accordion, TextField } from '@mui/material'
 import PayMethod from '~/components/Modal/PayMethod'
 import { OrderSuccess } from '~/components/Modal/OrderSuccess'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Navigate } from 'react-router-dom'
+import { useSelector} from 'react-redux'
+import { toast } from 'react-toastify'
 
 export const PayPage = () => {
+	const user = useSelector((state) =>state.user);
+	if (!user.id) {
+		toast.error('Bạn cần đăng nhập để thực hiện chức năng này!!!',{toastId: 'needLoginID'})
+		return (<Navigate to={'/login'} replace />)
+	} 
 	let Total = 0
 	let Discount = 0
 	const navigate = useNavigate()
