@@ -33,22 +33,22 @@ const HomeBanner = () => {
 					className='mySwiper'>
 					<SwiperSlide>
 						<div className='px-10 select-none'>
-							<img className='w-full' src={slide_1} alt='' srcset='' />
+							<img className='w-full' src={slide_1} alt='' srcSet='' />
 						</div>
 					</SwiperSlide>
 					<SwiperSlide>
 						<div className='px-10 select-none'>
-							<img className='w-full' src={slide_2} alt='' srcset='' />
+							<img className='w-full' src={slide_2} alt='' srcSet='' />
 						</div>
 					</SwiperSlide>
 					<SwiperSlide>
 						<div className='px-10 select-none'>
-							<img className='w-full' src={slide_3} alt='' srcset='' />
+							<img className='w-full' src={slide_3} alt='' srcSet='' />
 						</div>
 					</SwiperSlide>
 					<SwiperSlide>
 						<div className='px-10 select-none'>
-							<img className='w-full' src={slide_4} alt='' srcset='' />
+							<img className='w-full' src={slide_4} alt='' srcSet='' />
 						</div>
 					</SwiperSlide>
 				</Swiper>

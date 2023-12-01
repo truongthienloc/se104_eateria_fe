@@ -96,7 +96,7 @@ function Homepage() {
 					</div>
 
 					{tag === 'mainMenu' && (
-						<div div className='mt-14 flex flex-col gap-12'>
+						<div className='mt-14 flex flex-col gap-12'>
 							<div className='flex flex-row gap-9 '>
 								<FoodItems title='Bun cha Ha Noi ' />
 								<FoodItems />
