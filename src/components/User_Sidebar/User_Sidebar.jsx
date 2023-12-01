@@ -1,5 +1,7 @@
 import { React, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { initUserValue, resetUserValue } from '~/features/user/userSlice'
+import { useDispatch } from 'react-redux'
 const menu = [
 	{
 		href: '/user/profile',
@@ -25,6 +27,7 @@ const menu = [
 
 export const User_Sidebar = () => {
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
 	const [openModal, setopenModal] = useState(false)
 	const handleLogout = () => {
 		setopenModal(true)
@@ -78,6 +81,7 @@ export const User_Sidebar = () => {
 								<button
 									className='bg-primary text-third font-semibold w-[120px] h-[44px] rounded mx-5 border-primary border-[1px]'
 									onClick={() => {
+										dispatch(resetUserValue())
 										navigate('/')
 									}}>
 									Đăng xuất
