@@ -8,14 +8,21 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Navigate } from 'react-router-dom'
 import { OrderSuccess } from '~/components/Modal/OrderSuccess'
+import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 
 export const CartPage = () => {
+	const user = useSelector((state) => state.user)
+	if (!user.id) {
+		toast.error('Bạn cần đăng nhập để thực hiện chức năng này!!!',{toastId: 'needLoginID'})
+		return (<Navigate to={'/login'} replace />)
+	} 
 	let Total = 0
-	const navigate = useNavigate();
+	const navigate = useNavigate()
 	const [openModal, setopenModal] = useState(false)
-	const [openMessage, setopenMessage] = useState(false);
+	const [openMessage, setopenMessage] = useState(false)
 	const handleRemoveCartItem = (productID) => {
 		// Xóa sản phẩm khỏi giỏ hàng
 	}
@@ -141,15 +148,18 @@ export const CartPage = () => {
 					<div className='fixed inset-0 flex items-center justify-center z-50'>
 						<div className='modal-container bg-fourth py-8 px-20 rounded-md'>
 							<h2 className='text-2xl font-bold mb-8'>Bạn muốn ?</h2>
-							<p className='italic mb-8'>*Lưu ý: Mã giảm giá chỉ có thể áp dụng khi thanh toán trực tuy</p>
+							<p className='italic mb-8'>
+								*Lưu ý: Mã giảm giá chỉ có thể áp dụng khi thanh toán trực
+								tuy
+							</p>
 							<div className='flex justify-center flex-col items-center gap-10'>
 								<div className='flex flex-row'>
 									<button
 										className='bg-primary text-third font-semibold w-[280px] h-[44px] rounded mx-5 border-primary border-[1px]'
 										onClick={() => {
-											handleCloseModal();
-											setopenMessage(true);
-											setTimeout(handleCloseMessage,3000);
+											handleCloseModal()
+											setopenMessage(true)
+											setTimeout(handleCloseMessage, 3000)
 										}}>
 										Thanh toán bằng tiền mặt sau
 									</button>
@@ -173,10 +183,10 @@ export const CartPage = () => {
 			)}
 			{openMessage && (
 				<>
-				<div className='fixed inset-0 bg-black opacity-50 backdrop-filter backdrop-blur-lg z-50'></div>
-				<div className='fixed inset-0 flex items-center justify-center z-50'>
+					<div className='fixed inset-0 bg-black opacity-50 backdrop-filter backdrop-blur-lg z-50'></div>
+					<div className='fixed inset-0 flex items-center justify-center z-50'>
 						<OrderSuccess />
-				</div>
+					</div>
 				</>
 			)}
 		</div>

@@ -7,7 +7,6 @@ import { UserLayout } from '~/layouts/User/UserLayout'
 import { ProfilePage } from '~/pages/User/ProfilePage'
 import { ChangePasswordPage } from '~/pages/User/ChangePasswordPage'
 import { CouponPage } from '~/pages/User/CouponPage'
-import { CallWaiterPage } from '~/pages/User/CallWaiterPage'
 import { ReceiptHistoryPage } from '~/pages/User/ReceiptHistoryPage'
 import { ReservationInfoPage } from '~/pages/User/ReservationInfoPage'
 import { AboutPage } from '~/pages/AboutPage'
@@ -51,6 +50,8 @@ function RootRoute() {
 					<Route path='/signup' element={<SignupPage />} />
 					<Route path='/forgot-password' element={<ForgotPasswordPage />} />
 					<Route path='/pay' element={<PayPage />} />
+					<Route path='/cart' element={<CartPage />} />
+					<Route path='/reservation' element={<ReservationPage />} />
 					<Route path='/user' element={<UserLayout />}>
 						<Route path='profile' element={<ProfilePage />} />
 						<Route path='coupon' element={<CouponPage />} />
@@ -62,8 +63,6 @@ function RootRoute() {
 					<Route path='/about' element={<AboutPage />} />
 					<Route path='/product' element={<ProductPage />} />
 					<Route path='/product-detail' element={<ProductDetail />} />
-					<Route path='/reservation' element={<ReservationPage />} />
-					<Route path='/cart' element={<CartPage />} />
 					<Route index element={<Navigate to={'/home'} replace />} />
 				</Route>
 			</Routes>
