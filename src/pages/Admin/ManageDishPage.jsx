@@ -160,7 +160,7 @@ export const ManageDishPage = () => {
 														id=''
 														cols=''
 														rows=''
-														className='w-[300px] h-[80px] border-2 px-3 border-primary rounded-lg focus:outline-none'></textarea>
+														className='w-[300px] h-[80px] border-2 px-3 border-primary rounded-lg focus:outline-none resize-none'></textarea>
 												</div>
 											</div>
 											{/*footer*/}
