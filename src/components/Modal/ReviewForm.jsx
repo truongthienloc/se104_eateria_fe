@@ -3,7 +3,7 @@ import Rating from '@mui/material/Rating'
 import TextField from '@mui/material/TextField'
 import { useState } from 'react'
 
-export const ReviewForm = ({onClose}) => {
+export const ReviewForm = ({ onClose }) => {
 	const [rating, setRating] = useState(3)
 	return (
 		<div className='relative bg-white w-[560px] rounded-md flex flex-col py-10 px-10 gap-10 text-lg'>
@@ -20,7 +20,7 @@ export const ReviewForm = ({onClose}) => {
 				<p>Mức độ hài lòng của bạn về món ăn: </p>
 
 				<Rating
-          className='w-fit'
+					className='w-fit'
 					name='simple-controlled'
 					value={rating}
 					onChange={(event, newValue) => {
@@ -38,13 +38,12 @@ export const ReviewForm = ({onClose}) => {
 				defaultValue=''
 			/>
 			<div className='flex w-full'>
-        <button 
-          onClick={onClose}
-          className='bg-third border-[1px] w-[160px] h-[60px] hover:opacity-60'>
-          Quay lại
-        </button>
-				<button 
-          className='bg-primary text-third w-[160px] h-[60px] ml-auto hover:opacity-60'>
+				<button
+					onClick={onClose}
+					className='bg-third border-[1px] w-[160px] h-[60px] hover:opacity-60'>
+					Quay lại
+				</button>
+				<button className='bg-primary text-third w-[160px] h-[60px] ml-auto hover:opacity-60'>
 					Gửi Feedback
 				</button>
 			</div>

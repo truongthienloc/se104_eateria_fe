@@ -13,7 +13,12 @@ import { OrderSuccess } from '~/components/Modal/OrderSuccess'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import formattedMoney from '~/utils/formatMoney'
-import { deleteItem, decQuantity, incQuantity, deleteAll } from '~/features/cart/cartSlice'
+import {
+	deleteItem,
+	decQuantity,
+	incQuantity,
+	deleteAll,
+} from '~/features/cart/cartSlice'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
@@ -35,13 +40,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }))
 
 export const CartPage = () => {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch()
 	const user = useSelector((state) => state.user)
 	const cart = useSelector((state) => state.cart)
 	if (!user.id) {
-		toast.error('Bạn cần đăng nhập để thực hiện chức năng này!!!',{toastId: 'needLoginID'})
-		return (<Navigate to={`/login`} replace />)
-	} 
+		toast.error('Bạn cần đăng nhập để thực hiện chức năng này!!!', {
+			toastId: 'needLoginID',
+		})
+		return <Navigate to={`/login`} replace />
+	}
 	let Total = 0
 	const navigate = useNavigate()
 	const location = useLocation()
@@ -87,9 +94,15 @@ export const CartPage = () => {
 		return { dishID, imgLink, dishName, price, quantity, total }
 	}
 	const rows = cart.cartList.map((item) => {
-		return createData(item.id, item?.images?.[0]?.imageLink, item.dishName, item.dishPrice, item.quantity)
+		return createData(
+			item.id,
+			item?.images?.[0]?.imageLink,
+			item.dishName,
+			item.dishPrice,
+			item.quantity
+		)
 	})
-	
+
 	return (
 		<div className='flex flex-col pb-10 pt-1 items-center'>
 			<div className='w-full h-[160px] mt-1 mb-5 bg-headerBanner bg-no-repeat bg-cover flex justify-center items-center'>
@@ -130,20 +143,40 @@ export const CartPage = () => {
 											/>
 										</div>
 									</StyledTableCell>
-									<StyledTableCell className='uppercase'>{row.dishName}</StyledTableCell>
-									<StyledTableCell>{formattedMoney(row.price)}</StyledTableCell>
+									<StyledTableCell className='uppercase'>
+										{row.dishName}
+									</StyledTableCell>
+									<StyledTableCell>
+										{formattedMoney(row.price)}
+									</StyledTableCell>
 									<StyledTableCell align='center'>
 										<div className='flex items-center justify-between'>
-											<button onClick={() => handleDecQuantity(row.dishID)} className='px-3 py-1 bg-slate-300 hover:opacity-80'>-</button>
+											<button
+												onClick={() =>
+													handleDecQuantity(row.dishID)
+												}
+												className='px-3 py-1 bg-slate-300 hover:opacity-80'>
+												-
+											</button>
 											<p>{row.quantity}</p>
-											<button onClick={() => handleIncQuantity(row.dishID)} className='px-3 py-1 bg-slate-300 hover:opacity-80'>+</button>
+											<button
+												onClick={() =>
+													handleIncQuantity(row.dishID)
+												}
+												className='px-3 py-1 bg-slate-300 hover:opacity-80'>
+												+
+											</button>
 										</div>
 									</StyledTableCell>
-									<StyledTableCell align='left'>{formattedMoney(row.total)}</StyledTableCell>
+									<StyledTableCell align='left'>
+										{formattedMoney(row.total)}
+									</StyledTableCell>
 									<StyledTableCell>
 										<button
 											className='cursor-pointer'
-											onClick={()=>handleRemoveCartItem(row.dishID)}
+											onClick={() =>
+												handleRemoveCartItem(row.dishID)
+											}
 											id='cart-remove-button'>
 											<DeleteIcon className='hover:text-red-500 transition-all' />
 										</button>
@@ -155,11 +188,13 @@ export const CartPage = () => {
 				</TableContainer>
 			</div>
 			<div className='flex flex-col w-[1000px] py-5 items-center gap-10'>
-				<p className='font-bold text-xl ml-auto'>Tổng tiền: {formattedMoney(Total)}</p>
+				<p className='font-bold text-xl ml-auto'>
+					Tổng tiền: {formattedMoney(Total)}
+				</p>
 				<button
 					className='bg-primary text-third round w-40 hover:opacity-80'
-					onClick={handleOrderBtn}
-				>Gọi món
+					onClick={handleOrderBtn}>
+					Gọi món
 				</button>
 			</div>
 

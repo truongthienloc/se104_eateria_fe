@@ -7,20 +7,19 @@ import { DatePicker } from '@mui/x-date-pickers'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 
-
 export function SalesInfoPage() {
 	const [showModal, setShowModal] = useState(false)
 	const [saleData, setSaleData] = useState([])
-	const [username, setUsername] = useState('');
-	const [billId, setBillId] = useState('');
-	const [startDate, setStartDate] = useState(dayjs(new Date));
-	const [endDate, setEndDate] = useState(dayjs(new Date));
+	const [username, setUsername] = useState('')
+	const [billId, setBillId] = useState('')
+	const [startDate, setStartDate] = useState(dayjs(new Date()))
+	const [endDate, setEndDate] = useState(dayjs(new Date()))
 
-	const handleChangeUsername = e => setUsername(e.target.value)
-	const handleChangeBillId = e => setBillId(e.target.value)
-	const handleChangeStartDate = e => setStartDate(e.target.value)
-	const handleChangeEndDate = e => setEndDate(e.target.value)
-	
+	const handleChangeUsername = (e) => setUsername(e.target.value)
+	const handleChangeBillId = (e) => setBillId(e.target.value)
+	const handleChangeStartDate = (e) => setStartDate(e.target.value)
+	const handleChangeEndDate = (e) => setEndDate(e.target.value)
+
 	const fetchSale = async () => {
 		try {
 			const res = await api.get('/bill/all')
@@ -47,20 +46,18 @@ export function SalesInfoPage() {
 						id: billId !== '' ? billId : undefined,
 						fromDay: startDate.toISOString(),
 						toDay: endDate.toISOString(),
-					}
+					},
 				}),
 				{
 					pending: 'Đang lọc',
 					success: 'Lọc thành công',
-					error: 'Lọc thất bại'
+					error: 'Lọc thất bại',
 				}
 			)
 
-			const sale = res.data.data 
+			const sale = res.data.data
 			setSaleData(sale)
-		} catch (error) {
-			
-		}
+		} catch (error) {}
 	}
 
 	return (
@@ -70,8 +67,12 @@ export function SalesInfoPage() {
 					<p className='text-primary text-2xl font-normal'>
 						Thông tin bán hàng
 					</p>
-					<Link to="/admin/notification">
-						<img src={iconNotification} alt="" className='hover:cursor-pointer' />
+					<Link to='/admin/notification'>
+						<img
+							src={iconNotification}
+							alt=''
+							className='hover:cursor-pointer'
+						/>
 					</Link>
 				</div>
 				<div className='mt-9 flex gap-6 text-lg font-normal text-second'>
@@ -93,7 +94,7 @@ export function SalesInfoPage() {
 							placeholder='Nhập mã hóa đơn'
 							className=' placeholder:opacity-90
 						 placeholder:text-second w-[264px] h-[57px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
-						 	value={billId}
+							value={billId}
 							onChange={handleChangeBillId}
 						/>
 					</div>
@@ -105,7 +106,10 @@ export function SalesInfoPage() {
 							className=' placeholder:opacity-90
 						 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 						/> */}
-						<DatePicker format='DD/MM/YYYY' value={startDate} className='bg-third'
+						<DatePicker
+							format='DD/MM/YYYY'
+							value={startDate}
+							className='bg-third'
 							onChange={handleChangeStartDate}
 						/>
 					</div>
@@ -117,14 +121,17 @@ export function SalesInfoPage() {
 							className=' placeholder:opacity-90
 						 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 						/> */}
-						<DatePicker format='DD/MM/YYYY' value={endDate} className='bg-third'
+						<DatePicker
+							format='DD/MM/YYYY'
+							value={endDate}
+							className='bg-third'
 							onChange={handleChangeEndDate}
 						/>
 					</div>
 					<div className='flex items-end'>
-						<button className='px-4 py-1 h-min bg-primary text-white rounded-xl'
-							onClick={handleFilterButtonClick}
-						>
+						<button
+							className='px-4 py-1 h-min bg-primary text-white rounded-xl'
+							onClick={handleFilterButtonClick}>
 							LỌC
 						</button>
 					</div>

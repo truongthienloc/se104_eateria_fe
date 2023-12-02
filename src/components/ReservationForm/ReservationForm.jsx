@@ -8,31 +8,41 @@ export default function ReservationForm() {
 			<div className='flex flex-col gap-4'>
 				<p className='font-bold'>Chọn thời gian đặt bàn:</p>
 				<div className='flex flex-row items-center justify-between gap-2'>
-					<label htmlFor='' className='flex-1'>Chọn ngày: </label>
+					<label htmlFor='' className='flex-1'>
+						Chọn ngày:{' '}
+					</label>
 					<DatePicker className='flex-[2]' format='DD/MM/YYYY' />
 				</div>
 				<div className='flex flex-row items-center justify-between gap-2'>
-					<label htmlFor='' className='flex-1'>Chọn giờ: </label>
+					<label htmlFor='' className='flex-1'>
+						Chọn giờ:{' '}
+					</label>
 					<TimePicker className='flex-[2]' format='HH:mm' />
 				</div>
 			</div>
-            <div className="flex flex-col gap-4">
-                <div className="flex flex-row gap-2 items-center">
-                    <label htmlFor="" className="font-bold flex-1">
-                        Số lượng khách:
-                    </label>
-                    <OutlinedInput className='flex-[2] [&_input]:text-center' placeholder='2' />
-                </div>
-                <div className="flex flex-row gap-2 items-center">
-                    <label htmlFor="" className="font-bold flex-1">
-                        Mã bàn:
-                    </label>
-                    <OutlinedInput className='flex-[2] [&_input]:text-center' placeholder='15'/>
-                </div>
-            </div>
-            <button className='py-2 bg-primary text-white transition-opacity hover:opacity-80 border-none'>
-                Kiểm tra thông tin đặt bàn
-            </button>
+			<div className='flex flex-col gap-4'>
+				<div className='flex flex-row gap-2 items-center'>
+					<label htmlFor='' className='font-bold flex-1'>
+						Số lượng khách:
+					</label>
+					<OutlinedInput
+						className='flex-[2] [&_input]:text-center'
+						placeholder='2'
+					/>
+				</div>
+				<div className='flex flex-row gap-2 items-center'>
+					<label htmlFor='' className='font-bold flex-1'>
+						Mã bàn:
+					</label>
+					<OutlinedInput
+						className='flex-[2] [&_input]:text-center'
+						placeholder='15'
+					/>
+				</div>
+			</div>
+			<button className='py-2 bg-primary text-white transition-opacity hover:opacity-80 border-none'>
+				Kiểm tra thông tin đặt bàn
+			</button>
 		</div>
 	)
 }

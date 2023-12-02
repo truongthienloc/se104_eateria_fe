@@ -11,7 +11,7 @@ export default function LogoutModal({ isOpen, onClose, onLogout }) {
 						<div className='justify-center flex flex-col px-10 pt-8'>
 							<center>
 								<p className='w-[260px] font-medium'>
-                                    Bạn có muốn đăng xuất?
+									Bạn có muốn đăng xuất?
 								</p>
 							</center>
 						</div>

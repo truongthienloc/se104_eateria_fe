@@ -30,19 +30,20 @@ export const ReceiptHistoryPage = () => {
 	}))
 
 	function createData(receiptID, date, paymentMethod, totalBill, detail) {
-		let payMethod = "Thanh toán tiền mặt";
-		if (paymentMethod !== "cash") {
-			 payMethod = (paymentMethod === "banking") ? "Chuyển khoản ngân hàng" : "Ví điện tử Momo";
+		let payMethod = 'Thanh toán tiền mặt'
+		if (paymentMethod !== 'cash') {
+			payMethod =
+				paymentMethod === 'banking' ? 'Chuyển khoản ngân hàng' : 'Ví điện tử Momo'
 		}
 		return { receiptID, date, payMethod, totalBill, detail }
 	}
 
 	const rows = [
-		createData("BI7411","28/01/2023","cash","500.000 VND","Xem"),
-		createData("BI7411","28/01/2023","cash","500.000 VND","Xem"),
-		createData("BI7411","28/01/2023","cash","500.000 VND","Xem"),
-		createData("BI7411","28/01/2023","cash","500.000 VND","Xem"),
-		createData("BI7411","28/01/2023","cash","500.000 VND","Xem"),
+		createData('BI7411', '28/01/2023', 'cash', '500.000 VND', 'Xem'),
+		createData('BI7411', '28/01/2023', 'cash', '500.000 VND', 'Xem'),
+		createData('BI7411', '28/01/2023', 'cash', '500.000 VND', 'Xem'),
+		createData('BI7411', '28/01/2023', 'cash', '500.000 VND', 'Xem'),
+		createData('BI7411', '28/01/2023', 'cash', '500.000 VND', 'Xem'),
 	]
 	return (
 		<div className='w-full h-full px-10 pt-10 '>
@@ -58,7 +59,9 @@ export const ReceiptHistoryPage = () => {
 							<StyledTableCell>Ngày tạo đơn</StyledTableCell>
 							<StyledTableCell>Phương thức thanh toán</StyledTableCell>
 							<StyledTableCell>Tổng thanh toán</StyledTableCell>
-							<StyledTableCell align='center'>Chi tiết hóa đơn</StyledTableCell>
+							<StyledTableCell align='center'>
+								Chi tiết hóa đơn
+							</StyledTableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -70,7 +73,9 @@ export const ReceiptHistoryPage = () => {
 								<StyledTableCell align='justify'>
 									{row.date}
 								</StyledTableCell>
-								<StyledTableCell align='justify'>{row.payMethod}</StyledTableCell>
+								<StyledTableCell align='justify'>
+									{row.payMethod}
+								</StyledTableCell>
 								<StyledTableCell align='justify'>
 									{row.totalBill}
 								</StyledTableCell>

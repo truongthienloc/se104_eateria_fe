@@ -30,12 +30,12 @@ const ScrollToTopButton = () => {
 	return (
 		<>
 			{isVisible && (
-				<button 
+				<button
 					className='w-10 h-10 rounded-[50%] bg-primary fixed bottom-6 right-6 animate-fadeIn outline-none grid place-items-center p-0 hover:border-none focus:outline-none focus-visible:outline-none'
 					id='scrollToTopBtn'
 					onClick={scrollToTop}
 					// style={{ display: isVisible ? 'block' : 'none' }}
-                >
+				>
 					<KeyboardArrowUpIcon />
 				</button>
 			)}

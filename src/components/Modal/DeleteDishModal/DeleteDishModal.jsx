@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function DeleteDishModal({ isOpen, onClose, onSubmit }) {
-    if (!isOpen) return null
+	if (!isOpen) return null
 	return (
 		<div>
 			<div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
