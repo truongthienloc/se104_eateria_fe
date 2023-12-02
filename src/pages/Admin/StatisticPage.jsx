@@ -48,9 +48,9 @@ const dataset = [
     month: 'Tháng 5',
   },
   {
-    "Thực đơn chính": 60,
-    "Tráng miệng": 63,
-    "Thức uống": 103,
+    "Thực đơn chính": 160,
+    "Tráng miệng": 130,
+    "Thức uống": 193,
     month: 'Tháng 6',
   },
   {
@@ -99,9 +99,9 @@ export  function StatisticPage() {
       dataset={dataset}
       xAxis={[{ scaleType: 'band', dataKey: 'month' }]}
       series={[
-        { dataKey: '"Thực đơn chính"', label: 'Thực đơn chính', valueFormatter },
-        { dataKey: '"Tráng miệng"', label: 'Tráng miệng', valueFormatter },
-        { dataKey: '"Thức uống"', label: 'Thức uống', valueFormatter },
+        { dataKey: 'Thực đơn chính', label: 'Thực đơn chính', valueFormatter },
+        { dataKey: 'Tráng miệng', label: 'Tráng miệng', valueFormatter },
+        { dataKey: 'Thức uống', label: 'Thức uống', valueFormatter },
       ]}
       {...chartSetting}
 	  width={1000}
