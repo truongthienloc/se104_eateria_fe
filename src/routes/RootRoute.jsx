@@ -7,7 +7,6 @@ import { UserLayout } from '~/layouts/User/UserLayout'
 import { ProfilePage } from '~/pages/User/ProfilePage'
 import { ChangePasswordPage } from '~/pages/User/ChangePasswordPage'
 import { CouponPage } from '~/pages/User/CouponPage'
-import { CallWaiterPage } from '~/pages/User/CallWaiterPage'
 import { ReceiptHistoryPage } from '~/pages/User/ReceiptHistoryPage'
 import { ReservationInfoPage } from '~/pages/User/ReservationInfoPage'
 import { AboutPage } from '~/pages/AboutPage'
@@ -27,6 +26,7 @@ import { ManageClientPage } from '~/pages/Admin/ManageClientPage'
 import { ManageBookingPage } from '~/pages/Admin/ManageBookingPage'
 import { StatisticPage } from '~/pages/Admin/StatisticPage'
 import { PayPage } from '~/pages/PayPage/PayPage'
+import { BillDetailPage } from '~/pages/BillDetailPage'
 import { Notification } from '~/pages/Admin/Notification'
 
 function RootRoute() {
@@ -53,10 +53,12 @@ function RootRoute() {
 					<Route path='/signup' element={<SignupPage />} />
 					<Route path='/forgot-password' element={<ForgotPasswordPage />} />
 					<Route path='/pay' element={<PayPage />} />
+					<Route path='/cart' element={<CartPage />} />
+					<Route path='/reservation' element={<ReservationPage />} />
+					<Route path='/bill' element={<BillDetailPage />} />
 					<Route path='/user' element={<UserLayout />}>
 						<Route path='profile' element={<ProfilePage />} />
 						<Route path='coupon' element={<CouponPage />} />
-						<Route path='call-waiter' element={<CallWaiterPage />} />
 						<Route path='receipt-history' element={<ReceiptHistoryPage />} />
 						<Route path='reservation' element={<ReservationInfoPage />} />
 						<Route path='change-password' element={<ChangePasswordPage />} />
@@ -65,8 +67,6 @@ function RootRoute() {
 					<Route path='/about' element={<AboutPage />} />
 					<Route path='/product' element={<ProductPage />} />
 					<Route path='/product-detail' element={<ProductDetail />} />
-					<Route path='/reservation' element={<ReservationPage />} />
-					<Route path='/cart' element={<CartPage />} />
 					<Route index element={<Navigate to={'/home'} replace />} />
 				</Route>
 			</Routes>
