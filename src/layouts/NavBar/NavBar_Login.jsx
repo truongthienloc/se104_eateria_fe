@@ -6,8 +6,10 @@ import defaultProfileImg from '~/assets/images/default_profile_image.svg'
 import defaultAvatar from '~/assets/images/m10.jpg'
 import deliveryImg from '~/assets/images/delivery.svg'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function NavBar_Login() {
+	const cart = useSelector((state) =>state.cart);
 	return (
 		<div className='w-full flex flex-col shadow-md bg-third'>
 			<div className='bg-primary text-white'>
@@ -40,7 +42,7 @@ function NavBar_Login() {
 					<Link
 						className='bg-second text-white w-14 h-14 rounded-full flex flex-col items-center justify-center transition-opacity hover:opacity-70 hover:text-white'
 						to={'/cart'}>
-						<p className='font-bold'>10</p>
+						<p className='font-bold'>{cart.total}</p>
 						<ShoppingCartIcon />
 					</Link>
 

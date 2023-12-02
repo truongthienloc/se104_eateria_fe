@@ -7,12 +7,9 @@ import { useEffect} from 'react'
 
 function DefaultLayout() {
 	const user = useSelector((state) =>state.user)
-	useEffect(() => {
-		console.log('user: ',user);
-	}, [user]);
 	return (
 		<div className='flex flex-col min-h-screen overflow-x-hidden box-border font-roboto text-second'>
-			{user && user.id ? <NavBar_Login/> : <NavBar />}
+			{user && user.id ? <NavBar_Login /> : <NavBar />}
 			<Outlet />
 			<Footer />
 			<ScrollToTopButton />

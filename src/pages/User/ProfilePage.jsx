@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { UserLayout } from '~/layouts/User/UserLayout'
+import { useSelector } from 'react-redux';
 
 
 
 export const ProfilePage = () => {
+	const user = useSelector((state) =>state.user);
+	console.log(user);
 	const [url,setURL] = useState('');
 	const handleSaveButton = (user_id, customerName, customerPhone) => {
 
@@ -25,7 +28,7 @@ export const ProfilePage = () => {
 							<p>Tên khách hàng</p>
 							<input
 								className='bg-third text-second outline-none border-primary border-[2px] w-[300px] h-[40px] rounded-md px-3 mt-2'
-								placeholder="customer's name here"
+								placeholder={user.username}
 								type='text'
 							/>
 						</div>
@@ -33,7 +36,7 @@ export const ProfilePage = () => {
 							<p>Số điện thoại</p>
 							<input
 								className='bg-third text-second outline-none border-primary border-[2px] w-[300px] h-[40px] rounded-md px-3 mt-2'
-								placeholder="customer's numbers here"
+								placeholder={(user.phoneNumber == null)? 'Bạn chưa cập nhật số điện thoại':user.phoneNumber}
 								type='text'
 							/>
 						</div>
@@ -44,7 +47,7 @@ export const ProfilePage = () => {
 							<input
 								className='bg-third text-second outline-none border-primary border-[2px] w-[180px] h-[40px] rounded-md px-3 mt-2'
 								type='text'
-								placeholder='data here'
+								placeholder='1'
 								disabled
 							/>
 						</div>
@@ -53,7 +56,7 @@ export const ProfilePage = () => {
 							<input
 								className='bg-third text-second outline-none border-primary border-[2px] w-[180px] h-[40px] rounded-md px-3 mt-2'
 								type='text'
-								placeholder='data-here'
+								placeholder='100'
 								disabled
 							/>
 						</div>

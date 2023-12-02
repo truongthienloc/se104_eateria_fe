@@ -19,12 +19,15 @@ export const userSlice = createSlice({
     reducers: {
         initUserValue: (state, actions) => {
             return { ...state, ...actions.payload }
+        },
+        resetUserValue: () => {
+            return initialState
         }
     },
 
 })
 
 // Action creators are generated for each case reducer function
-export const { initUserValue } = userSlice.actions
+export const { initUserValue, resetUserValue } = userSlice.actions
 
 export default userSlice.reducer

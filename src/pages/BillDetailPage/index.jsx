@@ -1,0 +1,1 @@
+export {BillDetailPage} from './BillDetailPage'
