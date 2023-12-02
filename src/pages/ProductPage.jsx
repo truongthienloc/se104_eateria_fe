@@ -43,10 +43,10 @@ export const ProductPage = () => {
 			try {
 				const res = await api.get('/dish')
 				setdata(res.data.data)
-        let foods = res.data.data.slice(0,10)
-        let food2s = res.data.data.slice(10)
-        setfirstList(foods)
-        setsecondList(food2s)
+				let foods = res.data.data.slice(0, 10)
+				let food2s = res.data.data.slice(10)
+				setfirstList(foods)
+				setsecondList(food2s)
 			} catch (error) {
 				console.log(error)
 			}
@@ -57,23 +57,23 @@ export const ProductPage = () => {
 	return (
 		<div className='flex-1 flex-col justify-center'>
 			<div>
-      <div className='w-full h-[160px] mt-1 mb-5 bg-headerBanner bg-no-repeat bg-cover flex justify-center items-center'>
-				<p className='uppercase text-third font-bold text-3xl'>Sản phẩm</p>
-			</div>
+				<div className='w-full h-[160px] mt-1 mb-5 bg-headerBanner bg-no-repeat bg-cover flex justify-center items-center'>
+					<p className='uppercase text-third font-bold text-3xl'>Sản phẩm</p>
+				</div>
 				<p className='text-center text-second text-4xl font-normal mt-8'>
 					Hãy lựa chọn và thưởng thức món ngon bạn yêu thích !!
 				</p>
 				<div className='w-full flex justify-center'>
-          <div className='w-[460px] h-[80px] flex items-center justify-between my-8 bg-third border-4 rounded-2xl border-primary'>
-					<input
-						className=' bg-third px-4 text-2xl font-normal outline-none'
-						type='text'
-						placeholder='Bạn muốn tìm món gì?'
-						// value={inputValue}
-						onChange={handleChange}
-            />
-					<FaSearch className='mx-8 cursor-pointer text-xl text-second' />
-          </div>
+					<div className='w-[460px] h-[80px] flex items-center justify-between my-8 bg-third border-4 rounded-2xl border-primary'>
+						<input
+							className=' bg-third px-4 text-2xl font-normal outline-none'
+							type='text'
+							placeholder='Bạn muốn tìm món gì?'
+							// value={inputValue}
+							onChange={handleChange}
+						/>
+						<FaSearch className='mx-8 cursor-pointer text-xl text-second' />
+					</div>
 				</div>
 
 				<div className='flex items-center justify-center text-second mt-10'>
@@ -93,8 +93,7 @@ export const ProductPage = () => {
 					<select
 						className='w-[230px] h-[50px] bg-third border-2 rounded-xl border-primary pl-3 mr-4'
 						onChange={handleCategory}
-						value={category}
-            >
+						value={category}>
 						<option value='' disabled hidden>
 							Phân loại
 						</option>
@@ -104,35 +103,30 @@ export const ProductPage = () => {
 					</select>
 				</div>
 
-        <div div className='max-w-[1400px] mx-auto my-10 flex flex-wrap gap-12 items-center justify-center'>
-              {firstList.length > 0 && data.map((item) => {
-								return(
-									<FoodItems
-									key={item.id}
-									item={item}
-									/>
-								)
-							})}
+				<div
+					div
+					className='max-w-[1400px] mx-auto my-10 flex flex-wrap gap-12 items-center justify-center'>
+					{firstList.length > 0 &&
+						data.map((item) => {
+							return <FoodItems key={item.id} item={item} />
+						})}
 				</div>
 
 				<div className='max-w-[1400px] mx-auto'>
 					<img
-            className='w-full object-fill'
+						className='w-full object-fill'
 						src='src\assets\images\productPage\banner\image_itemsList_ooffer_2.svg'
 						alt='banner image'
 					/>
 				</div>
-        <div div className='max-w-[1400px] mx-auto my-10 flex flex-wrap gap-12 items-center justify-center'>
-              {secondList.length > 0 && data.map((item) => {
-								return(
-									<FoodItems
-									key={item.id}
-									item={item}
-									/>
-								)
-							})}
+				<div
+					div
+					className='max-w-[1400px] mx-auto my-10 flex flex-wrap gap-12 items-center justify-center'>
+					{secondList.length > 0 &&
+						data.map((item) => {
+							return <FoodItems key={item.id} item={item} />
+						})}
 				</div>
-
 			</div>
 		</div>
 	)

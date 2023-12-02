@@ -7,24 +7,25 @@ const useSocket = () => {
 	useEffect(() => {
 		const accessToken = localStorage.getItem('access-token')
 		if (accessToken) {
-			console.log(`${import.meta.env.VITE_SOCKET_URL}?access_token=${accessToken}`);
-			const newSocket = io(`${import.meta.env.VITE_SOCKET_URL}?access_token=${accessToken}`)
-	
+			console.log(`${import.meta.env.VITE_SOCKET_URL}?access_token=${accessToken}`)
+			const newSocket = io(
+				`${import.meta.env.VITE_SOCKET_URL}?access_token=${accessToken}`
+			)
+
 			newSocket.on('connect', () => {
 				console.log('Connected to Socket.IO')
 			})
-	
+
 			newSocket.on('disconnect', () => {
 				console.log('Disconnected from Socket.IO')
 			})
-	
+
 			setSocket(newSocket)
-			
+
 			return () => {
 				newSocket.disconnect()
 			}
 		}
-
 	}, [])
 
 	const sendMessage = (message) => {

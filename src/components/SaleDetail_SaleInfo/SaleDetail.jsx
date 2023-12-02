@@ -11,7 +11,9 @@ function SaleDetail({ billId, time, name, price, status, onStatusClick }) {
 			</td>
 			<td className='py-4 border-b border-gray-200 text-center'>{time}</td>
 			<td className='py-4 border-b border-gray-200 text-center'>{name}</td>
-			<td className='py-4 border-b border-gray-200 text-right'><center>{price}</center></td>
+			<td className='py-4 border-b border-gray-200 text-right'>
+				<center>{price}</center>
+			</td>
 			<td className='py-4 border-b border-gray-200 text-center'>
 				{status === '0' ? (
 					<span

@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 function NavBar_Login() {
-	const cart = useSelector((state) =>state.cart);
-	const user = useSelector((state) =>state.user);
+	const cart = useSelector((state) => state.cart)
+	const user = useSelector((state) => state.user)
 	return (
 		<div className='w-full flex flex-col shadow-md bg-third'>
 			<div className='bg-primary text-white'>

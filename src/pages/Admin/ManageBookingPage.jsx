@@ -87,12 +87,19 @@ export function ManageBookingPage() {
 			<div className=''>
 				<div className='flex justify-between'>
 					<p className='text-primary text-2xl font-normal'>Quản lý đặt bàn</p>
-					<Link to="/admin/notification">
-						<img src={iconNotification} alt="" className='hover:cursor-pointer' />
+					<Link to='/admin/notification'>
+						<img
+							src={iconNotification}
+							alt=''
+							className='hover:cursor-pointer'
+						/>
 					</Link>
 				</div>
 				<div className='mt-9 flex gap-20 text-lg font-normal text-second'>
-					<div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className='relative flex' >
+					<div
+						onMouseEnter={handleMouseEnter}
+						onMouseLeave={handleMouseLeave}
+						className='relative flex'>
 						<div className='flex gap-3 cursor-pointer items-center'>
 							<span>Tình trạng</span>
 							<ExpandMoreRoundedIcon />
@@ -118,13 +125,13 @@ export function ManageBookingPage() {
 					<div className='flex gap-3 cursor-pointer items-center '>
 						<span>Ngày đặt</span>
 						<div className=''>
-							<DatePicker format='DD/MM/YYYY' className='bg-third'/>
+							<DatePicker format='DD/MM/YYYY' className='bg-third' />
 						</div>
 					</div>
 					<div className='flex items-end'>
-						<button className='px-4 py-1 h-min bg-primary text-white'
-							onClick={() => toast.info('Chức năng chưa được hỗ trợ')}
-						>
+						<button
+							className='px-4 py-1 h-min bg-primary text-white'
+							onClick={() => toast.info('Chức năng chưa được hỗ trợ')}>
 							LỌC
 						</button>
 					</div>

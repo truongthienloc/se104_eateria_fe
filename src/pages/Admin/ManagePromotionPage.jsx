@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import useEditPromotionModal from '~/hooks/useEditPromotionModal'
 import PromotionDetail from '~/components/PromotionDetail_ManaegeDetail/PromotionDetail'
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined'
 import iconNotification from '~/assets/images/icon_notification.svg'
 import { api } from '~/services/axios'
 import { toast } from 'react-toastify'
@@ -49,21 +49,21 @@ export const ManagePromotionPage = () => {
 	}
 
 	const handleAddPromotionSubmit = async () => {
-		console.log(addPromotionModal);
+		console.log(addPromotionModal)
 
 		if (!addPromotionModal.validate()) {
 			toast.error('Tất cả các trường đều không được để trống')
-			return 
+			return
 		}
 
 		try {
 			const res = await toast.promise(
 				api.post('/discount', {
-					discountCode : addPromotionModal.id,
-					discountDescription : addPromotionModal.description,
-					discountPercent : addPromotionModal.percent,
-					startDay : addPromotionModal.startDay,
-					endDay : addPromotionModal.endDay
+					discountCode: addPromotionModal.id,
+					discountDescription: addPromotionModal.description,
+					discountPercent: addPromotionModal.percent,
+					startDay: addPromotionModal.startDay,
+					endDay: addPromotionModal.endDay,
 				}),
 				{
 					pending: 'Đang tạo khuyến mãi',
@@ -74,9 +74,7 @@ export const ManagePromotionPage = () => {
 
 			await fetchPromotion()
 			setShowModalAdd(false)
-		} catch (error) {
-			
-		}
+		} catch (error) {}
 	}
 
 	return (
@@ -86,8 +84,12 @@ export const ManagePromotionPage = () => {
 					<p className='text-primary text-2xl font-normal'>
 						Thông tin khuyến mãi
 					</p>
-					<Link to="/admin/notification">
-						<img src={iconNotification} alt="" className='hover:cursor-pointer' />
+					<Link to='/admin/notification'>
+						<img
+							src={iconNotification}
+							alt=''
+							className='hover:cursor-pointer'
+						/>
 					</Link>
 				</div>
 
@@ -144,7 +146,7 @@ export const ManagePromotionPage = () => {
 								Xóa khuyến mãi
 							</button>
 
-							<AddPromotionModal 
+							<AddPromotionModal
 								isOpen={showModalAdd}
 								onClose={() => setShowModalAdd(false)}
 								promotionInfo={addPromotionModal}

@@ -165,8 +165,7 @@ export const BillDetailPage = () => {
 						<div
 							onClick={handleCloseModal}
 							className='absolute inset-0 bg-black opacity-50 backdrop-filter backdrop-blur-lg'></div>
-						<ReviewForm
-              onClose={handleCloseModal} />
+						<ReviewForm onClose={handleCloseModal} />
 					</div>
 				</>
 			)}

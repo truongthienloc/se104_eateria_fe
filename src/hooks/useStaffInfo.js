@@ -55,13 +55,13 @@ const useStaffInfo = () => {
 		setPhone(newPhone || '')
 	}
 
-    const validate = () => {
-        if (!id || !name || !role || !startDate || !salary || !shift || !phone) {
-          return false;
-        }
-    
-        return true;
-      };
+	const validate = () => {
+		if (!id || !name || !role || !startDate || !salary || !shift || !phone) {
+			return false
+		}
+
+		return true
+	}
 
 	return {
 		id,
@@ -79,7 +79,7 @@ const useStaffInfo = () => {
 		handleChangeShift,
 		handleChangePhoneNumber,
 		setAll,
-        validate,
+		validate,
 	}
 }
 

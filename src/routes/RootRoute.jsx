@@ -34,17 +34,17 @@ function RootRoute() {
 		<>
 			<Routes>
 				<Route path='/admin/login' element={<AdminLoginPage />} />
-				<Route path='/admin' element={<AdminLayout />} >
-						<Route path='sales-info' element={<SalesInfoPage />} />
-						<Route path='manage-statistic' element={<StatisticPage />} />
-						<Route path='manage-booking' element={<ManageBookingPage />} />
-						<Route path='manage-dish' element={<ManageDishPage />} />
-						<Route path='manage-staff' element={<ManageStaffPage />} />
-						<Route path='manage-client' element={<ManageClientPage />} />
-						<Route path='manage-promotion' element={<ManagePromotionPage />}/>
-						<Route path='change-password' element={<ChangePasswordPage />} />
-						<Route path='notification' element={<Notification />} />
-						<Route index element={<Navigate to={'login'} replace />} />
+				<Route path='/admin' element={<AdminLayout />}>
+					<Route path='sales-info' element={<SalesInfoPage />} />
+					<Route path='manage-statistic' element={<StatisticPage />} />
+					<Route path='manage-booking' element={<ManageBookingPage />} />
+					<Route path='manage-dish' element={<ManageDishPage />} />
+					<Route path='manage-staff' element={<ManageStaffPage />} />
+					<Route path='manage-client' element={<ManageClientPage />} />
+					<Route path='manage-promotion' element={<ManagePromotionPage />} />
+					<Route path='change-password' element={<ChangePasswordPage />} />
+					<Route path='notification' element={<Notification />} />
+					<Route index element={<Navigate to={'login'} replace />} />
 				</Route>
 				<Route path='/' element={<DefaultLayout />}>
 					<Route path='/' element={<Homepage />} />

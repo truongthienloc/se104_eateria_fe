@@ -91,7 +91,6 @@ export default function LoginPage() {
 				const resUserInfo = await api.get('user/me/info')
 				dispatch(initUserValue(resUserInfo.data.data))
 			}
-			
 
 			setTimeout(() => {
 				navigate('/')

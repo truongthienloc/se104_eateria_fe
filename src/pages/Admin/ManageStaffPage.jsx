@@ -54,28 +54,30 @@ export const ManageStaffPage = () => {
 	const handleAddStaffSubmit = async () => {
 		if (!addStaffInfo.validate()) {
 			toast.error('Tất cả các trường đều không được để trống')
-			return 
+			return
 		}
 
 		try {
-			console.log(JSON.stringify({
-				employeeName : addStaffInfo.name,
-				employeePosition : addStaffInfo.role,
-				staffCode : addStaffInfo.id,
-				startWorkingDay : addStaffInfo.startDate.toISOString(),
-				salary : addStaffInfo.salary,
-				workShift : addStaffInfo.shift,
-				phoneNumber : addStaffInfo.phone,
-			}));
+			console.log(
+				JSON.stringify({
+					employeeName: addStaffInfo.name,
+					employeePosition: addStaffInfo.role,
+					staffCode: addStaffInfo.id,
+					startWorkingDay: addStaffInfo.startDate.toISOString(),
+					salary: addStaffInfo.salary,
+					workShift: addStaffInfo.shift,
+					phoneNumber: addStaffInfo.phone,
+				})
+			)
 			const res = await toast.promise(
 				api.post('/employee/', {
-					employeeName : addStaffInfo.name,
-					employeePosition : addStaffInfo.role,
-					staffCode : addStaffInfo.id,
-					startWorkingDay : addStaffInfo.startDate.toISOString(),
-					salary : addStaffInfo.salary,
-					workShift : addStaffInfo.shift,
-					phoneNumber : addStaffInfo.phone,
+					employeeName: addStaffInfo.name,
+					employeePosition: addStaffInfo.role,
+					staffCode: addStaffInfo.id,
+					startWorkingDay: addStaffInfo.startDate.toISOString(),
+					salary: addStaffInfo.salary,
+					workShift: addStaffInfo.shift,
+					phoneNumber: addStaffInfo.phone,
 				}),
 				{
 					pending: 'Đang thêm nhân viên',
@@ -86,9 +88,7 @@ export const ManageStaffPage = () => {
 
 			await fetchStaff()
 			setShowModalAdd(false)
-		} catch (error) {
-			
-		}
+		} catch (error) {}
 	}
 
 	return (
@@ -98,8 +98,12 @@ export const ManageStaffPage = () => {
 					<p className='text-primary text-2xl font-normal'>
 						Thông tin nhân viên
 					</p>
-					<Link to="/admin/notification">
-						<img src={iconNotification} alt="" className='hover:cursor-pointer' />
+					<Link to='/admin/notification'>
+						<img
+							src={iconNotification}
+							alt=''
+							className='hover:cursor-pointer'
+						/>
 					</Link>
 				</div>
 				<div className='mt-9 flex gap-6 text-lg font-normal text-second'>

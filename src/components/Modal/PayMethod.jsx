@@ -18,9 +18,9 @@ import { deleteAll } from '~/features/cart/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function PayMethod() {
-	const navigate = useNavigate();
+	const navigate = useNavigate()
 	const dispatch = useDispatch()
-	const [openModal, setopenModal] = useState(false);
+	const [openModal, setopenModal] = useState(false)
 	const [expanded, setExpanded] = useState(false)
 	const [validMonth, setvalidMonth] = useState('')
 
@@ -33,14 +33,14 @@ export default function PayMethod() {
 	const handlePay = () => {
 		setopenModal(true)
 		dispatch(deleteAll())
-		setTimeout(()=>{
+		setTimeout(() => {
 			setopenModal(false)
 			navigate('/home')
 			window.scrollTo({
 				top: 0,
 				behavior: 'smooth',
 			})
-		},3000)
+		}, 3000)
 	}
 	return (
 		<div>
