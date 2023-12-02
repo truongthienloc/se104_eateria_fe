@@ -1,12 +1,26 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import { api } from '~/services/axios'
 import iconNotification from '~/assets/images/icon_notification.svg'
 import SaleDetail from '~/components/SaleDetail_SaleInfo/SaleDetail'
+import { toast } from 'react-toastify'
+import { DatePicker } from '@mui/x-date-pickers'
+import dayjs from 'dayjs'
+
+
 export function SalesInfoPage() {
 	const [showModal, setShowModal] = useState(false)
 	const [saleData, setSaleData] = useState([])
-	const fetchSale = async() => {
+	const [username, setUsername] = useState('');
+	const [billId, setBillId] = useState('');
+	const [startDate, setStartDate] = useState(dayjs(new Date));
+	const [endDate, setEndDate] = useState(dayjs(new Date));
+
+	const handleChangeUsername = e => setUsername(e.target.value)
+	const handleChangeBillId = e => setBillId(e.target.value)
+	const handleChangeStartDate = e => setStartDate(e.target.value)
+	const handleChangeEndDate = e => setEndDate(e.target.value)
+	
+	const fetchSale = async () => {
 		try {
 			const res = await api.get('/bill/all')
 			const sale = res.data.data
@@ -15,9 +29,39 @@ export function SalesInfoPage() {
 			console.log(error)
 		}
 	}
-	useEffect(()=>{
+	useEffect(() => {
 		fetchSale()
-	},[])
+	}, [])
+
+	const totalPayment = useMemo(() => {
+		return saleData.reduce((total, value) => total + value.totalMoney, 0)
+	}, [saleData])
+
+	const handleFilterButtonClick = async () => {
+		try {
+			const res = await toast.promise(
+				api.get('/bill/all/filter', {
+					params: {
+						username: username !== '' ? username : undefined,
+						id: billId !== '' ? billId : undefined,
+						fromDay: startDate.toISOString(),
+						toDay: endDate.toISOString(),
+					}
+				}),
+				{
+					pending: 'Đang lọc',
+					success: 'Lọc thành công',
+					error: 'Lọc thất bại'
+				}
+			)
+
+			const sale = res.data.data 
+			setSaleData(sale)
+		} catch (error) {
+			
+		}
+	}
+
 	return (
 		<div className='pt-9 w-[1200px] pl-10 h-full bg-[#f8f8f8]'>
 			<div className=''>
@@ -37,6 +81,8 @@ export function SalesInfoPage() {
 							className='  placeholder:opacity-90
 						 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 							placeholder='Nhập tên khách hàng'
+							value={username}
+							onChange={handleChangeUsername}
 						/>
 					</div>
 					<div className='flex flex-col gap-5 '>
@@ -46,25 +92,40 @@ export function SalesInfoPage() {
 							placeholder='Nhập mã hóa đơn'
 							className=' placeholder:opacity-90
 						 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
+						 	value={billId}
+							onChange={handleChangeBillId}
 						/>
 					</div>
 					<div className='flex flex-col gap-5 '>
 						<p>Ngày bắt đầu</p>
-						<input
+						{/* <input
 							type='text'
 							placeholder='Nhập ngày bắt đầu'
 							className=' placeholder:opacity-90
 						 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
+						/> */}
+						<DatePicker format='DD/MM/YYYY' value={startDate}
+							onChange={handleChangeStartDate}
 						/>
 					</div>
 					<div className='flex flex-col gap-5 '>
 						<p>Ngày kết thúc</p>
-						<input
+						{/* <input
 							type='text'
 							placeholder='Nhập ngày kết thúc'
 							className=' placeholder:opacity-90
 						 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
+						/> */}
+						<DatePicker format='DD/MM/YYYY' value={endDate}
+							onChange={handleChangeEndDate}
 						/>
+					</div>
+					<div className='flex items-end'>
+						<button className='px-4 py-2 h-min bg-primary text-white'
+							onClick={handleFilterButtonClick}
+						>
+							LỌC
+						</button>
 					</div>
 				</div>
 				<p className='my-2.5 text-lg font-normal text-second '>
@@ -77,31 +138,36 @@ export function SalesInfoPage() {
 				<div className='grid '>
 					<table className='text-lg bg-third '>
 						<thead className='text-primary '>
-							<th className='py-4 px-8 text-left border-b border-gray-200'>
+							<th className='py-4 text-left border-b border-gray-200' />
+							<th className='py-4 text-center border-b border-gray-200'>
 								Mã hóa đơn
 							</th>
-							<th className='py-4 px-8 text-left border-b border-gray-200'>
+							<th className='py-4 text-center border-b border-gray-200'>
 								Thời gian tạo hóa đơn
 							</th>
-							<th className='py-4 px-8 text-left border-b border-gray-200'>
+							<th className='py-4 text-center border-b border-gray-200'>
 								Tên khách hàng
 							</th>
-							<th className='py-4 px-8 text-left border-b border-gray-200'>
+							<th className='py-4 text-left border-b border-gray-200 text-right'>
 								Tổng thanh toán
 							</th>
-							<th className='py-4 px-8 text-left border-b border-gray-200'>
+							<th className='py-4 text-center border-b border-gray-200'>
 								Trạng thái
 							</th>
+							{/* <th className='py-4 text-left border-b border-gray-200'/> */}
 						</thead>
 						<tbody>
-							{saleData.map((sale)=> (
+							{saleData.map((sale) => (
 								<SaleDetail
-								key={sale.id}
-								billId={sale.id}
-								time={sale.createdAt}
-								name={sale.user.username}
-								price={sale.totalMoney}
-								status1={sale.billPayed}
+									key={sale.id}
+									billId={sale.id}
+									time={sale.createdAt}
+									name={sale.user.username}
+									price={sale.totalMoney}
+									status={sale.billPayed}
+									onStatusClick={() => {
+										toast.info('Chức năng này chưa được hỗ trợ')
+									}}
 								/>
 							))}
 						</tbody>
@@ -110,20 +176,16 @@ export function SalesInfoPage() {
 				<div className='mt-20 text-lg font-medium flex gap-3.5 float-right pr-20'>
 					<p className='flex items-center'>Doanh thu: </p>
 					<p className='px-5 py-2 bg-third  border-primary border-[3px]'>
-						10.000.000 <span>VND</span>
+						{totalPayment} <span>VND</span>
 					</p>
 				</div>
 				<div className='mt-40 pl-18 text-xl font-normal flex gap-9 mb-10'>
 					<button
-						className=' h-[50px] py-2 px-8 rounded-2xl  bg-white border-primary border-[3px] text-primary hover:border-primary hover:text-white 
-					hover:bg-primary focus:outline-none'
-						onClick={() => setShowModal(true)}>
-						Sửa hóa đơn
-					</button>
-
-					<button
 						className=' h-[50px] px-9 py-2 rounded-2xl bg-white border-primary border-[3px] text-primary hover:border-primary hover:text-white 
-					hover:bg-primary'>
+					hover:bg-primary'
+						onClick={() => {
+							toast.info('Chức năng này chưa được hỗ trợ')
+						}}>
 						Xóa
 					</button>
 
