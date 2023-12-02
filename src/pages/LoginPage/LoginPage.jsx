@@ -95,7 +95,7 @@ export default function LoginPage() {
 
 			setTimeout(() => {
 				navigate('/')
-			}, 3000)
+			}, 1000)
 		} catch (error) {
 			console.log('error: ', error)
 			if (error.response) {
