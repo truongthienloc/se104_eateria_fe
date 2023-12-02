@@ -8,12 +8,12 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { useNavigate, Navigate } from 'react-router-dom'
+import { useNavigate, Navigate, useLocation } from 'react-router-dom'
 import { OrderSuccess } from '~/components/Modal/OrderSuccess'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import formattedMoney from '~/utils/formatMoney'
-import { deleteItem } from '~/features/cart/cartSlice'
+import { deleteItem, decQuantity, incQuantity, deleteAll } from '~/features/cart/cartSlice'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
@@ -40,18 +40,32 @@ export const CartPage = () => {
 	const cart = useSelector((state) => state.cart)
 	if (!user.id) {
 		toast.error('Bạn cần đăng nhập để thực hiện chức năng này!!!',{toastId: 'needLoginID'})
-		return (<Navigate to={'/login'} replace />)
+		return (<Navigate to={`/login`} replace />)
 	} 
 	let Total = 0
 	const navigate = useNavigate()
+	const location = useLocation()
 	const [openModal, setopenModal] = useState(false)
 	const [openMessage, setopenMessage] = useState(false)
+
 	const handleRemoveCartItem = (productID) => {
 		dispatch(deleteItem(productID))
 		let item = cart.cartList.filter((item) => item.id === productID)
-		console.log(item?.[0].dishName);
-		toast.success(`Xóa ${item?.[0].dishName.toUpperCase()} khỏi giỏ hàng`)
+		toast.success(`Xóa toàn bô ${item?.[0].dishName.toUpperCase()} khỏi giỏ hàng`)
 	}
+
+	const handleDecQuantity = (productID) => {
+		dispatch(decQuantity(productID))
+		let item = cart.cartList.filter((item) => item.id === productID)
+		toast.success(`Xóa 1 ${item?.[0].dishName.toUpperCase()} khỏi giỏ hàng`)
+	}
+
+	const handleIncQuantity = (productID) => {
+		dispatch(incQuantity(productID))
+		let item = cart.cartList.filter((item) => item.id === productID)
+		toast.success(`Thêm 1 ${item?.[0].dishName.toUpperCase()} vào giỏ hàng`)
+	}
+
 	const handleOrderBtn = () => {
 		setopenModal(true)
 	}
@@ -75,6 +89,7 @@ export const CartPage = () => {
 	const rows = cart.cartList.map((item) => {
 		return createData(item.id, item?.images?.[0]?.imageLink, item.dishName, item.dishPrice, item.quantity)
 	})
+	
 	return (
 		<div className='flex flex-col pb-10 pt-1 items-center'>
 			<div className='w-full h-[160px] mt-1 mb-5 bg-headerBanner bg-no-repeat bg-cover flex justify-center items-center'>
@@ -96,8 +111,8 @@ export const CartPage = () => {
 								</StyledTableCell>
 								<StyledTableCell>Tên món ăn</StyledTableCell>
 								<StyledTableCell>Đơn giá</StyledTableCell>
-								<StyledTableCell>Số lượng</StyledTableCell>
-								<StyledTableCell>Thành tiền</StyledTableCell>
+								<StyledTableCell align='center'>Số lượng</StyledTableCell>
+								<StyledTableCell align='left'>Thành tiền</StyledTableCell>
 								<StyledTableCell>Hủy chọn</StyledTableCell>
 							</TableRow>
 						</TableHead>
@@ -117,8 +132,14 @@ export const CartPage = () => {
 									</StyledTableCell>
 									<StyledTableCell className='uppercase'>{row.dishName}</StyledTableCell>
 									<StyledTableCell>{formattedMoney(row.price)}</StyledTableCell>
-									<StyledTableCell>{row.quantity}</StyledTableCell>
-									<StyledTableCell>{formattedMoney(row.total)}</StyledTableCell>
+									<StyledTableCell align='center'>
+										<div className='flex items-center justify-between'>
+											<button onClick={() => handleDecQuantity(row.dishID)} className='px-3 py-1 bg-slate-300 hover:opacity-80'>-</button>
+											<p>{row.quantity}</p>
+											<button onClick={() => handleIncQuantity(row.dishID)} className='px-3 py-1 bg-slate-300 hover:opacity-80'>+</button>
+										</div>
+									</StyledTableCell>
+									<StyledTableCell align='left'>{formattedMoney(row.total)}</StyledTableCell>
 									<StyledTableCell>
 										<button
 											className='cursor-pointer'
@@ -160,6 +181,7 @@ export const CartPage = () => {
 											handleCloseModal()
 											setopenMessage(true)
 											setTimeout(handleCloseMessage, 3000)
+											dispatch(deleteAll())
 										}}>
 										Thanh toán bằng tiền mặt sau
 									</button>

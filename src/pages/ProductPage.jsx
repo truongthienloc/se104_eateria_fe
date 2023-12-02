@@ -106,7 +106,6 @@ export const ProductPage = () => {
 
         <div div className='max-w-[1400px] mx-auto my-10 flex flex-wrap gap-12 items-center justify-center'>
               {firstList.length > 0 && data.map((item) => {
-                console.log('1',firstList);
 								return(
 									<FoodItems
 									key={item.id}
@@ -125,7 +124,6 @@ export const ProductPage = () => {
 				</div>
         <div div className='max-w-[1400px] mx-auto my-10 flex flex-wrap gap-12 items-center justify-center'>
               {secondList.length > 0 && data.map((item) => {
-                console.log('2',secondList);
 								return(
 									<FoodItems
 									key={item.id}

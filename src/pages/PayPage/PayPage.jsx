@@ -14,6 +14,7 @@ import { useNavigate, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import formattedMoney from '~/utils/formatMoney'
+import { deleteAll } from '~/features/cart/cartSlice'
 
 export const PayPage = () => {
 	const user = useSelector((state) =>state.user);
@@ -25,13 +26,12 @@ export const PayPage = () => {
 	let Total = 0
 	let Discount = 0
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
 	const [openModal, setopenModal] = useState(false)
-	const handleRemoveCartItem = (productID) => {
-		// Xóa sản phẩm khỏi giỏ hàng
-	}
 	const handleOpenModal = () => {
 		setopenModal(true)
 		setTimeout(handleCloseModal, 3000)
+		dispatch(deleteAll())
 	}
 	const handleCloseModal = () => {
 		setopenModal(false)
@@ -67,7 +67,6 @@ export const PayPage = () => {
 		return { dishID, imgLink, dishName, price, quantity, total }
 	}
 	const rows = cart.cartList.map((item) => {
-		console.log(item)
 		return createData(item.id, item?.images?.[0]?.imageLink, item.dishName, item.dishPrice, item.quantity)
 	})
 	return (
