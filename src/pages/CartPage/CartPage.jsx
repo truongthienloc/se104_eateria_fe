@@ -8,12 +8,12 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { useNavigate, Navigate } from 'react-router-dom'
+import { useNavigate, Navigate, useLocation } from 'react-router-dom'
 import { OrderSuccess } from '~/components/Modal/OrderSuccess'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import formattedMoney from '~/utils/formatMoney'
-import { deleteItem, decQuantity, incQuantity } from '~/features/cart/cartSlice'
+import { deleteItem, decQuantity, incQuantity, deleteAll } from '~/features/cart/cartSlice'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
@@ -40,10 +40,11 @@ export const CartPage = () => {
 	const cart = useSelector((state) => state.cart)
 	if (!user.id) {
 		toast.error('Bạn cần đăng nhập để thực hiện chức năng này!!!',{toastId: 'needLoginID'})
-		return (<Navigate to={'/login'} replace />)
+		return (<Navigate to={`/login`} replace />)
 	} 
 	let Total = 0
 	const navigate = useNavigate()
+	const location = useLocation()
 	const [openModal, setopenModal] = useState(false)
 	const [openMessage, setopenMessage] = useState(false)
 
@@ -88,6 +89,7 @@ export const CartPage = () => {
 	const rows = cart.cartList.map((item) => {
 		return createData(item.id, item?.images?.[0]?.imageLink, item.dishName, item.dishPrice, item.quantity)
 	})
+	
 	return (
 		<div className='flex flex-col pb-10 pt-1 items-center'>
 			<div className='w-full h-[160px] mt-1 mb-5 bg-headerBanner bg-no-repeat bg-cover flex justify-center items-center'>
@@ -179,6 +181,7 @@ export const CartPage = () => {
 											handleCloseModal()
 											setopenMessage(true)
 											setTimeout(handleCloseMessage, 3000)
+											dispatch(deleteAll())
 										}}>
 										Thanh toán bằng tiền mặt sau
 									</button>

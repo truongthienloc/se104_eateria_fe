@@ -31,7 +31,6 @@ export const ReceiptHistoryPage = () => {
 
 	function createData(receiptID, date, paymentMethod, totalBill, detail) {
 		let payMethod = "Thanh toán tiền mặt";
-		console.log(paymentMethod);
 		if (paymentMethod !== "cash") {
 			 payMethod = (paymentMethod === "banking") ? "Chuyển khoản ngân hàng" : "Ví điện tử Momo";
 		}

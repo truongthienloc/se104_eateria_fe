@@ -3,13 +3,13 @@ import CallIcon from '@mui/icons-material/Call'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import logo from '~/assets/images/logo.svg'
 import defaultProfileImg from '~/assets/images/default_profile_image.svg'
-import defaultAvatar from '~/assets/images/m10.jpg'
 import deliveryImg from '~/assets/images/delivery.svg'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 function NavBar_Login() {
 	const cart = useSelector((state) =>state.cart);
+	const user = useSelector((state) =>state.user);
 	return (
 		<div className='w-full flex flex-col shadow-md bg-third'>
 			<div className='bg-primary text-white'>
@@ -50,7 +50,7 @@ function NavBar_Login() {
 						<div className='w-[65px] h-[65px] rounded-[50%] border-primary border-[1px] flex items-center justify-center overflow-hidden ml-auto'>
 							<Link to={'/user'} className='my-0 mx-auto '>
 								<img
-									src={defaultAvatar}
+									src={user.avatar || defaultProfileImg}
 									alt='Profile Image'
 									className='w-full h-full object-contain'
 								/>

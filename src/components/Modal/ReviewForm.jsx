@@ -4,7 +4,6 @@ import TextField from '@mui/material/TextField'
 import { useState } from 'react'
 
 export const ReviewForm = ({onClose}) => {
-  console.log(onClose);
 	const [rating, setRating] = useState(3)
 	return (
 		<div className='relative bg-white w-[560px] rounded-md flex flex-col py-10 px-10 gap-10 text-lg'>

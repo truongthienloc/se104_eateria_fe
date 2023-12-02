@@ -14,9 +14,12 @@ import vnpay from '../../assets/images/vnpay.png'
 import momoqr from '../../assets/images/momoqr.svg'
 import vtqr from '../../assets/images/vtpayqr.svg'
 import { OrderSuccess } from './OrderSuccess'
+import { deleteAll } from '~/features/cart/cartSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function PayMethod() {
 	const navigate = useNavigate();
+	const dispatch = useDispatch()
 	const [openModal, setopenModal] = useState(false);
 	const [expanded, setExpanded] = useState(false)
 	const [validMonth, setvalidMonth] = useState('')
@@ -29,6 +32,7 @@ export default function PayMethod() {
 	}
 	const handlePay = () => {
 		setopenModal(true)
+		dispatch(deleteAll())
 		setTimeout(()=>{
 			setopenModal(false)
 			navigate('/home')

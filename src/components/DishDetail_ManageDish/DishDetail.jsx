@@ -1,7 +1,6 @@
 import EditNoteIcon from '@mui/icons-material/EditNote'
 
 function DishDetail({id, kind, name, description, price, imgs, onEditButtonClick}) {
-    console.log(imgs);
     return (
             <tr>
                 <td className='py-4 px-2 border-b border-gray-200 text-lg text-primary'>

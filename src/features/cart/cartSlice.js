@@ -53,10 +53,13 @@ export const cartSlice = createSlice({
             }
             state.total -= 1
         },
+        deleteAll: (state, actions) => {
+            return initialState
+        }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { increasement, deleteItem, decQuantity, incQuantity } = cartSlice.actions
+export const { increasement, deleteItem, decQuantity, incQuantity, deleteAll } = cartSlice.actions
 
 export default cartSlice.reducer
