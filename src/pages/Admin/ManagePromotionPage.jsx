@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import useEditPromotionModal from'~/hooks/useEditPromotionModal'
+import useEditPromotionModal from '~/hooks/useEditPromotionModal'
 import PromotionDetail from '~/components/PromotionDetail_ManaegeDetail/PromotionDetail'
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined'
 import { api } from '~/services/axios'
+import { toast } from 'react-toastify'
+import { AddPromotionModal } from '~/components/Modal/AddPromotionModal'
 export const ManagePromotionPage = () => {
 	const [showModalAdd, setShowModalAdd] = useState(false)
 	const [showModalEdit, setShowModalEdit] = useState(false)
 	const [showModalRemove, setShowModalRemove] = useState(false)
 	const [promotionData, setPromotionData] = useState([])
 	const editPromotionModal = useEditPromotionModal()
-	
-	const fetchPromotion = async()=>{
+	const addPromotionModal = useEditPromotionModal()
+
+	const fetchPromotion = async () => {
 		try {
 			const res = await api.get('/discount')
 			const promotion = res.data.data
@@ -18,15 +21,14 @@ export const ManagePromotionPage = () => {
 		} catch (error) {
 			console.log(error)
 		}
-		
 	}
-	useEffect(()=> {
+	useEffect(() => {
 		fetchPromotion()
 	}, [])
 	const handleEditButtonClick = (id) => {
 		const promotion = promotionData.find((value) => value.id === id)
 		setShowModalEdit(true)
-		if (!promotion) return 
+		if (!promotion) return
 
 		editPromotionModal.setAll(
 			promotion.discountCode,
@@ -37,6 +39,43 @@ export const ManagePromotionPage = () => {
 		)
 		setShowModalEdit(true)
 	}
+
+	const handleAddButtonClick = () => {
+		addPromotionModal.setAll('', '', '', null, null)
+		setShowModalAdd(true)
+	}
+
+	const handleAddPromotionSubmit = async () => {
+		console.log(addPromotionModal);
+
+		if (!addPromotionModal.validate()) {
+			toast.error('Tất cả các trường đều không được để trống')
+			return 
+		}
+
+		try {
+			const res = await toast.promise(
+				api.post('/discount', {
+					discountCode : addPromotionModal.id,
+					discountDescription : addPromotionModal.description,
+					discountPercent : addPromotionModal.percent,
+					startDay : addPromotionModal.startDay,
+					endDay : addPromotionModal.endDay
+				}),
+				{
+					pending: 'Đang tạo khuyến mãi',
+					success: 'Tạo thành công',
+					error: 'Tạo thất bại',
+				}
+			)
+
+			await fetchPromotion()
+			setShowModalAdd(false)
+		} catch (error) {
+			
+		}
+	}
+
 	return (
 		<div>
 			<div className='pt-9 w-[1200px]	pl-10 h-full bg-[#f8f8f8]'>
@@ -73,7 +112,7 @@ export const ManagePromotionPage = () => {
 								<th className='py-4 px-4 text-left border-b border-gray-200' />
 							</thead>
 							<tbody>
-							{promotionData.map((pro)=> (
+								{promotionData.map((pro) => (
 									<PromotionDetail
 										key={pro.id}
 										id={pro.id}
@@ -81,12 +120,11 @@ export const ManagePromotionPage = () => {
 										percent={pro.discountPercent}
 										startDay={pro.startDay}
 										endDay={pro.endDay}
-										onEditButtonClick={() => 
-											handleEditButtonClick(pro.id)}
+										onEditButtonClick={() =>
+											handleEditButtonClick(pro.id)
+										}
 									/>
-								))
-							}
-
+								))}
 							</tbody>
 						</table>
 					</div>
@@ -95,105 +133,23 @@ export const ManagePromotionPage = () => {
 							<button
 								className=' h-[50px] py-2 px-8 rounded-2xl  bg-white border-primary border-[3px] text-primary hover:border-primary hover:text-white 
 						hover:bg-primary focus:outline-none'
-								onClick={() => setShowModalAdd(true)}>
+								onClick={handleAddButtonClick}>
 								Thêm khuyến mãi
 							</button>
 							<button
-								className='mr-12 h-[50px] px-9 py-2 rounded-2xl bg-white border-primary border-[3px] text-primary hover:border-primary hover:text-white 
-						hover:bg-primary focus:outline-none'
+								className='mr-12 h-[50px] px-9 py-2 rounded-2xl bg-white border-primary border-[3px] text-primary hover:border-primary hover:text-white hover:bg-primary focus:outline-none'
 								onClick={() => setShowModalRemove(true)}>
 								Xóa khuyến mãi
 							</button>
 
-							{showModalAdd ? (
-								<div>
-									<div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
-										<div className='relative my-6'>
-											{/*content*/}
-											<div className='border-0 rounded-lg relative flex flex-col w-full bg-white outline-none focus:outline-none'>
-												{/*header*/}
-												<div className='flex  justify-center p-5 border-b border-solid'>
-													<h3 className='text-2xl font-medium text-primary '>
-														Thêm khuyến mãi
-													</h3>
-												</div>
-												{/*body*/}
-												<div className='justify-center flex gap-7 flex-col px-7 mt-4   '>
-													<div className='flex gap-8 items-center text-lg '>
-														<p className='w-[160px] font-medium'>
-															Mã khuyến mãi:
-														</p>
-														<input
-															type='text'
-															className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
-														/>
-													</div>
-													<div className='flex gap-8 items-center text-lg '>
-														<p className='w-[160px] font-medium'>
-															Mô tả:
-														</p>
-														<textarea
-															name=''
-															id=''
-															cols=''
-															rows=''
-															className='w-[300px] h-[100px]  border-2 px-3 border-primary rounded-lg focus:outline-none resize-none'></textarea>
-													</div>
-													<div className='flex gap-8 items-center text-lg '>
-														<p className='w-[160px] font-medium'>
-															Mức giảm:
-														</p>
-														<input
-															type='text'
-															className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
-														/>
-													</div>
-													<div className='flex gap-8 items-center text-lg '>
-														<p className='w-[160px] font-medium'>
-															Ngày bắt đầu:
-														</p>
-														<div className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'>
-															<input type='text' />
-														</div>
-													</div>
-													<div className='flex gap-8 items-center text-lg '>
-														<p className='w-[160px] font-medium'>
-															Ngày kết thúc
-														</p>
-														<input
-															type='text'
-															className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
-														/>
-								
-													</div>
-												</div>
-												{/*footer*/}
-												<div className='flex items-center justify-end p-6 border-t border-solid rounded-b mt-4'>
-													<button
-														className=' background-transparent font-bold uppercase px-6 py-2 text-sm  bg-white border-primary border-2 text-primary hover:border-primary hover:text-white 
-													hover:bg-primary outline-none focus:outline-none mr-4 mb-1 ease-linear transition-all duration-150'
-														type='button'
-														onClick={() =>
-															setShowModalAdd(false)
-														}>
-														Hủy
-													</button>
-													<button
-														className='bg-white text-primary  border-primary border-2 font-bold uppercase rounded-lg text-sm px-4 py-2 outline-none hover:bg-primary hover:border-primary hover:text-white  focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
-														type='button'
-														onClick={() =>
-															setShowModalAdd(false)
-														}>
-														Xác nhận
-													</button>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className='opacity-25 fixed inset-0 z-40 bg-black'></div>
-								</div>
-							) : null}
-						{showModalEdit ? (
+							<AddPromotionModal 
+								isOpen={showModalAdd}
+								onClose={() => setShowModalAdd(false)}
+								promotionInfo={addPromotionModal}
+								onSubmit={handleAddPromotionSubmit}
+							/>
+
+							{showModalEdit ? (
 								<div>
 									<div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
 										<div className='relative my-6'>
@@ -215,7 +171,9 @@ export const ManagePromotionPage = () => {
 															type='text'
 															className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
 															value={editPromotionModal.id}
-															onChange={editPromotionModal.handleChangeId}
+															onChange={
+																editPromotionModal.handleChangeId
+															}
 														/>
 													</div>
 													<div className='flex gap-8 items-center text-lg '>
@@ -228,10 +186,12 @@ export const ManagePromotionPage = () => {
 															cols=''
 															rows=''
 															className='w-[300px] h-[150px]  border-2 px-3 border-primary rounded-lg focus:outline-none resize-none'
-															value={editPromotionModal.description}
-															onChange={editPromotionModal.description}
-															>
-															</textarea>
+															value={
+																editPromotionModal.description
+															}
+															onChange={
+																editPromotionModal.description
+															}></textarea>
 													</div>
 													<div className='flex gap-8 items-center text-lg '>
 														<p className='w-[160px] font-medium'>
@@ -240,8 +200,12 @@ export const ManagePromotionPage = () => {
 														<input
 															type='text'
 															className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
-															value={editPromotionModal.percent}
-															onChange={editPromotionModal.percent}
+															value={
+																editPromotionModal.percent
+															}
+															onChange={
+																editPromotionModal.percent
+															}
 														/>
 													</div>
 													<div className='flex gap-8 items-center text-lg '>
@@ -249,10 +213,15 @@ export const ManagePromotionPage = () => {
 															Ngày bắt đầu:
 														</p>
 														<div className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'>
-															<input type='text'
-															value={editPromotionModal.startDay}
-															onChange={editPromotionModal.startDay}
-															 />
+															<input
+																type='text'
+																value={
+																	editPromotionModal.startDay
+																}
+																onChange={
+																	editPromotionModal.startDay
+																}
+															/>
 														</div>
 													</div>
 													<div className='flex gap-8 items-center text-lg '>
@@ -262,10 +231,13 @@ export const ManagePromotionPage = () => {
 														<input
 															type='text'
 															className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
-															value={editPromotionModal.endDay}
-															onChange={editPromotionModal.endDay}
+															value={
+																editPromotionModal.endDay
+															}
+															onChange={
+																editPromotionModal.endDay
+															}
 														/>
-								
 													</div>
 												</div>
 												{/*footer*/}
@@ -283,7 +255,9 @@ export const ManagePromotionPage = () => {
 														className='bg-white text-primary  border-primary border-2 font-bold uppercase rounded-lg text-sm px-4 py-2 outline-none hover:bg-primary hover:border-primary hover:text-white  focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
 														type='button'
 														onClick={() =>
-															setShowModalEdit(false)
+															toast.info(
+																'Chức năng chưa được hỗ trợ'
+															)
 														}>
 														Xác nhận
 													</button>
@@ -304,8 +278,8 @@ export const ManagePromotionPage = () => {
 												<div className='justify-center flex flex-col px-10 pt-8'>
 													<center>
 														<p className='w-[260px] font-medium'>
-															Bạn có chắc chắn muốn xóa khuyến
-															mãi	này không ?
+															Bạn có chắc chắn muốn xóa
+															khuyến mãi này không ?
 														</p>
 													</center>
 												</div>
@@ -323,7 +297,9 @@ export const ManagePromotionPage = () => {
 														className='bg-white text-primary  border-primary border-2 font-bold uppercase rounded-lg text-sm px-4 py-2 outline-none hover:bg-primary hover:border-primary hover:text-white  focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
 														type='button'
 														onClick={() =>
-															setShowModalRemove(false)
+															toast.info(
+																'Chức năng chưa được hỗ trợ'
+															)
 														}>
 														Xóa
 													</button>

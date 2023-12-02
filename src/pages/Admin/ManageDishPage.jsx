@@ -187,9 +187,9 @@ export const ManageDishPage = () => {
 
 	return (
 		<div className='pt-9 w-[1280px]	pl-10 h-full bg-[#f8f8f8]'>
-			<div className='mb-12'>
+			<div className='mb-12 flex flex-row justify-between'>
 				<p className='text-primary text-2xl font-normal'>Quản lý món ăn</p>
-				<NotificationsNoneOutlinedIcon sx={{ width: '100px', height: '100px' }} />
+				<NotificationsNoneOutlinedIcon sx={{ width: '50px', height: '50px' }} />
 			</div>
 
 			<div className='rounded-3xl border-third border-8 px-3 bg-third mb-16'>

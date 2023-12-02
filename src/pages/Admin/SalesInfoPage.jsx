@@ -13,6 +13,11 @@ export function SalesInfoPage() {
 	const [billId, setBillId] = useState('');
 	const [startDate, setStartDate] = useState(dayjs(new Date));
 	const [endDate, setEndDate] = useState(dayjs(new Date));
+
+	const handleChangeUsername = e => setUsername(e.target.value)
+	const handleChangeBillId = e => setBillId(e.target.value)
+	const handleChangeStartDate = e => setStartDate(e.target.value)
+	const handleChangeEndDate = e => setEndDate(e.target.value)
 	
 	const fetchSale = async () => {
 		try {
@@ -74,6 +79,7 @@ export function SalesInfoPage() {
 						 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 							placeholder='Nhập tên khách hàng'
 							value={username}
+							onChange={handleChangeUsername}
 						/>
 					</div>
 					<div className='flex flex-col gap-5 '>
@@ -84,6 +90,7 @@ export function SalesInfoPage() {
 							className=' placeholder:opacity-90
 						 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 						 	value={billId}
+							onChange={handleChangeBillId}
 						/>
 					</div>
 					<div className='flex flex-col gap-5 '>
@@ -94,7 +101,9 @@ export function SalesInfoPage() {
 							className=' placeholder:opacity-90
 						 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 						/> */}
-						<DatePicker format='DD/MM/YYYY' value={startDate}/>
+						<DatePicker format='DD/MM/YYYY' value={startDate}
+							onChange={handleChangeStartDate}
+						/>
 					</div>
 					<div className='flex flex-col gap-5 '>
 						<p>Ngày kết thúc</p>
@@ -104,7 +113,9 @@ export function SalesInfoPage() {
 							className=' placeholder:opacity-90
 						 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 						/> */}
-						<DatePicker format='DD/MM/YYYY' value={endDate}/>
+						<DatePicker format='DD/MM/YYYY' value={endDate}
+							onChange={handleChangeEndDate}
+						/>
 					</div>
 					<div className='flex items-end'>
 						<button className='px-4 py-2 h-min bg-primary text-white'
