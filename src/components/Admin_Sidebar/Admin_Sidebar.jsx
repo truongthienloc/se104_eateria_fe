@@ -1,5 +1,7 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { LogoutModal } from '../Modal/LogoutModal'
+import { api } from '~/services/axios'
 import promotionIcon from '~/assets/images/AdminSidebar/Subtract.svg'
 import clientIcon from '~/assets/images/AdminSidebar/Accepted Profile.svg'
 import bookTableIcon from '~/assets/images/AdminSidebar/clipboard-tick.svg'
@@ -53,21 +55,30 @@ const menu = [
 		label: 'Đổi mật khẩu',
 		src: changePassIcon,
 	},
-	{
-		href: '/admin/logout',
-		label: 'Đăng xuất',
-		src: logOutIcon,
-	},
 ]
 
 export const Admin_Sidebar = () => {
+	const navigate = useNavigate()
+	const [showLogoutModal, setShowLogoutModal] = useState(false)
+
+	const handleLogout = async () => {
+		try {
+			api.post('/auth/logout')
+			setTimeout(() => {
+				localStorage.removeItem('access-token')
+			}, 500)
+			setShowLogoutModal(false)
+			navigate('/admin/login')
+		} catch (error) {}
+	}
+
 	return (
 		<div className='pl-8 pt-8 mb-20 w-[240px] h-full bg-[#f8f8f8] flex flex-col gap-10'>
 			<div className=' flex gap-5 '>
 				<img src={fourBlocksIcon} alt='' />
 				<p className='font-normal text-primary text-2xl'>Admin</p>
 			</div>
-	
+
 			{menu.map((item) => {
 				return (
 					<NavLink
@@ -82,6 +93,21 @@ export const Admin_Sidebar = () => {
 					</NavLink>
 				)
 			})}
+
+			<NavLink
+				className={
+					'px-[5px] py-[10px] flex gap-4 text-lg text-second font-normal hover:text-primary rounded-sm'
+				}
+				onClick={() => setShowLogoutModal(true)}>
+				<img className='' src={logOutIcon} />
+				Đăng xuất
+			</NavLink>
+
+			<LogoutModal
+				isOpen={showLogoutModal}
+				onClose={() => setShowLogoutModal(false)}
+				onLogout={handleLogout}
+			/>
 		</div>
 	)
 }
