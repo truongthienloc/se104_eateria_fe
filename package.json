@@ -1,7 +1,7 @@
 {
   "name": "se104_eateria_fe",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,10 +11,29 @@
     "format": "prettier --config .prettierrc --write ./src/**/*.{js,jsx,css,scss,sass,json}"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "5.14.16",
+    "@mui/lab": "^5.0.0-alpha.154",
+    "@mui/material": "^5.14.19",
+    "@mui/x-charts": "6.18.2",
+    "@mui/x-date-pickers": "^6.18.2",
+    "@reduxjs/toolkit": "^1.9.7",
+    "axios": "1.6.2",
+    "clsx": "2.0.0",
+    "dayjs": "1.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.48.2",
+    "react-icons": "^4.12.0",
+    "react-redux": "^8.1.3",
     "react-router-dom": "6.17.0",
-    "sass": "1.69.4"
+    "react-toastify": "9.1.3",
+    "sass": "1.69.4",
+    "slugify": "^1.6.6",
+    "socket.io-client": "4.7.2",
+    "swiper": "^11.0.5",
+    "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

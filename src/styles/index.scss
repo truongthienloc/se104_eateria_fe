@@ -2,20 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import './variables';
+
 :root {
-	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	font-family: 'Roboto', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 	line-height: 1.5;
 	font-weight: 400;
 
 	color-scheme: light dark;
 	color: rgba(255, 255, 255, 0.87);
-	background-color: #242424;
+	background-color: white;
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-text-size-adjust: 100%;
+
+	--primary-color: #fe5621;
+	--second-color: #2a435d;
+	// --third-color: #fff8ee;
+	--third-color: #ffffff;
+	--fourth-color: #eee7de;
+	--link-color: #4bff3c;
 }
 
 a {
@@ -23,15 +33,17 @@ a {
 	color: #646cff;
 	text-decoration: inherit;
 }
+
 a:hover {
 	color: #535bf2;
 }
 
 body {
 	margin: 0;
-	display: flex;
-	place-items: center;
-	min-width: 320px;
+	display: block;
+	// place-items: center;
+	box-sizing: border-box;
+	// min-width: 320px;
 	min-height: 100vh;
 }
 
@@ -47,27 +59,64 @@ button {
 	font-size: 1em;
 	font-weight: 500;
 	font-family: inherit;
-	background-color: #1a1a1a;
-	cursor: pointer;
-	transition: border-color 0.25s;
+	// background-color: #1a1a1a;
+	// transition: border-color 0.25s;
 }
-button:hover {
-	border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-	outline: 4px auto -webkit-focus-ring-color;
-}
+
+// button:hover {
+// 	border-color: #646cff;
+// }
+
+// button:focus,
+// button:focus-visible {
+// 	outline: 4px auto -webkit-focus-ring-color;
+// }
 
 @media (prefers-color-scheme: light) {
 	:root {
 		color: #213547;
 		background-color: #ffffff;
 	}
+
 	a:hover {
 		color: #747bff;
 	}
+
 	button {
 		background-color: #f9f9f9;
 	}
 }
+
+#user-sidebar.active {
+	background-color: var(--primary-color);
+	color: var(--third-color);
+	transition: all 0.2s ease;
+
+	&:hover {
+		color: var(--third-color) !important;
+		opacity: 0.8;
+	}
+}
+
+#admin-sidebar.active {
+	color: var(--primary-color);
+
+}
+.scrollable-div {
+	overflow-y: scroll; /* Enable scrolling */
+	scrollbar-width: thin; /* Set the width of the scrollbar */
+	scrollbar-color: transparent transparent; /* Set the color of the thumb and track */
+  }
+  
+  /* Hide the scrollbar */
+  .scrollable-div::-webkit-scrollbar {
+	width: 0.5em; /* Set the width of the scrollbar */
+  }
+  
+  .scrollable-div::-webkit-scrollbar-thumb {
+	background-color: transparent; /* Set the color of the thumb */
+  }
+  
+  .scrollable-div::-webkit-scrollbar-track {
+	background-color: transparent; /* Set the color of the track */
+  }
