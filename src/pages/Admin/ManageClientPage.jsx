@@ -1,17 +1,20 @@
 import React from 'react'
 import ClientDetail from '~/components/ClientDetail_ManageClient/ClientDetail'
+import iconNotification from '~/assets/images/icon_notification.svg'
 export const ManageClientPage = () => {
 	const [showModalAdd, setShowModalAdd] = React.useState(false)
 		const [showModalEdit, setShowModalEdit] = React.useState(false)
 		const [showModalRemove, setShowModalRemove] = React.useState(false)
 	return (
-		<div className='pt-9 w-[1230px] pl-10 h-full bg-[#f8f8f8]'>
+		<div className='pt-9 w-[1200px] pl-10 h-full bg-[#f8f8f8]'>
 		<div className='mb-8'>
-			<div className='flex gap-10'>
+			<div className='flex justify-between'>
 				<p className='text-primary text-2xl font-normal'>
 					Thông tin khách hàng
 				</p>
-				{/* <NotificationsNoneOutlinedIcon className=''/> */}
+				<a href="/admin/notification">
+						<img src={iconNotification} alt="" className='hover:cursor-pointer' />
+				</a>
 			</div>
 			<div className='mt-9 flex gap-6 text-lg font-normal text-second'>
 				<div className='flex flex-col gap-5'>

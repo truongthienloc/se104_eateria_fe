@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import DishDetail from '~/components/DishDetail_ManageDish/DishDetail'
 import { api } from '~/services/axios'
 import useEditDishModal from '~/hooks/useEditDishModal'
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import iconNotification from '~/assets/images/icon_notification.svg'
 import { EditDishModal } from '~/components/Modal/EditDishModal'
+import { AddDishModal } from '~/components/Modal/AddDishModal'
+import { DeleteDishModal } from '~/components/Modal/DeleteDishModal'
 import { toast } from 'react-toastify'
 
 export const ManageDishPage = () => {
@@ -12,11 +14,12 @@ export const ManageDishPage = () => {
 	const [showModalRemove, setShowModalRemove] = useState(false)
 	const [dishesData, setDishesData] = useState([])
 	const editDishModal = useEditDishModal()
+	const addDishModal = useEditDishModal()
 
 	const fetchDish = async () => {
 		try {
 			const res = await api.get('/dish/')
-			const dishes = res.data.data
+			const dishes = res.data.data.map(value => ({...value, isCheck: false}))
 			setDishesData(dishes)
 		} catch (error) {
 			console.log(error)
@@ -43,48 +46,165 @@ export const ManageDishPage = () => {
 		setShowModalEdit(true)
 	}
 
+	const handleCheck = (e, id) => {
+		const newDishes = dishesData.map(dish => {
+			if (dish.id !== id) return dish 
+			return {...dish, isCheck: !dish.isCheck}
+		})
+		setDishesData(newDishes) 
+	}
+
 	const handleEditDishSubmit = async () => {
 		try {
 			const formData = new FormData()
-			formData.append('dishName', editDishModal.name);
-			formData.append('menuName', editDishModal.kind);
-			formData.append('dishPrice', editDishModal.price);
+			formData.append('dishName', editDishModal.name)
+			formData.append('menuName', editDishModal.kind)
+			formData.append('dishPrice', editDishModal.price)
 			formData.append('dishDescription', editDishModal.description)
-			// formData.append('images', )
+			for (const image of editDishModal.imageFiles) {
+				formData.append('images', image)
+			}
+
+			const excutePromise = new Promise(async (resolve, reject) => {
+				try {
+					if (editDishModal.deletedImages.length > 0) {
+						await Promise.all(editDishModal.deletedImages.map(async (image) => {
+							console.log(image);
+							await api.delete(`/dish/images/${image.id}`)
+						}))
+					}
+
+					const res = await api.put(`/dish/${editDishModal.id}`, formData, {
+						headers: {
+							'Content-Type': 'multipart/form-data',
+						},
+					})
+
+					resolve(res)
+				} catch (error) {
+					reject(error)
+				}
+			})
+
+
 			const res = await toast.promise(
-				api.put(`/dish/${editDishModal.id}`, formData),
+				excutePromise,
 				{
 					pending: 'Đang sửa thông tin món ăn',
 					success: 'Sửa thông tin món ăn thành công',
-					error: 'Sửa thông tin món ăn thất bại'
+					error: 'Sửa thông tin món ăn thất bại',
 				}
 			)
 
-			await fetchDish();
-			setShowModalEdit(false);
+			await fetchDish()
+			setShowModalEdit(false)
+		} catch (error) {}
+	}
+
+	const handleAddDishClick = () => {
+		addDishModal.setAll(0, '', '', [], 0, '')
+		setShowModalAdd(true)
+	}
+
+	const handleAddDishSubmit = async () => {
+		if (addDishModal.name === '') {
+			toast.error('"Tên món ăn" không được để trống')
+			return
+		}
+
+		if (addDishModal.kind === '') {
+			toast.error('"Phân loại món ăn" không được để trống')
+			return
+		}
+
+		try {
+			const formData = new FormData()
+			formData.append('dishName', addDishModal.name)
+			formData.append('menuName', addDishModal.kind)
+			formData.append('dishPrice', addDishModal.price)
+			formData.append('dishDescription', addDishModal.description)
+			// console.log(addDishModal.imageFiles);
+			for (const image of addDishModal.imageFiles) {
+				console.log(image);
+				formData.append('images', image)
+			}
+
+			const res = await toast.promise(api.post('/dish/', formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			}), {
+				pending: 'Đang thêm món ăn',
+				success: 'Thêm món ăn thành công',
+				error: 'Thêm món ăn thất bại',
+			})
+
+			await fetchDish()
+			setShowModalAdd(false)
 		} catch (error) {
-			
+			console.log(error)
 		}
 	}
 
+	const handleDeleteButtonClick = () => {
+		const deletedDishes = dishesData.filter(dish => dish.isCheck === true);
+		if (deletedDishes.length === 0) {
+			toast.error('Chưa chọn bất cứ món ăn nào để xóa')
+			return 
+		}
+		setShowModalRemove(true);
+	}
+
+	const handleDeleteDishSubmit = async () => {
+		const deletedDishes = dishesData.filter(dish => dish.isCheck === true);
+		if (deletedDishes.length === 0) {
+			toast.error('Chưa chọn bất cứ món ăn nào để xóa')
+			return 
+		}
+		
+		try {
+			const promises = deletedDishes.map(async(dish) => {
+				await api.delete(`/dish/${dish.id}`)
+			})
+	
+			await toast.promise(
+				Promise.all(promises),
+				{
+					pending: 'Đang xóa món ăn',
+					success: 'Xóa thành công',
+					error: 'Xóa thất bại'
+				}
+			)
+
+			await fetchDish()
+			setShowModalRemove(false)
+		} catch (error) {
+			console.log(error);
+			setShowModalRemove(false)
+		}
+		
+	}
+
 	return (
-		<div className='pt-9 w-[1280px]	pl-10 h-full bg-[#f8f8f8]'>
-			<div className='mb-12'>
+		<div className='pt-9 w-[1200px]	pl-10 h-full bg-[#f8f8f8]'>
+			<div className='mb-12 flex justify-between'>
 				<p className='text-primary text-2xl font-normal'>Quản lý món ăn</p>
-				<NotificationsNoneOutlinedIcon sx={{width: '100px', height: '100px'}}/>
+				<a href="/admin/notification">
+						<img src={iconNotification} alt="" className='hover:cursor-pointer' />
+				</a>
 			</div>
 
 			<div className='rounded-3xl border-third border-8 px-3 bg-third mb-16'>
 				<div className='grid '>
 					<table className='text-lg bg-third '>
 						<thead className='text-primary text-left'>
-							<th className='py-4 px-2 text-left border-b border-gray-200'>
+							<th className='py-4 px-2 text-left border-b w-[80px] border-gray-200'>
 								<center>STT</center>
 							</th>
-							<th className='py-4 px-2 text-left border-b border-gray-200'>
+							<th className='py-4 px-2 text-left border-b  border-gray-200'>
 								<center>Phân loại</center>
 							</th>
-							<th className='py-4 px-2 text-left border-b border-gray-200'>
+							<th className='py-4 px-2 text-left border-b w-[120px] border-gray-200'>
 								<center>Tên</center>
 							</th>
 							<th className='py-4 px-2 text-left border-b w-[300px] border-gray-200 '>
@@ -102,6 +222,7 @@ export const ManageDishPage = () => {
 								<DishDetail
 									key={dish.id}
 									id={dish.id}
+									isCheck={dish.isCheck}
 									kind={dish.menu.menuName}
 									name={dish.dishName}
 									description={dish.dishDescription}
@@ -110,6 +231,7 @@ export const ManageDishPage = () => {
 									onEditButtonClick={() =>
 										handleEditButtonClick(dish.id)
 									}
+									onCheck={e => handleCheck(e, dish.id)}
 								/>
 							))}
 						</tbody>
@@ -120,151 +242,35 @@ export const ManageDishPage = () => {
 						<button
 							className=' h-[50px] py-2 px-8 rounded-2xl  bg-white border-primary border-[3px] text-primary hover:border-primary hover:text-white 
 						hover:bg-primary focus:outline-none'
-							onClick={() => setShowModalAdd(true)}>
+							onClick={handleAddDishClick}>
 							Thêm món ăn
 						</button>
 						<button
 							className='mr-12 h-[50px] px-9 py-2 rounded-2xl bg-white border-primary border-[3px] text-primary hover:border-primary hover:text-white 
 						hover:bg-primary focus:outline-none'
-							onClick={() => setShowModalRemove(true)}>
+							onClick={handleDeleteButtonClick}>
 							Xóa món ăn
 						</button>
 
-						{showModalAdd ? (
-							<div>
-								<div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
-									<div className='relative my-6'>
-										{/*content*/}
-										<div className='border-0 rounded-lg relative flex flex-col w-full bg-white outline-none focus:outline-none'>
-											{/*header*/}
-											<div className='flex  justify-center p-5 border-b border-solid'>
-												<h3 className='text-2xl font-medium text-primary '>
-													Thêm món ăn
-												</h3>
-											</div>
-											{/*body*/}
-											<div className='justify-center flex gap-7 flex-col px-7 mt-4   '>
-												<div className='flex gap-8 items-center text-lg '>
-													<p className='w-[160px] font-medium'>
-														Tên món ăn:
-													</p>
-													<input
-														type='text'
-														className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
-													/>
-												</div>
-												<div className='flex gap-8 items-center text-lg '>
-													<p className='w-[160px] font-medium'>
-														Phân loại món ăn:
-													</p>
-													<input
-														type='text'
-														className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
-													/>
-												</div>
-												<div className='flex gap-8 items-center text-lg '>
-													<p className='w-[160px] font-medium'>
-														Giá:
-													</p>
-													<input
-														type='text'
-														className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
-													/>
-												</div>
-												<div className='flex gap-8 items-center text-lg '>
-													<p className='w-[160px] font-medium'>
-														Hình ảnh:
-													</p>
-													<div className=''>
-														<input type='file' />
-													</div>
-												</div>
-												<div className='flex gap-8 items-center text-lg '>
-													<p className='w-[160px] font-medium'>
-														Mô tả:
-													</p>
-													<textarea
-														name=''
-														id=''
-														cols=''
-														rows=''
-														className='w-[300px] h-[80px] border-2 px-3 border-primary rounded-lg focus:outline-none'></textarea>
-												</div>
-											</div>
-											{/*footer*/}
-											<div className='flex items-center justify-end p-6 border-t border-solid rounded-b mt-4'>
-												<button
-													className=' background-transparent font-bold uppercase px-6 py-2 text-sm  bg-white border-primary border-2 text-primary hover:border-primary hover:text-white 
-													hover:bg-primary outline-none focus:outline-none mr-4 mb-1 ease-linear transition-all duration-150'
-													type='button'
-													onClick={() =>
-														setShowModalAdd(false)
-													}>
-													Hủy
-												</button>
-												<button
-													className='bg-white text-primary  border-primary border-2 font-bold uppercase rounded-lg text-sm px-4 py-2 outline-none hover:bg-primary hover:border-primary hover:text-white  focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
-													type='button'
-													onClick={() =>
-														setShowModalAdd(false)
-													}>
-													Xác nhận
-												</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div className='opacity-25 fixed inset-0 z-40 bg-black'></div>
-							</div>
-						) : null}
-						{showModalEdit ? (
-							<EditDishModal
-								editDishModal={editDishModal}
-								isOpen={showModalEdit}
-								onClose={() => setShowModalEdit(false)}
-								onSubmit={handleEditDishSubmit}
-							/>
-						) : null}
+						<AddDishModal
+							isOpen={showModalAdd}
+							addDishModal={addDishModal}
+							onClose={() => setShowModalAdd(false)}
+							onSubmit={handleAddDishSubmit}
+						/>
 
-						{showModalRemove ? (
-							<div>
-								<div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
-									<div className='relative '>
-										{/*content*/}
-										<div className='border-[3px] border-primary bg-[#fff8ee] rounded-xl relative flex flex-col w-full outline-none focus:outline-none'>
-											<div className='justify-center flex flex-col px-10 pt-8'>
-												<center>
-													<p className='w-[260px] font-medium'>
-														Bạn có chắc chắn muốn xóa món ăn
-														này không ?
-													</p>
-												</center>
-											</div>
-											<div className='flex justify-center gap-8 p-6 rounded-b'>
-												<button
-													className=' background-transparent font-bold uppercase px-6 py-2 text-sm  bg-white border-primary border-2 text-primary hover:border-primary hover:text-white 
-													hover:bg-primary outline-none focus:outline-none mr-4 mb-1 ease-linear transition-all duration-150'
-													type='button'
-													onClick={() =>
-														setShowModalRemove(false)
-													}>
-													Hủy
-												</button>
-												<button
-													className='bg-white text-primary  border-primary border-2 font-bold uppercase rounded-lg text-sm px-4 py-2 outline-none hover:bg-primary hover:border-primary hover:text-white  focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
-													type='button'
-													onClick={() =>
-														setShowModalRemove(false)
-													}>
-													Xóa
-												</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div className='opacity-25 fixed inset-0 z-40 bg-black'></div>
-							</div>
-						) : null}
+						<EditDishModal
+							editDishModal={editDishModal}
+							isOpen={showModalEdit}
+							onClose={() => setShowModalEdit(false)}
+							onSubmit={handleEditDishSubmit}
+						/>
+
+						<DeleteDishModal
+							isOpen={showModalRemove}
+							onClose={() => setShowModalRemove(false)}
+							onSubmit={handleDeleteDishSubmit}
+						/>
 					</div>
 				</div>
 			</div>

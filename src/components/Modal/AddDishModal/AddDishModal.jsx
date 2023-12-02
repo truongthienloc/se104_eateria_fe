@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 
-export default function EditDishModal({ isOpen, editDishModal, onClose, onSubmit }) {
+export default function AddDishModal({ isOpen, onClose, onSubmit, addDishModal }) {
 	const [images, setImages] = useState([])
-	console.log(editDishModal);
+
 	const handleAddImageClick = () => {
 		const input = document.createElement('input')
 		input.type = 'file'
@@ -12,7 +12,7 @@ export default function EditDishModal({ isOpen, editDishModal, onClose, onSubmit
 			const file = e.target.files[0]
 			// console.log(file);
 			if (file) {
-				editDishModal.handleAddImageFiles(file)
+				addDishModal.handleAddImageFiles(file)
 			}
 
 			input.removeEventListener('change', handleFileChange)
@@ -22,8 +22,8 @@ export default function EditDishModal({ isOpen, editDishModal, onClose, onSubmit
 	}
 
 	useEffect(() => {
-		// console.log(editDishModal);
-		const newImages = editDishModal.imageFiles.map((image) => {
+		// console.log(addDishModal);
+		const newImages = addDishModal.imageFiles.map((image) => {
 			const link = URL.createObjectURL(image)
 
 			return {
@@ -39,7 +39,7 @@ export default function EditDishModal({ isOpen, editDishModal, onClose, onSubmit
 				URL.revokeObjectURL(image.imageLink)
 			}
 		}
-	}, [editDishModal.imageFiles])
+	}, [addDishModal.imageFiles])
 
 	const handleDeleteImage = (id) => {
 		const index = images.findIndex((value) => value.id === id)
@@ -47,11 +47,7 @@ export default function EditDishModal({ isOpen, editDishModal, onClose, onSubmit
 			return
 		}
 
-		editDishModal.handleRemoveImageFiles(editDishModal.imageFiles[index])
-	}
-
-	const handleDeleteAvailableImage = (id) => {
-		editDishModal.handleDeleteImage(id)
+		addDishModal.handleRemoveImageFiles(addDishModal.imageFiles[index])
 	}
 
 	if (!isOpen) return null
@@ -64,7 +60,7 @@ export default function EditDishModal({ isOpen, editDishModal, onClose, onSubmit
 						{/*header*/}
 						<div className='flex  justify-center p-5 border-b border-solid'>
 							<h3 className='text-2xl font-medium text-primary '>
-								Sửa món ăn
+								Thêm món ăn
 							</h3>
 						</div>
 						{/*body*/}
@@ -74,8 +70,8 @@ export default function EditDishModal({ isOpen, editDishModal, onClose, onSubmit
 								<input
 									type='text'
 									className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
-									value={editDishModal.name}
-									onChange={editDishModal.handleChangeName}
+									value={addDishModal.name}
+									onChange={addDishModal.handleChangeName}
 								/>
 							</div>
 							<div className='flex gap-8 items-center text-lg '>
@@ -83,8 +79,8 @@ export default function EditDishModal({ isOpen, editDishModal, onClose, onSubmit
 								<input
 									type='text'
 									className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
-									value={editDishModal.kind}
-									onChange={editDishModal.handleChangeKind}
+									value={addDishModal.kind}
+									onChange={addDishModal.handleChangeKind}
 								/>
 							</div>
 							<div className='flex gap-8 items-center text-lg '>
@@ -92,23 +88,13 @@ export default function EditDishModal({ isOpen, editDishModal, onClose, onSubmit
 								<input
 									type='text'
 									className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
-									value={editDishModal.price}
-									onChange={editDishModal.handleChangePrice}
+									value={addDishModal.price}
+									onChange={addDishModal.handleChangePrice}
 								/>
 							</div>
 							<div className='flex gap-8 items-center text-lg '>
 								<p className='w-[160px] font-medium'>Hình ảnh:</p>
 								<div className='grid grid-flow-row grid-cols-2 gap-4 flex-wrap items-center'>
-									{editDishModal.imgs.length > 0 &&
-										editDishModal.imgs.map((image) => (
-											<ImageItem
-												key={image.id}
-												image={image}
-												onDeleteClick={() =>
-													handleDeleteAvailableImage(image.id)
-												}
-											/>
-										))}
 									{images.length > 0 &&
 										images.map((image) => (
 											<ImageItem
@@ -134,9 +120,9 @@ export default function EditDishModal({ isOpen, editDishModal, onClose, onSubmit
 									cols=''
 									rows=''
 									className='w-[300px] h-[80px] border-2 px-3 border-primary rounded-lg focus:outline-none'
-									value={editDishModal.description}
+									value={addDishModal.description}
 									onChange={
-										editDishModal.handleChangeDescription
+										addDishModal.handleChangeDescription
 									}></textarea>
 							</div>
 						</div>
