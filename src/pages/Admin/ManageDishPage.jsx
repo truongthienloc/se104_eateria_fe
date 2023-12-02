@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import DishDetail from '~/components/DishDetail_ManageDish/DishDetail'
 import { api } from '~/services/axios'
 import useEditDishModal from '~/hooks/useEditDishModal'
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined'
+import iconNotification from '~/assets/images/icon_notification.svg'
 import { EditDishModal } from '~/components/Modal/EditDishModal'
 import { AddDishModal } from '~/components/Modal/AddDishModal'
 import { DeleteDishModal } from '~/components/Modal/DeleteDishModal'
@@ -187,23 +187,25 @@ export const ManageDishPage = () => {
 	}
 
 	return (
-		<div className='pt-9 w-[1280px]	pl-10 h-full bg-[#f8f8f8]'>
-			<div className='mb-12'>
+		<div className='pt-9 w-[1200px]	pl-10 h-full bg-[#f8f8f8]'>
+			<div className='mb-12 flex justify-between'>
 				<p className='text-primary text-2xl font-normal'>Quản lý món ăn</p>
-				<NotificationsNoneOutlinedIcon sx={{ width: '100px', height: '100px' }} />
+				<a href="/admin/notification">
+						<img src={iconNotification} alt="" className='hover:cursor-pointer' />
+				</a>
 			</div>
 
 			<div className='rounded-3xl border-third border-8 px-3 bg-third mb-16'>
 				<div className='grid '>
 					<table className='text-lg bg-third '>
 						<thead className='text-primary text-left'>
-							<th className='py-4 px-2 text-left border-b border-gray-200'>
+							<th className='py-4 px-2 text-left border-b w-[80px] border-gray-200'>
 								<center>STT</center>
 							</th>
-							<th className='py-4 px-2 text-left border-b border-gray-200'>
+							<th className='py-4 px-2 text-left border-b  border-gray-200'>
 								<center>Phân loại</center>
 							</th>
-							<th className='py-4 px-2 text-left border-b border-gray-200'>
+							<th className='py-4 px-2 text-left border-b w-[120px] border-gray-200'>
 								<center>Tên</center>
 							</th>
 							<th className='py-4 px-2 text-left border-b w-[300px] border-gray-200 '>

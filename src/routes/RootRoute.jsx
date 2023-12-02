@@ -27,6 +27,7 @@ import { ManageClientPage } from '~/pages/Admin/ManageClientPage'
 import { ManageBookingPage } from '~/pages/Admin/ManageBookingPage'
 import { StatisticPage } from '~/pages/Admin/StatisticPage'
 import { PayPage } from '~/pages/PayPage/PayPage'
+import { Notification } from '~/pages/Admin/Notification'
 
 function RootRoute() {
 	return (
@@ -42,6 +43,7 @@ function RootRoute() {
 						<Route path='manage-client' element={<ManageClientPage />} />
 						<Route path='manage-promotion' element={<ManagePromotionPage />}/>
 						<Route path='change-password' element={<ChangePasswordPage />} />
+						<Route path='notification' element={<Notification />} />
 						<Route index element={<Navigate to={'login'} replace />} />
 				</Route>
 				<Route path='/' element={<DefaultLayout />}>

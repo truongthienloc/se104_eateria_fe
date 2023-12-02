@@ -1,7 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { Admin_Sidebar } from '~/components/Admin_Sidebar/Admin_Sidebar'
-
 export const AdminLayout = () => {
 	return (
 		<div className='flex flex-col bg-[#f8f8f8]'>
