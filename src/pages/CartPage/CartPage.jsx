@@ -113,7 +113,7 @@ export const CartPage = () => {
 											/>
 										</div>
 									</StyledTableCell>
-									<StyledTableCell>{row.dishName}</StyledTableCell>
+									<StyledTableCell className='uppercase'>{row.dishName}</StyledTableCell>
 									<StyledTableCell>{formattedMoney(row.price)}</StyledTableCell>
 									<StyledTableCell>{row.quantity}</StyledTableCell>
 									<StyledTableCell>{formattedMoney(row.total)}</StyledTableCell>

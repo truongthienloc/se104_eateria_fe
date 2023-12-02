@@ -21,7 +21,9 @@ function FoodItems({ item }) {
 					<p className='text-primary font-normal text-2xl uppercase'>{item.dishName}</p>
 				<div className='flex justify-between'>
 					<p className='text-second text-xl font-normal pt-3'>Giá {formattedMoney(item.dishPrice)}</p>
-					<button className='flex items-center justify-center font-normal text-2xl text-third bg-primary w-[150px] h-[50px] hover:opacity-80'>Thêm</button>
+					<button
+					onClick={onAdd} 
+					className='flex items-center justify-center font-normal text-2xl text-third bg-primary w-[150px] h-[50px] hover:opacity-80'>Thêm</button>
 				</div>
 			</div>
 
