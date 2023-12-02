@@ -38,11 +38,10 @@ export const CartPage = () => {
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.user)
 	const cart = useSelector((state) => state.cart)
-	console.log(cart);
-	// if (!user.id) {
-	// 	toast.error('Bạn cần đăng nhập để thực hiện chức năng này!!!',{toastId: 'needLoginID'})
-	// 	return (<Navigate to={'/login'} replace />)
-	// } 
+	if (!user.id) {
+		toast.error('Bạn cần đăng nhập để thực hiện chức năng này!!!',{toastId: 'needLoginID'})
+		return (<Navigate to={'/login'} replace />)
+	} 
 	let Total = 0
 	const navigate = useNavigate()
 	const [openModal, setopenModal] = useState(false)
