@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { ReservationGroup, ReservationExp } from '~/components/ReservationGroup'
 import { ReservationForm } from '~/components/ReservationForm'
 import { useSelector} from 'react-redux'
 import { toast } from 'react-toastify'
 import { Navigate } from 'react-router-dom'
+import { api } from '~/services/axios'
 const tableData = {
 	floor1: [
 		{
@@ -124,6 +125,16 @@ const tableData = {
 }
 
 export const ReservationPage = () => {
+	const [tableData, setTableData] = useState([]);
+
+	const fetchTable = async () => {
+		try {
+			const res = await api.get('');
+		} catch (error) {
+			
+		}
+	}
+
 	const user = useSelector((state) =>state.user);
 	if (!user.id) {
 		toast.error('Bạn cần đăng nhập để thực hiện chức năng này!!!',{toastId: 'needLoginID'})
@@ -132,8 +143,9 @@ export const ReservationPage = () => {
 	return (
 		<div className="flex flex-row p-8">
 			<div className="flex flex-col w-[50%] gap-4 items-center">
+				{/* <ReservationGroup title={'Tầng 1'} data={tableData.floor1}/>
+				<ReservationGroup title={'Tầng 2'} data={tableData.floor2}/> */}
 				<ReservationGroup title={'Tầng 1'} data={tableData.floor1}/>
-				<ReservationGroup title={'Tầng 2'} data={tableData.floor2}/>
 				<ReservationExp />
 			</div>
 			<div className="flex flex-col pt-16">
