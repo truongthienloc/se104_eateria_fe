@@ -13,7 +13,7 @@ import { OrderSuccess } from '~/components/Modal/OrderSuccess'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import formattedMoney from '~/utils/formatMoney'
-import { deleteItem } from '~/features/cart/cartSlice'
+import { deleteItem, decQuantity, incQuantity } from '~/features/cart/cartSlice'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
@@ -46,12 +46,25 @@ export const CartPage = () => {
 	const navigate = useNavigate()
 	const [openModal, setopenModal] = useState(false)
 	const [openMessage, setopenMessage] = useState(false)
+
 	const handleRemoveCartItem = (productID) => {
 		dispatch(deleteItem(productID))
 		let item = cart.cartList.filter((item) => item.id === productID)
-		console.log(item?.[0].dishName);
-		toast.success(`Xóa ${item?.[0].dishName.toUpperCase()} khỏi giỏ hàng`)
+		toast.success(`Xóa toàn bô ${item?.[0].dishName.toUpperCase()} khỏi giỏ hàng`)
 	}
+
+	const handleDecQuantity = (productID) => {
+		dispatch(decQuantity(productID))
+		let item = cart.cartList.filter((item) => item.id === productID)
+		toast.success(`Xóa 1 ${item?.[0].dishName.toUpperCase()} khỏi giỏ hàng`)
+	}
+
+	const handleIncQuantity = (productID) => {
+		dispatch(incQuantity(productID))
+		let item = cart.cartList.filter((item) => item.id === productID)
+		toast.success(`Thêm 1 ${item?.[0].dishName.toUpperCase()} vào giỏ hàng`)
+	}
+
 	const handleOrderBtn = () => {
 		setopenModal(true)
 	}
@@ -96,8 +109,8 @@ export const CartPage = () => {
 								</StyledTableCell>
 								<StyledTableCell>Tên món ăn</StyledTableCell>
 								<StyledTableCell>Đơn giá</StyledTableCell>
-								<StyledTableCell>Số lượng</StyledTableCell>
-								<StyledTableCell>Thành tiền</StyledTableCell>
+								<StyledTableCell align='center'>Số lượng</StyledTableCell>
+								<StyledTableCell align='left'>Thành tiền</StyledTableCell>
 								<StyledTableCell>Hủy chọn</StyledTableCell>
 							</TableRow>
 						</TableHead>
@@ -117,8 +130,14 @@ export const CartPage = () => {
 									</StyledTableCell>
 									<StyledTableCell className='uppercase'>{row.dishName}</StyledTableCell>
 									<StyledTableCell>{formattedMoney(row.price)}</StyledTableCell>
-									<StyledTableCell>{row.quantity}</StyledTableCell>
-									<StyledTableCell>{formattedMoney(row.total)}</StyledTableCell>
+									<StyledTableCell align='center'>
+										<div className='flex items-center justify-between'>
+											<button onClick={() => handleDecQuantity(row.dishID)} className='px-3 py-1 bg-slate-300 hover:opacity-80'>-</button>
+											<p>{row.quantity}</p>
+											<button onClick={() => handleIncQuantity(row.dishID)} className='px-3 py-1 bg-slate-300 hover:opacity-80'>+</button>
+										</div>
+									</StyledTableCell>
+									<StyledTableCell align='left'>{formattedMoney(row.total)}</StyledTableCell>
 									<StyledTableCell>
 										<button
 											className='cursor-pointer'
