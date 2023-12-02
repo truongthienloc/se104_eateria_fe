@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { increasement } from "~/features/cart/cartSlice";
 import { toast } from 'react-toastify'
+import { api } from "~/services/axios";
 
 
 function FoodItems({item}) {
@@ -8,6 +9,13 @@ function FoodItems({item}) {
 	const onAdd = () => {
 		dispatch(increasement(item))
 		toast.success(`Thêm ${item.dishName.toUpperCase()} vào giỏ hàng`)
+		const pushItemToCart = async () => {
+			try {
+				const post = await api.post('/bill/dish/add')
+			} catch (error) {
+				console.log(error);
+			}
+		}
 	}
 	const formattedMoney = (number) => {
 		let res = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");

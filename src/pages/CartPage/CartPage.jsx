@@ -48,6 +48,9 @@ export const CartPage = () => {
 	const [openMessage, setopenMessage] = useState(false)
 	const handleRemoveCartItem = (productID) => {
 		dispatch(deleteItem(productID))
+		let item = cart.cartList.filter((item) => item.id === productID)
+		console.log(item?.[0].dishName);
+		toast.success(`Xóa ${item?.[0].dishName.toUpperCase()} khỏi giỏ hàng`)
 	}
 	const handleOrderBtn = () => {
 		setopenModal(true)
@@ -70,7 +73,6 @@ export const CartPage = () => {
 		return { dishID, imgLink, dishName, price, quantity, total }
 	}
 	const rows = cart.cartList.map((item) => {
-		console.log(item)
 		return createData(item.id, item?.images?.[0]?.imageLink, item.dishName, item.dishPrice, item.quantity)
 	})
 	return (
@@ -113,7 +115,7 @@ export const CartPage = () => {
 											/>
 										</div>
 									</StyledTableCell>
-									<StyledTableCell>{row.dishName}</StyledTableCell>
+									<StyledTableCell className='uppercase'>{row.dishName}</StyledTableCell>
 									<StyledTableCell>{formattedMoney(row.price)}</StyledTableCell>
 									<StyledTableCell>{row.quantity}</StyledTableCell>
 									<StyledTableCell>{formattedMoney(row.total)}</StyledTableCell>
