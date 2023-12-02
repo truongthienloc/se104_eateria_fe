@@ -83,19 +83,19 @@ export default function LoginPage() {
 			)
 
 			const token = res.data.accessToken
-			if ( token) {
-				const resUserInfo = await api.get('user/me/info',{
-					headers: {
-						Authorization: `bearer ${token}`
-					}
-				})
+			if (token) {
+				localStorage.setItem('access-token', token)
+				/**
+				 * Cái api nó tự động đính kèm token khi gửi request nên không cần thêm token ngay chổ này
+				 */
+				const resUserInfo = await api.get('user/me/info')
 				dispatch(initUserValue(resUserInfo.data.data))
 			}
-			localStorage.setItem('access-token', token)
+			
 
 			setTimeout(() => {
 				navigate('/')
-			}, 3000)
+			}, 1000)
 		} catch (error) {
 			console.log('error: ', error)
 			if (error.response) {
