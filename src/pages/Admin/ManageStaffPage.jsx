@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import { AddStaffModal } from '~/components/Modal/AddStaffModal'
 import useStaffInfo from '~/hooks/useStaffInfo'
 import iconNotification from '~/assets/images/icon_notification.svg'
+import { Link } from 'react-router-dom'
 
 export const ManageStaffPage = () => {
 	const [showModalAdd, setShowModalAdd] = useState(false)
@@ -97,9 +98,9 @@ export const ManageStaffPage = () => {
 					<p className='text-primary text-2xl font-normal'>
 						Thông tin nhân viên
 					</p>
-					<a href="/admin/notification">
+					<Link to="/admin/notification">
 						<img src={iconNotification} alt="" className='hover:cursor-pointer' />
-					</a>
+					</Link>
 				</div>
 				<div className='mt-9 flex gap-6 text-lg font-normal text-second'>
 					<div className='flex flex-col gap-5'>

@@ -1,6 +1,8 @@
 import React from 'react'
 import ClientDetail from '~/components/ClientDetail_ManageClient/ClientDetail'
 import iconNotification from '~/assets/images/icon_notification.svg'
+import { Link } from 'react-router-dom'
+
 export const ManageClientPage = () => {
 	const [showModalAdd, setShowModalAdd] = React.useState(false)
 		const [showModalEdit, setShowModalEdit] = React.useState(false)
@@ -12,9 +14,9 @@ export const ManageClientPage = () => {
 				<p className='text-primary text-2xl font-normal'>
 					Thông tin khách hàng
 				</p>
-				<a href="/admin/notification">
+				<Link to="/admin/notification">
 						<img src={iconNotification} alt="" className='hover:cursor-pointer' />
-				</a>
+				</Link>
 			</div>
 			<div className='mt-9 flex gap-6 text-lg font-normal text-second'>
 				<div className='flex flex-col gap-5'>

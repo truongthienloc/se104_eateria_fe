@@ -9,6 +9,7 @@ import { DeleteTableModal } from '~/components/Modal/DeleteTableModal'
 import { toast } from 'react-toastify'
 import useSocket from '~/services/socketIO/useSocket'
 import { DatePicker } from '@mui/x-date-pickers'
+import { Link } from 'react-router-dom'
 
 export function ManageBookingPage() {
 	const [showModalAdd, setShowModalAdd] = useState(false)
@@ -86,12 +87,12 @@ export function ManageBookingPage() {
 			<div className=''>
 				<div className='flex justify-between'>
 					<p className='text-primary text-2xl font-normal'>Quản lý đặt bàn</p>
-					<a href="/admin/notification">
+					<Link to="/admin/notification">
 						<img src={iconNotification} alt="" className='hover:cursor-pointer' />
-					</a>
+					</Link>
 				</div>
 				<div className='mt-9 flex gap-20 text-lg font-normal text-second'>
-					<div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className='relative'>
+					<div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className='relative flex' >
 						<div className='flex gap-3 cursor-pointer items-center'>
 							<span>Tình trạng</span>
 							<ExpandMoreRoundedIcon />
@@ -114,17 +115,14 @@ export function ManageBookingPage() {
 							</div>
 						)}
 					</div>
-					<div className='flex gap-3 cursor-pointer '>
+					<div className='flex gap-3 cursor-pointer items-center '>
 						<span>Ngày đặt</span>
-						<div>
-							<ExpandMoreRoundedIcon />
-						</div>
 						<div className=''>
-							<DatePicker format='DD/MM/YYYY'/>
+							<DatePicker format='DD/MM/YYYY' className='bg-third'/>
 						</div>
 					</div>
 					<div className='flex items-end'>
-						<button className='px-4 py-2 h-min bg-primary text-white'
+						<button className='px-4 py-1 h-min bg-primary text-white'
 							onClick={() => toast.info('Chức năng chưa được hỗ trợ')}
 						>
 							LỌC

@@ -4,6 +4,7 @@ import iconNotification from '~/assets/images/icon_notification.svg'
 import SaleDetail from '~/components/SaleDetail_SaleInfo/SaleDetail'
 import { toast } from 'react-toastify'
 import { DatePicker } from '@mui/x-date-pickers'
+import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 
 
@@ -69,9 +70,9 @@ export function SalesInfoPage() {
 					<p className='text-primary text-2xl font-normal'>
 						Thông tin bán hàng
 					</p>
-					<a href="/admin/notification">
+					<Link to="/admin/notification">
 						<img src={iconNotification} alt="" className='hover:cursor-pointer' />
-					</a>
+					</Link>
 				</div>
 				<div className='mt-9 flex gap-6 text-lg font-normal text-second'>
 					<div className='flex flex-col gap-5'>
@@ -79,7 +80,7 @@ export function SalesInfoPage() {
 						<input
 							type='text'
 							className='  placeholder:opacity-90
-						 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
+						 placeholder:text-second w-[264px] h-[57px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 							placeholder='Nhập tên khách hàng'
 							value={username}
 							onChange={handleChangeUsername}
@@ -91,7 +92,7 @@ export function SalesInfoPage() {
 							type='text'
 							placeholder='Nhập mã hóa đơn'
 							className=' placeholder:opacity-90
-						 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
+						 placeholder:text-second w-[264px] h-[57px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 						 	value={billId}
 							onChange={handleChangeBillId}
 						/>
@@ -104,7 +105,7 @@ export function SalesInfoPage() {
 							className=' placeholder:opacity-90
 						 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 						/> */}
-						<DatePicker format='DD/MM/YYYY' value={startDate}
+						<DatePicker format='DD/MM/YYYY' value={startDate} className='bg-third'
 							onChange={handleChangeStartDate}
 						/>
 					</div>
@@ -116,12 +117,12 @@ export function SalesInfoPage() {
 							className=' placeholder:opacity-90
 						 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 						/> */}
-						<DatePicker format='DD/MM/YYYY' value={endDate}
+						<DatePicker format='DD/MM/YYYY' value={endDate} className='bg-third'
 							onChange={handleChangeEndDate}
 						/>
 					</div>
 					<div className='flex items-end'>
-						<button className='px-4 py-2 h-min bg-primary text-white'
+						<button className='px-4 py-1 h-min bg-primary text-white rounded-xl'
 							onClick={handleFilterButtonClick}
 						>
 							LỌC
@@ -148,7 +149,7 @@ export function SalesInfoPage() {
 							<th className='py-4 text-center border-b border-gray-200'>
 								Tên khách hàng
 							</th>
-							<th className='py-4 text-left border-b border-gray-200 text-right'>
+							<th className='py-4 text-center border-b border-gray-200 '>
 								Tổng thanh toán
 							</th>
 							<th className='py-4 text-center border-b border-gray-200'>

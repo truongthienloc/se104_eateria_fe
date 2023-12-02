@@ -6,6 +6,8 @@ import iconNotification from '~/assets/images/icon_notification.svg'
 import { api } from '~/services/axios'
 import { toast } from 'react-toastify'
 import { AddPromotionModal } from '~/components/Modal/AddPromotionModal'
+import { Link } from 'react-router-dom'
+
 export const ManagePromotionPage = () => {
 	const [showModalAdd, setShowModalAdd] = useState(false)
 	const [showModalEdit, setShowModalEdit] = useState(false)
@@ -84,9 +86,9 @@ export const ManagePromotionPage = () => {
 					<p className='text-primary text-2xl font-normal'>
 						Thông tin khuyến mãi
 					</p>
-					<a href="/admin/notification">
+					<Link to="/admin/notification">
 						<img src={iconNotification} alt="" className='hover:cursor-pointer' />
-					</a>
+					</Link>
 				</div>
 
 				<div className='rounded-3xl border-third border-8 px-3 bg-third mb-16'>
