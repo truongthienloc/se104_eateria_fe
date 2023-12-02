@@ -1,26 +1,35 @@
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { increasement } from '~/features/cart/cartSlice'
+import { toast } from 'react-toastify'
 
-import { useNavigate } from "react-router-dom";
+function FoodItems({ item }) {
+	const navigate = useNavigate()
+	const dispatch = useDispatch()
+	const onAdd = () => {
+		dispatch(increasement(item))
+		toast.success(`Thêm ${item.dishName.toUpperCase()} vào giỏ hàng`)
+	}
+	const formattedMoney = (number) => {
+		let res = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+		return `${res} VND`
+	}
 
-function FoodItems(props) {
-    const navigate = useNavigate()
-    
-    var title = props.title ||"Bún Chả Hà Nội";
-    return ( 
-        <div className="w-[590px] h-[170px] bg-fourth border border-third rounded-2xl flex flex-row space-x-4 shadow-lg"
-            onClick={navigate('/food-detail')}>
-            
-            <div className="pl-6">
-                <p className="mt-7 text-primary font-normal text-2xl">{title}</p>
-                <p className="my-11 text-second text-xl font-normal pt-3">Giá 59.000 VND</p>
-            </div>
-            <div className="flex items-end pl-4 mb-4">
-              <button className="font-normal text-2xl text-third bg-primary leading-5 w-[150px] h-[50px] ">Thêm</button>
-            </div>
-            <div className="w-[150px] h-[150px] flex mt-[10px]">
-                <img className="ml-8" src="src\assets\images\productPage\food\image_itemsList_1.svg" alt="" />
-            </div>
-        </div>
-     );
+	return (
+		<div className='flex flex-row w-[590px] h-[180px] border border-third rounded-2xl shadow-xl items-center justify-center gap-5 bg-fourth'>
+			<div className='flex flex-col w-[400px] gap-8'>
+					<p className='text-primary font-normal text-2xl uppercase'>{item.dishName}</p>
+				<div className='flex justify-between'>
+					<p className='text-second text-xl font-normal pt-3'>Giá {formattedMoney(item.dishPrice)}</p>
+					<button className='flex items-center justify-center font-normal text-2xl text-third bg-primary w-[150px] h-[50px] hover:opacity-80'>Thêm</button>
+				</div>
+			</div>
+
+			<div className='w-[150px] h-[150px] flex rounded-xl overflow-hidden'>
+				<img className='object-fill' src={item.images[0]?.imageLink} alt={item.dishName} />
+			</div>
+		</div>
+	)
 }
 
-export default FoodItems ;
+export default FoodItems
