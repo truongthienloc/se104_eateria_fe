@@ -14,6 +14,8 @@ import { useState, useEffect } from 'react'
 import HomeBanner from '~/components/Carousel/HomeBanner'
 import { api } from '~/services/axios'
 import { useSearchParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import slugifyFn from '~/utils/slugifyFn'
 
 function Homepage() {
 	const [tag, setTag] = useState('mainMenu')
@@ -24,11 +26,11 @@ function Homepage() {
 	const selectMenu = searchParams.get('menu') || menuList[0] || ''
 	const foods =
 		data.filter((item) => {
-			return item.name === selectMenu
+			return slugifyFn(item.name) === slugifyFn(selectMenu)
 		})?.[0]?.data || []
 	const HandleOnClick = (name) => {
 		setSearchParams({
-			menu: name,
+			menu: slugifyFn(name),
 		})
 	}
 	useEffect(() => {
@@ -97,34 +99,31 @@ function Homepage() {
 						{menuList.length > 0 &&
 							menuList.map((menu, index) => {
 								return (
-									<div key={menu} className='flex items-center'>
+									<div key={menu} className='flex items-center hover:opacity-70'>
 										<button
 											id='mainMenu'
 											className={
-												selectMenu === menu
+												slugifyFn(selectMenu) === slugifyFn(menu)
 													? 'font-medium text-2xl rounded-xl border-0 text-third bg-primary px-4 w-[242px] focus:outline-none  '
 													: 'font-medium text-2xl rounded-xl border-0 text-primary bg-button px-4 w-[242px] focus:outline-none'
 											}
 											onClick={() => HandleOnClick(menu)}>
 											{menu}
 										</button>
-										{ index !== menuList.length-1 && <div className='border border-second h-[42px]'></div> }
+										{ index !== menuList.length-1 && <div className='border border-second h-[42px] mx-4'></div> }
 									</div>
 									
 								)
 							})}
 					</div>
 
-					<div className='mt-14 flex flex-col gap-12'>
-						<div className='flex flex-row gap-9 '>
+					<div className='w-[1400px] mt-14'>
+						<div className='flex flex-row justify-center gap-7 flex-wrap'>
 							{foods.length > 0 && foods.map((item) => {
 								return(
 									<FoodItems 
 									key={item.id}
-									id = {item.id}
-									imageURL={item.images[0]?.imageLink}
-									title = {item.dishName}
-									price = {item.dishPrice}
+									item={item}
 									/>
 								)
 							})}

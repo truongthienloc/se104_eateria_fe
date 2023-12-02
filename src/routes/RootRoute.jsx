@@ -26,6 +26,7 @@ import { ManageClientPage } from '~/pages/Admin/ManageClientPage'
 import { ManageBookingPage } from '~/pages/Admin/ManageBookingPage'
 import { StatisticPage } from '~/pages/Admin/StatisticPage'
 import { PayPage } from '~/pages/PayPage/PayPage'
+import { BillDetailPage } from '~/pages/BillDetailPage'
 
 function RootRoute() {
 	return (
@@ -52,6 +53,7 @@ function RootRoute() {
 					<Route path='/pay' element={<PayPage />} />
 					<Route path='/cart' element={<CartPage />} />
 					<Route path='/reservation' element={<ReservationPage />} />
+					<Route path='/bill' element={<BillDetailPage />} />
 					<Route path='/user' element={<UserLayout />}>
 						<Route path='profile' element={<ProfilePage />} />
 						<Route path='coupon' element={<CouponPage />} />
