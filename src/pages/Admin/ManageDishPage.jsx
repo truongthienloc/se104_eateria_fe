@@ -7,6 +7,8 @@ import { EditDishModal } from '~/components/Modal/EditDishModal'
 import { AddDishModal } from '~/components/Modal/AddDishModal'
 import { DeleteDishModal } from '~/components/Modal/DeleteDishModal'
 import { toast } from 'react-toastify'
+import { Link } from 'react-router-dom'
+
 
 export const ManageDishPage = () => {
 	const [showModalAdd, setShowModalAdd] = useState(false)
@@ -189,9 +191,9 @@ export const ManageDishPage = () => {
 		<div className='pt-9 w-[1200px]	pl-10 h-full bg-[#f8f8f8]'>
 			<div className='mb-12 flex justify-between'>
 				<p className='text-primary text-2xl font-normal'>Quản lý món ăn</p>
-				<a href="/admin/notification">
+				<Link to="/admin/notification">
 						<img src={iconNotification} alt="" className='hover:cursor-pointer' />
-				</a>
+				</Link>
 			</div>
 
 			<div className='rounded-3xl border-third border-8 px-3 bg-third mb-16'>
