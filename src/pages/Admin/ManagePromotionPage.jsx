@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import useEditPromotionModal from '~/hooks/useEditPromotionModal'
 import PromotionDetail from '~/components/PromotionDetail_ManaegeDetail/PromotionDetail'
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined'
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import iconNotification from '~/assets/images/icon_notification.svg'
 import { api } from '~/services/axios'
 import { toast } from 'react-toastify'
 import { AddPromotionModal } from '~/components/Modal/AddPromotionModal'
@@ -83,10 +84,9 @@ export const ManagePromotionPage = () => {
 					<p className='text-primary text-2xl font-normal'>
 						Thông tin khuyến mãi
 					</p>
-					<NotificationsNoneOutlinedIcon
-						sx={{ width: '60px', height: '60px' }}
-						className='mr-8'
-					/>
+					<a href="/admin/notification">
+						<img src={iconNotification} alt="" className='hover:cursor-pointer' />
+					</a>
 				</div>
 
 				<div className='rounded-3xl border-third border-8 px-3 bg-third mb-16'>

@@ -2,6 +2,7 @@ import React from 'react'
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded'
 import { useState, useEffect } from 'react'
 import { api } from '~/services/axios'
+import iconNotification from '~/assets/images/icon_notification.svg'
 import BookingDetail from '~/components/BookingDetail_ManageBooking/BookingDetail'
 import { AddTableModal } from '~/components/Modal/AddTableModal'
 import { DeleteTableModal } from '~/components/Modal/DeleteTableModal'
@@ -81,11 +82,13 @@ export function ManageBookingPage() {
 	}
 
 	return (
-		<div className='pt-9 w-[1130px] pl-10 h-full bg-[#f8f8f8]'>
+		<div className='pt-9 w-[1200px] pl-10 h-full bg-[#f8f8f8]'>
 			<div className=''>
-				<div className='flex gap-10'>
+				<div className='flex justify-between'>
 					<p className='text-primary text-2xl font-normal'>Quản lý đặt bàn</p>
-					{/* <NotificationsNoneOutlinedIcon className=''/> */}
+					<a href="/admin/notification">
+						<img src={iconNotification} alt="" className='hover:cursor-pointer' />
+					</a>
 				</div>
 				<div className='mt-9 flex gap-20 text-lg font-normal text-second'>
 					<div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className='relative'>

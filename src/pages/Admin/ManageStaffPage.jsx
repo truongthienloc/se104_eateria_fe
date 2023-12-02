@@ -6,6 +6,8 @@ import useEditStaffModal from '~/hooks/useEditStaffModal'
 import { toast } from 'react-toastify'
 import { AddStaffModal } from '~/components/Modal/AddStaffModal'
 import useStaffInfo from '~/hooks/useStaffInfo'
+import iconNotification from '~/assets/images/icon_notification.svg'
+
 export const ManageStaffPage = () => {
 	const [showModalAdd, setShowModalAdd] = useState(false)
 	const [showModalEdit, setShowModalEdit] = useState(false)
@@ -89,13 +91,15 @@ export const ManageStaffPage = () => {
 	}
 
 	return (
-		<div className='pt-9 w-[1230px] pl-10 h-full bg-[#f8f8f8]'>
+		<div className='pt-9 w-[1200px] pl-10 h-full bg-[#f8f8f8]'>
 			<div className='mb-8'>
-				<div className='flex gap-10'>
+				<div className='flex justify-between'>
 					<p className='text-primary text-2xl font-normal'>
 						Thông tin nhân viên
 					</p>
-					{/* <NotificationsNoneOutlinedIcon className=''/> */}
+					<a href="/admin/notification">
+						<img src={iconNotification} alt="" className='hover:cursor-pointer' />
+					</a>
 				</div>
 				<div className='mt-9 flex gap-6 text-lg font-normal text-second'>
 					<div className='flex flex-col gap-5'>
