@@ -19,7 +19,12 @@ export default function AutoLoginProvider({ children }) {
 		setIsLoading(false)
 	}
 
+	const checkHealth = () => {
+		api.get('/')
+	}
+
 	useEffect(() => {
+		checkHealth()
 		fetchUser()
 	}, [])
 
