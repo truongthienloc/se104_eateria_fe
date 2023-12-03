@@ -2,10 +2,16 @@ import { useDispatch } from 'react-redux'
 import { increasement } from '~/features/cart/cartSlice'
 import { toast } from 'react-toastify'
 import { api } from '~/services/axios'
+import { useNavigate } from 'react-router-dom'
 
 function FoodItems({ item }) {
 	const dispatch = useDispatch()
-	const onAdd = () => {
+	const navigate = useNavigate()
+	const onNavigate = () => {
+		navigate(`/product-detail/${item.id}`)
+	}
+	const onAdd = (e) => {
+		e.stopPropagation()
 		dispatch(increasement(item))
 		toast.success(`Thêm ${item.dishName.toUpperCase()} vào giỏ hàng`)
 		const pushItemToCart = async () => {
@@ -21,7 +27,9 @@ function FoodItems({ item }) {
 		return `${res} VND`
 	}
 	return (
-		<div className='flex w-[300px] h-[400px] bg-sub1 border border-sub2 rounded-2xl flex-col items-center justify-between'>
+		<div
+			onClick={onNavigate}
+			className='flex w-[300px] h-[400px] bg-sub1 border border-sub2 rounded-2xl flex-col items-center justify-between cursor-pointer hover:opacity-90'>
 			<div className='h-[150px] overflow-hidden mt-5 rounded-2xl'>
 				<img
 					className='w-full h-full object-contain'

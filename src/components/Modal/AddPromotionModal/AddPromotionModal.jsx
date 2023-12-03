@@ -51,6 +51,7 @@ export default function AddPromotionModal({ isOpen, promotionInfo, onClose, onSu
 							<div className='flex gap-8 items-center text-lg '>
 								<p className='w-[160px] font-medium'>Ngày bắt đầu:</p>
 								<DatePicker
+									className='flex-1'
 									format='DD/MM/YYYY'
 									value={promotionInfo.startDay}
 									onChange={promotionInfo.handleChangeStartDay}
@@ -59,6 +60,7 @@ export default function AddPromotionModal({ isOpen, promotionInfo, onClose, onSu
 							<div className='flex gap-8 items-center text-lg '>
 								<p className='w-[160px] font-medium'>Ngày kết thúc</p>
 								<DatePicker
+									className='flex-1'
 									format='DD/MM/YYYY'
 									value={promotionInfo.endDay}
 									onChange={promotionInfo.handleChangeEndDay}

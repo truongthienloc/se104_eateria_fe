@@ -8,13 +8,19 @@ function ClientDetail({ id, name, point, timeEat, phoneNumber }) {
 				<center>{name}</center>
 			</td>
 			<td className='py-4 px-8 border-b border-gray-200'>
-				<center>{point}</center>
+				<center>
+					{point || <div className='w-10 h-[1px] bg-black m-auto' />}
+				</center>
 			</td>
 			<td className='py-4 px-8 border-b border-gray-200'>
-				<center>{timeEat}</center>
+				<center>
+					{timeEat || <div className='w-10 h-[1px] bg-black m-auto' />}
+				</center>
 			</td>
 			<td className='py-4 px-8 border-b border-gray-200'>
-				<center>{phoneNumber}</center>
+				<center>
+					{phoneNumber || <div className='w-10 h-[1px] bg-black m-auto' />}
+				</center>
 			</td>
 		</tr>
 	)

@@ -103,9 +103,7 @@ export const ProductPage = () => {
 					</select>
 				</div>
 
-				<div
-					div
-					className='max-w-[1400px] mx-auto my-10 flex flex-wrap gap-12 items-center justify-center'>
+				<div className='max-w-[1400px] mx-auto my-10 flex flex-wrap gap-12 items-center justify-center'>
 					{firstList.length > 0 &&
 						data.map((item) => {
 							return <FoodItems key={item.id} item={item} />
@@ -119,9 +117,7 @@ export const ProductPage = () => {
 						alt='banner image'
 					/>
 				</div>
-				<div
-					div
-					className='max-w-[1400px] mx-auto my-10 flex flex-wrap gap-12 items-center justify-center'>
+				<div className='max-w-[1400px] mx-auto my-10 flex flex-wrap gap-12 items-center justify-center'>
 					{secondList.length > 0 &&
 						data.map((item) => {
 							return <FoodItems key={item.id} item={item} />

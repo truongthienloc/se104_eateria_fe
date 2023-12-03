@@ -7,6 +7,8 @@ import { api } from '~/services/axios'
 import { toast } from 'react-toastify'
 import { AddPromotionModal } from '~/components/Modal/AddPromotionModal'
 import { Link } from 'react-router-dom'
+import { DatePicker } from '@mui/x-date-pickers'
+import dayjs from 'dayjs'
 
 export const ManagePromotionPage = () => {
 	const [showModalAdd, setShowModalAdd] = useState(false)
@@ -37,8 +39,8 @@ export const ManagePromotionPage = () => {
 			promotion.discountCode,
 			promotion.discountDescription,
 			promotion.discountPercent,
-			promotion.startDay,
-			promotion.endDay
+			dayjs(promotion.startDay),
+			dayjs(promotion.endDay)
 		)
 		setShowModalEdit(true)
 	}
@@ -189,7 +191,7 @@ export const ManagePromotionPage = () => {
 															id=''
 															cols=''
 															rows=''
-															className='w-[300px] h-[150px]  border-2 px-3 border-primary rounded-lg focus:outline-none resize-none'
+															className='w-[300px] h-[150px]  border-2 px-3 p-4 border-primary rounded-lg focus:outline-none resize-none'
 															value={
 																editPromotionModal.description
 															}
@@ -216,30 +218,29 @@ export const ManagePromotionPage = () => {
 														<p className='w-[160px] font-medium'>
 															Ngày bắt đầu:
 														</p>
-														<div className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'>
-															<input
-																type='text'
-																value={
-																	editPromotionModal.startDay
-																}
-																onChange={
-																	editPromotionModal.startDay
-																}
-															/>
-														</div>
+														<DatePicker
+															className='flex-1'
+															format='DD/MM/YYYY'
+															value={
+																editPromotionModal.startDay
+															}
+															onChange={
+																editPromotionModal.handleChangeStartDay
+															}
+														/>
 													</div>
 													<div className='flex gap-8 items-center text-lg '>
 														<p className='w-[160px] font-medium'>
-															Ngày kết thúc
+															Ngày kết thúc:
 														</p>
-														<input
-															type='text'
-															className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
+														<DatePicker
+															className='flex-1'
+															format='DD/MM/YYYY'
 															value={
 																editPromotionModal.endDay
 															}
 															onChange={
-																editPromotionModal.endDay
+																editPromotionModal.handleChangeEndDay
 															}
 														/>
 													</div>

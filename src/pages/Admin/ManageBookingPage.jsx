@@ -7,7 +7,7 @@ import BookingDetail from '~/components/BookingDetail_ManageBooking/BookingDetai
 import { AddTableModal } from '~/components/Modal/AddTableModal'
 import { DeleteTableModal } from '~/components/Modal/DeleteTableModal'
 import { toast } from 'react-toastify'
-import useSocket from '~/services/socketIO/useSocket'
+import { useSocket } from '~/services/websocket'
 import { DatePicker } from '@mui/x-date-pickers'
 import { Link } from 'react-router-dom'
 

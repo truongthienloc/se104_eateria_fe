@@ -1,4 +1,5 @@
 import EditNoteIcon from '@mui/icons-material/EditNote'
+import dayjs from 'dayjs'
 function StaffDetail({
 	id,
 	name,
@@ -24,7 +25,7 @@ function StaffDetail({
 				<center>{position}</center>
 			</td>
 			<td className='py-4 px-8 border-b border-gray-200'>
-				<center>{startDate}</center>
+				<center>{dayjs(startDate).format('DD/MM/YYYY')}</center>
 			</td>
 			<td className='py-4 px-8 border-b border-gray-200'>
 				<center>{salary}</center>

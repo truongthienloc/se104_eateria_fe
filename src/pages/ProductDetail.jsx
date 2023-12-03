@@ -1,190 +1,146 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import FoodReview from '~/components/ProductDetail_Review/FoodReview'
 import FoodItems from '~/components/Food_Items_ProductPage/FoodItems'
-import { FaStar } from 'react-icons/fa'
+import Rating from '@mui/material/Rating'
+import { api } from '~/services/axios'
+import formattedMoney from '~/utils/formatMoney'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import { useDispatch } from 'react-redux'
+import { increasement } from '~/features/cart/cartSlice'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
-export const ProductDetail = (props) => {
+export const ProductDetail = () => {
+	const dispatch = useDispatch()
 	const [rating, setRating] = useState(null)
 	const [hover, setHover] = useState(null)
-	var title = props.title || 'Bún Chả Hà Nội'
+	const [dish, setDish] = useState()
+	const [dishImage, setDishImage] = useState([])
+	const [data, setdata] = useState([])
+	let { id } = useParams()
+	const onAdd = () => {
+		dispatch(increasement(dish))
+		toast.success(`Thêm ${dish.dishName.toUpperCase()} vào giỏ hàng`)
+		const pushItemToCart = async () => {
+			try {
+				const post = await api.post('/bill/dish/add')
+			} catch (error) {
+				console.log(error)
+			}
+		}
+	}
+	useEffect(() => {
+        const fetchData = async (menuId) => {
+            try {
+                const res = await api.get('/dish')
+				let foods = res.data.data.filter((item) => item.menuId === dish.menuId)
+                setdata(foods)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        if (!dish || !dish.menuId) return;
+        fetchData(dish.menuId)
+    }, [dish?.menuId])
+
+	useEffect(() => {
+		const fetchDishData = async () => {
+			try {
+				const res = await api.get(`/dish/${id}`)
+				let dishData = res.data
+				console.log(dishData)
+				setDish(dishData.data)
+				setDishImage(dishData.data.images)
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		fetchDishData()
+	}, [])
 	return (
-		<div className='flex-1 flex'>
-			<div>
-				<div className='w-screen ml-7 bg-no-repeat items-center text-center text-fourth bg-[url(src/assets/images/productPage/banner/image_items_bg.svg)]'>
-					<p className=' pt-10 text-3xl'>Phở Bò</p>
-					<div className='flex flex-row justify-center pb-10'>
-						{[...Array(5)].map((star, index) => {
-							const currentRating = index + 1
-							return (
-								<label>
-									<input
-										className='hidden'
-										type='radio'
-										name='rating'
-										value={currentRating}
-										onClick={() => setRating(currentRating)}
-									/>
-									<FaStar
-										size={50}
-										color={
-											currentRating <= (hover || rating)
-												? '#ffc107'
-												: '#e4e5e9'
-										}
-										onMouseEnter={() => setHover(currentRating)}
-										onMouseLeave={() => setHover(null)}
-									/>
-								</label>
-							)
-						})}
+		<div className='flex flex-col pb-10 pt-1 items-center'>
+			<div className='w-full h-[160px] mt-1 mb-5 bg-headerBanner bg-no-repeat bg-cover flex flex-col justify-center items-center gap-5'>
+				<p className='uppercase text-third font-bold text-3xl'>
+					{dish?.dishName}
+				</p>
+				<Rating name='read-only' value={5} readOnly />
+			</div>
+			<div className='flex flex-row gap-10'>
+				<div className='flex flex-col w-[600px]'>
+					<div className='rounded-xl overflow-hidden'>
+						<Swiper slidesPerView={1}>
+							{dishImage.length > 0 &&
+								dishImage.map((item) => {
+									return (
+										<SwiperSlide key={item.id}>
+											<img
+												className='w-full h-full'
+												src={item?.imageLink}
+												alt={dish?.dishName}
+											/>
+										</SwiperSlide>
+									)
+								})}
+						</Swiper>
 					</div>
 				</div>
-				<div className='grid grid-cols-2 gap-4'>
-					<div class='... grid grid-cols-2 gap-4 m-12'>
-						<div class='col-span-2 ...'>
-							<img src='src/assets/images/productPage/food/image_itemsList_1.svg' />
-						</div>
-						<div class='...'>
-							<img src='src/assets/images/productPage/food/image_itemsList_1.svg' />
-						</div>
-						<div class='...'>
-							<img src='src/assets/images/productPage/food/image_itemsList_1.svg' />
-						</div>
-					</div>
 
-					<div class='... flex flex-col mt-12'>
-						<p className='text-second font-bold'>
-							Tổng lượt bán: <span className='text-primary'>1000</span>
-						</p>
-						<br />
+				<div className='flex flex-col mt-12'>
+					<p className='text-second font-bold'>
+						Tổng lượt bán:{' '}
+						<span className='text-primary'>{dish?.totalOrder}</span>
+					</p>
+					<br />
 
-						<p className='max-w-xl font-normal'>
-							Phở bò là một món ăn truyền thống của Việt Nam, được làm từ
-							bánh phở, thịt bò, nước dùng và các loại gia vị khác. Nước
-							dùng được ninh từ xương bò trong nhiều giờ, tạo nên hương vị
-							thơm ngon, đậm đà. Thịt bò được thái mỏng, có thể là thịt chín
-							hoặc thịt tái. Bánh phở được làm từ bột gạo, có thể là bánh
-							phở tươi hoặc bánh phở khô. Ngoài ra, phở bò còn được ăn kèm
-							với các loại rau thơm như hành lá, húng quế, giá đỗ,... Phở bò
-							của nhà hàng chúng tôi được làm từ những nguyên liệu tươi ngon
-							nhất, được tuyển chọn kỹ lưỡng. Nước dùng được ninh từ xương
-							bò trong nhiều giờ, tạo nên hương vị thơm ngon, đậm đà. Thịt
-							bò được thái mỏng, mềm mại, chín tái vừa phải. Bánh phở được
-							làm từ bột gạo thượng hạng, dai ngon, thấm vị. Ngoài ra, phở
-							bò của nhà hàng chúng tôi còn được ăn kèm với các loại rau
-							thơm tươi ngon, tạo nên hương vị hấp dẫn khó quên.
+					<p className='max-w-xl font-normal'>{dish?.dishDescription}</p>
+					<div className='ml-80'>
+						<p className='my-6 text-second text-xl font-extrabold pt-3'>
+							{formattedMoney(dish?.dishPrice)}
 						</p>
-						<div className='ml-80'>
-							<p className='my-6 text-second text-xl font-extrabold pt-3'>
-								Giá 59.000 VND
-							</p>
-							<button className='font-normal text-2xl text-third bg-primary leading-5 w-[150px] h-[50px] '>
-								Thêm
-							</button>
-						</div>
+						<button
+							onClick={onAdd}
+							className='flex items-center justify-center font-normal text-2xl text-third bg-primary w-[150px] h-[50px] hover:opacity-75'>
+							Thêm
+						</button>
 					</div>
 				</div>
-				<div>
-					<div className='flex items-center justify-center my-8 text-second'>
-						<p className='text-4xl'>Đánh giá của khách hàng</p>
-					</div>
-					<div className='flex flex-row ml-40'>
-						{[...Array(5)].map((star, index) => {
-							const currentRating = index + 1
-							return (
-								<label>
-									<input
-										className='hidden'
-										type='radio'
-										name='rating'
-										value={currentRating}
-										onClick={() => setRating(currentRating)}
-									/>
-									<FaStar
-										size={36}
-										color={
-											currentRating <= (hover || rating)
-												? '#ffc107'
-												: '#e4e5e9'
-										}
-										onMouseEnter={() => setHover(currentRating)}
-										onMouseLeave={() => setHover(null)}
-									/>
-								</label>
-							)
-						})}
-						<p className='text-2xl ml-2'>
-							<span className='text-primary'>5/5</span> (1000 đánh giá)
-						</p>
-					</div>
-				</div>
-				<div div className='mt-14 flex flex-col gap-16 items-center'>
-					<div className='flex flex-row gap-20 '>
-						<FoodReview />
-						<FoodReview />
-					</div>
-					<div className='flex flex-row gap-20 '>
-						<FoodReview />
-						<FoodReview />
-					</div>
-					<div className='flex flex-row gap-20 '>
-						<FoodReview />
-						<FoodReview />
-					</div>
-				</div>
+			</div>
+
+			<div className='my-10 flex flex-col gap-5'>
 				<div className='flex items-center justify-center my-8 text-second'>
-					<p className='text-4xl'>Xem thêm món ăn</p>
+					<p className='text-4xl'>Đánh giá của khách hàng</p>
 				</div>
-				<div div className='mt-14 flex flex-col gap-12 items-center'>
-					<div className='flex flex-row gap-9 '>
-						<FoodItems />
-						<FoodItems />
+
+				<div className='flex flex-row'>
+					<Rating name='read-only' value={5} readOnly />
+					<p className='text-2xl ml-2'>
+						<span className='text-primary'>5/5</span> (1000 đánh giá)
+					</p>
+				</div>
+				<div className='flex flex-col w-full gap-10'>
+					<div className='flex flex-row justify-between gap-20'>
+						<FoodReview id={1} />
+						<FoodReview id={2} />
 					</div>
-					<div className='flex flex-row gap-9'>
-						<FoodItems />
-						<FoodItems />
-					</div>
-					<div className='flex flex-row gap-9'>
-						<FoodItems />
-						<FoodItems />
-					</div>
-					<div className='flex flex-row gap-9'>
-						<FoodItems />
-						<FoodItems />
-					</div>
-					<div className='flex flex-row gap-9'>
-						<FoodItems />
-						<FoodItems />
+					<div className='flex flex-row justify-between'>
+						<FoodReview id={3} />
+						<FoodReview id={4} />
 					</div>
 				</div>
-				<div>
-					<img
-						className='w-screen'
-						src='src\assets\images\productPage\banner\image_itemsList_ooffer_2.svg'
-						alt='banner image'
-					/>
+			</div>
+
+			<div className='flex flex-col'>
+				<div className='flex items-center justify-center my-8 text-second'>
+					<p className='text-4xl'>Sản phẩm tương tự</p>
 				</div>
-				<div div className='mt-14 mb-10 flex flex-col gap-12 items-center'>
-					<div className='flex flex-row gap-9 '>
-						<FoodItems title='Bun cha Ha Noi ' />
-						<FoodItems />
-					</div>
-					<div className='flex flex-row gap-9'>
-						<FoodItems />
-						<FoodItems />
-					</div>
-					<div className='flex flex-row gap-9'>
-						<FoodItems />
-						<FoodItems />
-					</div>
-					<div className='flex flex-row gap-9'>
-						<FoodItems />
-						<FoodItems />
-					</div>
-					<div className='flex flex-row gap-9'>
-						<FoodItems />
-						<FoodItems />
-					</div>
+				<div className='max-w-[1400px] mx-auto my-10 flex flex-wrap gap-12 items-center justify-center'>
+					{data.length > 0 &&
+						data.map((item) => {
+							return <FoodItems key={item.id} item={item} />
+						})}
 				</div>
 			</div>
 		</div>
