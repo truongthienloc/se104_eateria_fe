@@ -122,7 +122,7 @@ export function StatisticPage() {
 					height={500}
 				/>
 				<p className='text-primary font-medium text-xl'>
-					Doanh thu của quán qua hàng tháng
+					Doanh thu của quán hàng tháng
 				</p>
 			</div>
 		</div>
