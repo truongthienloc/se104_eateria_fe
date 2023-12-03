@@ -38,9 +38,7 @@ export function SalesInfoPage() {
 	}, [saleData])
 
 	const handleFilterButtonClick = async () => {
-		
 		try {
-			
 			const res = await toast.promise(
 				api.get('/bill/all/filter', {
 					params: {

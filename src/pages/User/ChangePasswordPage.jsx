@@ -60,7 +60,7 @@ export const ChangePasswordPage = () => {
 
 	const handleRePasswordKeyDown = (e) => {
 		if (e.key !== 'Enter') {
-			return 
+			return
 		}
 
 		e.preventDefault()

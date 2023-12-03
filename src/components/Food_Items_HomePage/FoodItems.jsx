@@ -4,7 +4,6 @@ import { toast } from 'react-toastify'
 import { api } from '~/services/axios'
 import { useNavigate } from 'react-router-dom'
 
-
 function FoodItems({ item }) {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
@@ -29,7 +28,7 @@ function FoodItems({ item }) {
 	}
 	return (
 		<div
-			onClick={onNavigate} 
+			onClick={onNavigate}
 			className='flex w-[300px] h-[400px] bg-sub1 border border-sub2 rounded-2xl flex-col items-center justify-between cursor-pointer hover:opacity-90'>
 			<div className='h-[150px] overflow-hidden mt-5 rounded-2xl'>
 				<img

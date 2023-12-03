@@ -21,7 +21,7 @@ function FoodItems({ item }) {
 
 	return (
 		<div
-			onClick={onNavigate} 
+			onClick={onNavigate}
 			className='flex flex-row w-[590px] h-[180px] border border-third rounded-2xl shadow-xl items-center justify-center gap-5 bg-fourth cursor-pointer hover:opacity-90'>
 			<div className='flex flex-col w-[400px] gap-8'>
 				<p className='text-primary font-normal text-2xl uppercase'>
