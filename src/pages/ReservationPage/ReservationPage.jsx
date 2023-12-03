@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { Navigate } from 'react-router-dom'
 import { api } from '~/services/axios'
-import { useSocket } from '~/services/socketIO'
+import { useSocket } from '~/services/websocket'
 
 export const ReservationPage = () => {
 	const [tableData, setTableData] = useState([])
