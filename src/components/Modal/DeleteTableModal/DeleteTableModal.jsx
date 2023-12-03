@@ -4,7 +4,7 @@ export default function DeleteTableModal({ isOpen, onClose, onSubmit }) {
 	if (!isOpen) return null
 	return (
 		<div>
-			<div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
+			<div className='justify-center text-second items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
 				<div className='relative '>
 					{/*content*/}
 					<div className='border-[3px] border-primary bg-[#fff8ee] rounded-xl relative flex flex-col w-full outline-none focus:outline-none'>

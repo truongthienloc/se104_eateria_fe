@@ -8,9 +8,9 @@ function PromotionDetail({
 	onEditButtonClick,
 }) {
 	return (
-		<tr>
+		<tr className='text-second'>
 			<td className='py-4 px-2 border-b border-gray-200'>
-				<input className='' type='checkbox' />
+				<input className='bg-third' type='checkbox' />
 			</td>
 			<td className='py-4 px-2 border-b border-gray-200 text-lg text-primary text-center'>
 				{id}

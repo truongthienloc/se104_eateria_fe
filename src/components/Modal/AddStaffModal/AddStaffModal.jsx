@@ -5,7 +5,7 @@ export default function AddStaffModal({ isOpen, staffInfo, onClose, onSubmit }) 
 	if (!isOpen) return null
 	return (
 		<div>
-			<div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
+			<div className='justify-center text-second items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
 				<div className='relative my-6'>
 					{/*content*/}
 					<div className='border-0 rounded-lg relative flex flex-col w-full bg-white outline-none focus:outline-none'>
@@ -54,6 +54,7 @@ export default function AddStaffModal({ isOpen, staffInfo, onClose, onSubmit }) 
 									format='DD/MM/YYYY'
 									value={staffInfo.startDate}
 									onChange={staffInfo.handleChangeStartDate}
+									className='bg-third'
 								/>
 							</div>
 							<div className='flex gap-8 items-center text-lg '>

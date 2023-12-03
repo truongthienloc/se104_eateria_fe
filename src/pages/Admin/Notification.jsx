@@ -5,7 +5,7 @@ import AdminNotification from '~/components/Admin_Notification/Admin_Notificatio
 export function Notification() {
     const [showModal, setShowModal] = useState(false)
 	return (
-		<div className='bg-[#f8f8f8] pt-9 w-[1200px] pl-10 h-full'>
+		<div className='bg-[#f8f8f8] pt-9 w-[1200px] text-second pl-10 h-full'>
 			<div className='justify-end flex'>
 				<img src={iconNotification} alt='' className='hover:cursor-pointer' />
 			</div>
@@ -57,7 +57,7 @@ export function Notification() {
                 />
                 {showModal ? (
 						<div>
-							<div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
+							<div className='justify-center text-second items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
 								<div className='relative w-auto my-6 mx-auto '>
 									{/*content*/}
 									<div className='border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none'>

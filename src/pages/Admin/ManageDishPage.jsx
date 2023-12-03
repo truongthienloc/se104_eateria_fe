@@ -188,7 +188,7 @@ export const ManageDishPage = () => {
 	}
 
 	return (
-		<div className='pt-9 w-[1200px]	pl-10 h-full bg-[#f8f8f8]'>
+		<div className='pt-9 w-[1200px] text-second	pl-10 h-full bg-[#f8f8f8]'>
 			<div className='mb-12 flex justify-between'>
 				<p className='text-primary text-2xl font-normal'>Quản lý món ăn</p>
 				<Link to="/admin/notification">

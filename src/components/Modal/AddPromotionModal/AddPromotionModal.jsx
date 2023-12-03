@@ -5,7 +5,7 @@ export default function AddPromotionModal({ isOpen, promotionInfo, onClose, onSu
 	if (!isOpen) return null
 	return (
 		<div>
-			<div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
+			<div className='justify-center text-second items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
 				<div className='relative my-6'>
 					{/*content*/}
 					<div className='border-0 rounded-lg relative flex flex-col w-full bg-white outline-none focus:outline-none'>
@@ -21,7 +21,7 @@ export default function AddPromotionModal({ isOpen, promotionInfo, onClose, onSu
 								<p className='w-[160px] font-medium'>Mã khuyến mãi:</p>
 								<input
 									type='text'
-									className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
+									className='w-[300px] h-[40px] bg-third border-2 px-3 border-primary rounded-lg focus:outline-none'
 									value={promotionInfo.id}
 									onChange={promotionInfo.handleChangeId}
 								/>
@@ -33,7 +33,7 @@ export default function AddPromotionModal({ isOpen, promotionInfo, onClose, onSu
 									id=''
 									cols=''
 									rows=''
-									className='w-[300px] h-[100px]  border-2 px-3 border-primary rounded-lg focus:outline-none resize-none'
+									className='w-[300px] h-[100px]  bg-third border-2 px-3 border-primary rounded-lg focus:outline-none resize-none'
 									value={promotionInfo.description}
 									onChange={
 										promotionInfo.handleChangeDescription
@@ -43,7 +43,7 @@ export default function AddPromotionModal({ isOpen, promotionInfo, onClose, onSu
 								<p className='w-[160px] font-medium'>Mức giảm:</p>
 								<input
 									type='text'
-									className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
+									className='w-[300px] h-[40px] bg-third border-2 px-3 border-primary rounded-lg focus:outline-none'
 									value={promotionInfo.percent}
 									onChange={promotionInfo.handleChangePercent}
 								/>
@@ -54,6 +54,7 @@ export default function AddPromotionModal({ isOpen, promotionInfo, onClose, onSu
 									format='DD/MM/YYYY'
 									value={promotionInfo.startDay}
 									onChange={promotionInfo.handleChangeStartDay}
+									className='bg-third'
 								/>
 							</div>
 							<div className='flex gap-8 items-center text-lg '>
@@ -62,6 +63,7 @@ export default function AddPromotionModal({ isOpen, promotionInfo, onClose, onSu
 									format='DD/MM/YYYY'
 									value={promotionInfo.endDay}
 									onChange={promotionInfo.handleChangeEndDay}
+									className='bg-third'
 								/>
 							</div>
 						</div>

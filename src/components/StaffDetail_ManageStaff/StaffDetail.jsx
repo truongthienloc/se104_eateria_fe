@@ -10,9 +10,9 @@ function StaffDetail({
 	onEditButtonClick,
 }) {
 	return (
-		<tr>
+		<tr className='text-second'>
 			<td className='border-b border-gray-200'>
-				<input className='mr-4' type='checkbox' />
+				<input className='mr-4 bg-third' type='checkbox' />
 			</td>
 			<td className='py-4 px-8 border-b border-gray-200 text-lg text-primary'>
 				<center> {id}</center>

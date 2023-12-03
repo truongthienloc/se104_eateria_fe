@@ -1,8 +1,8 @@
 function BookingDetail({ id, tableName, status, time, numOfClient, clientName, email }) {
 	return (
-		<tr >
+		<tr className="text-second">
 			<td className='py-4 px-4  border-b border-gray-200 text-lg text-primary'>
-				<input className='mr-6' type='checkbox' /> {id}
+				<input className='mr-6 bg-third' type='checkbox' /> {id}
 			</td>
 			<td className='py-4 px-4 text-center border-b border-gray-200'>
 				{tableName}

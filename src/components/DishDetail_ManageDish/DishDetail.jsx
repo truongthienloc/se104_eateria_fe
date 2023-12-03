@@ -13,9 +13,9 @@ function DishDetail({
 }) {
 	// console.log(imgs);
 	return (
-		<tr>
+		<tr className='text-second'>
 			<td className='py-4 px-2 border-b border-gray-200 text-lg text-primary'>
-				<input className='mr-4' type='checkbox' checked={isCheck} onChange={onCheck}/> {id}
+				<input className='mr-4 bg-third' type='checkbox' checked={isCheck} onChange={onCheck}/> {id}
 			</td>
 			<td className='py-4 px-2 border-b border-gray-200'>{kind}</td>
 			<td className='py-4 px-2 border-b border-gray-200'>{name}</td>

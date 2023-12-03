@@ -3,7 +3,7 @@ import EditNoteIcon from '@mui/icons-material/EditNote'
 function SaleDetail({ billId, time, name, price, status, onStatusClick }) {
 	return (
 		<tr>
-			<td className='text-left border-b border-gray-200'>
+			<td className='text-left border-b border-gray-200 bg-third'>
 				<input className='mr-6' type='checkbox' />
 			</td>
 			<td className='py-4 border-b border-gray-200 text-lg text-primary text-center'>

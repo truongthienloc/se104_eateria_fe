@@ -81,7 +81,7 @@ export const ManagePromotionPage = () => {
 
 	return (
 		<div>
-			<div className='pt-9 w-[1200px]	pl-10 h-full bg-[#f8f8f8]'>
+			<div className='pt-9 w-[1200px]	pl-10 h-full text-second bg-[#f8f8f8]'>
 				<div className='mb-12 flex justify-between'>
 					<p className='text-primary text-2xl font-normal'>
 						Thông tin khuyến mãi
@@ -153,7 +153,7 @@ export const ManagePromotionPage = () => {
 
 							{showModalEdit ? (
 								<div>
-									<div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
+									<div className='justify-center text-second items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
 										<div className='relative my-6'>
 											{/*content*/}
 											<div className='border-0 rounded-lg relative flex flex-col w-full bg-white outline-none focus:outline-none'>
@@ -171,7 +171,7 @@ export const ManagePromotionPage = () => {
 														</p>
 														<input
 															type='text'
-															className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
+															className='w-[300px] h-[40px] bg-third border-2 px-3 border-primary rounded-lg focus:outline-none'
 															value={editPromotionModal.id}
 															onChange={
 																editPromotionModal.handleChangeId
@@ -187,7 +187,7 @@ export const ManagePromotionPage = () => {
 															id=''
 															cols=''
 															rows=''
-															className='w-[300px] h-[150px]  border-2 px-3 border-primary rounded-lg focus:outline-none resize-none'
+															className='w-[300px] h-[150px] bg-third p-6 border-2 px-3 border-primary rounded-lg focus:outline-none resize-none '
 															value={
 																editPromotionModal.description
 															}
@@ -201,7 +201,7 @@ export const ManagePromotionPage = () => {
 														</p>
 														<input
 															type='text'
-															className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
+															className='w-[300px] h-[40px] bg-third border-2 px-3 border-primary rounded-lg focus:outline-none'
 															value={
 																editPromotionModal.percent
 															}
@@ -214,8 +214,9 @@ export const ManagePromotionPage = () => {
 														<p className='w-[160px] font-medium'>
 															Ngày bắt đầu:
 														</p>
-														<div className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'>
+														
 															<input
+															className='w-[300px] h-[40px] bg-third border-2 px-3 border-primary rounded-lg focus:outline-none'
 																type='text'
 																value={
 																	editPromotionModal.startDay
@@ -224,7 +225,7 @@ export const ManagePromotionPage = () => {
 																	editPromotionModal.startDay
 																}
 															/>
-														</div>
+														
 													</div>
 													<div className='flex gap-8 items-center text-lg '>
 														<p className='w-[160px] font-medium'>
@@ -232,7 +233,7 @@ export const ManagePromotionPage = () => {
 														</p>
 														<input
 															type='text'
-															className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
+															className='w-[300px] h-[40px] bg-third border-2 px-3 border-primary rounded-lg focus:outline-none'
 															value={
 																editPromotionModal.endDay
 															}
@@ -273,7 +274,7 @@ export const ManagePromotionPage = () => {
 
 							{showModalRemove ? (
 								<div>
-									<div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
+									<div className='justify-center text-second items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
 										<div className='relative '>
 											{/*content*/}
 											<div className='border-[3px] border-primary bg-[#fff8ee] rounded-xl relative flex flex-col w-full outline-none focus:outline-none'>

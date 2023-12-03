@@ -53,7 +53,7 @@ export default function AddDishModal({ isOpen, onClose, onSubmit, addDishModal }
 	if (!isOpen) return null
 	return (
 		<div>
-			<div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
+			<div className='justify-center text-second items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
 				<div className='relative my-6'>
 					{/*content*/}
 					<div className='border-0 rounded-lg relative flex flex-col w-full bg-white outline-none focus:outline-none'>
@@ -69,7 +69,7 @@ export default function AddDishModal({ isOpen, onClose, onSubmit, addDishModal }
 								<p className='w-[160px] font-medium'>Tên món ăn:</p>
 								<input
 									type='text'
-									className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
+									className='w-[300px] h-[40px] bg-third border-2 px-3 border-primary rounded-lg focus:outline-none'
 									value={addDishModal.name}
 									onChange={addDishModal.handleChangeName}
 								/>
@@ -78,7 +78,7 @@ export default function AddDishModal({ isOpen, onClose, onSubmit, addDishModal }
 								<p className='w-[160px] font-medium'>Phân loại món ăn:</p>
 								<input
 									type='text'
-									className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
+									className='w-[300px] h-[40px] bg-third border-2 px-3 border-primary rounded-lg focus:outline-none'
 									value={addDishModal.kind}
 									onChange={addDishModal.handleChangeKind}
 								/>
@@ -87,7 +87,7 @@ export default function AddDishModal({ isOpen, onClose, onSubmit, addDishModal }
 								<p className='w-[160px] font-medium'>Giá:</p>
 								<input
 									type='text'
-									className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
+									className='w-[300px] h-[40px] bg-third border-2 px-3 border-primary rounded-lg focus:outline-none'
 									value={addDishModal.price}
 									onChange={addDishModal.handleChangePrice}
 								/>
@@ -119,7 +119,7 @@ export default function AddDishModal({ isOpen, onClose, onSubmit, addDishModal }
 									id=''
 									cols=''
 									rows=''
-									className='w-[300px] h-[80px] border-2 px-3 border-primary rounded-lg focus:outline-none'
+									className='w-[300px] bg-third h-[80px] border-2 px-3 border-primary rounded-lg focus:outline-none'
 									value={addDishModal.description}
 									onChange={
 										addDishModal.handleChangeDescription

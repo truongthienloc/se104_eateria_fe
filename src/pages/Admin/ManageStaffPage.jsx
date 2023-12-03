@@ -36,7 +36,7 @@ export const ManageStaffPage = () => {
 		editStaffModal.setAll(
 			staff.staffCode,
 			staff.employeeName,
-			staff.employeePossition,
+			staff.employeePosition,
 			staff.startWorkingDay,
 			staff.salary,
 			staff.workShift,
@@ -92,7 +92,7 @@ export const ManageStaffPage = () => {
 	}
 
 	return (
-		<div className='pt-9 w-[1200px] pl-10 h-full bg-[#f8f8f8]'>
+		<div className='pt-9 w-[1200px] pl-10 text-second h-full bg-[#f8f8f8]'>
 			<div className='mb-8'>
 				<div className='flex justify-between'>
 					<p className='text-primary text-2xl font-normal'>
@@ -107,7 +107,7 @@ export const ManageStaffPage = () => {
 						<p>Tên nhân viên</p>
 						<input
 							type='text'
-							className='  placeholder:opacity-90
+							className='  placeholder:opacity-90 bg-third
 						 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 							placeholder='Nhập tên nhân viên'
 						/>
@@ -117,7 +117,7 @@ export const ManageStaffPage = () => {
 						<input
 							type='text'
 							placeholder='Nhập mã nhân viên'
-							className=' placeholder:opacity-90
+							className=' placeholder:opacity-90 bg-third
 						 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 						/>
 					</div>
@@ -126,7 +126,7 @@ export const ManageStaffPage = () => {
 						<input
 							type='text'
 							placeholder='Nhập chức vụ'
-							className=' placeholder:opacity-90
+							className=' placeholder:opacity-90 bg-third
 						 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 						/>
 					</div>
@@ -210,14 +210,14 @@ export const ManageStaffPage = () => {
 					/>
 					{showModalEdit ? (
 						<div>
-							<div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
+							<div className='justify-center text-second items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
 								<div className='relative my-6'>
 									{/*content*/}
 									<div className='border-0 rounded-lg relative flex flex-col w-full bg-white outline-none focus:outline-none'>
 										{/*header*/}
 										<div className='flex  justify-center p-5 border-b border-solid'>
 											<h3 className='text-2xl font-medium text-primary '>
-												Thêm nhân viên
+												Sửa nhân viên
 											</h3>
 										</div>
 										{/*body*/}
@@ -339,7 +339,7 @@ export const ManageStaffPage = () => {
 					) : null}
 					{showModalRemove ? (
 						<div>
-							<div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
+							<div className='justify-center text-second items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
 								<div className='relative '>
 									{/*content*/}
 									<div className='border-[3px] border-primary bg-[#fff8ee] rounded-xl relative flex flex-col w-full outline-none focus:outline-none'>

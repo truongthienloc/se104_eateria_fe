@@ -64,7 +64,7 @@ export function SalesInfoPage() {
 	}
 
 	return (
-		<div className='pt-9 w-[1200px] pl-10 h-full bg-[#f8f8f8]'>
+		<div className='pt-9 w-[1200px] pl-10 h-full bg-[#f8f8f8] text-second'>
 			<div className=''>
 				<div className='flex justify-between'>
 					<p className='text-primary text-2xl font-normal'>
@@ -79,7 +79,7 @@ export function SalesInfoPage() {
 						<p>Khách hàng</p>
 						<input
 							type='text'
-							className='  placeholder:opacity-90
+							className='  placeholder:opacity-90 bg-third
 						 placeholder:text-second w-[264px] h-[57px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 							placeholder='Nhập tên khách hàng'
 							value={username}
@@ -91,7 +91,7 @@ export function SalesInfoPage() {
 						<input
 							type='text'
 							placeholder='Nhập mã hóa đơn'
-							className=' placeholder:opacity-90
+							className=' placeholder:opacity-90 bg-third
 						 placeholder:text-second w-[264px] h-[57px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 						 	value={billId}
 							onChange={handleChangeBillId}
@@ -135,7 +135,7 @@ export function SalesInfoPage() {
 				</p>
 			</div>
 
-			<div className='rounded-3xl border-third border-8 px-3 bg-third mb-16'>
+			<div className='rounded-3xl border-third border-8 px-3 bg-third mb-16 '>
 				<div className='grid '>
 					<table className='text-lg bg-third '>
 						<thead className='text-primary '>
