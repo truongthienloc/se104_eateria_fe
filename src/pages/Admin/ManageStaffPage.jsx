@@ -151,7 +151,7 @@ export const ManageStaffPage = () => {
 					<table className='text-lg bg-third '>
 						<thead className='text-primary '>
 							<th className='text-left border-b border-gray-200'></th>
-							<th className='py-4 pl-4 text-left border-b border-gray-200'>
+							<th className='py-4 pl-4 text-center border-b border-gray-200 whitespace-nowrap'>
 								Mã nhân viên
 							</th>
 							<th className='py-4 px-4 text-left border-b border-gray-200'>
@@ -223,7 +223,7 @@ export const ManageStaffPage = () => {
 										{/*header*/}
 										<div className='flex  justify-center p-5 border-b border-solid'>
 											<h3 className='text-2xl font-medium text-primary '>
-												Thêm nhân viên
+												Sửa nhân viên
 											</h3>
 										</div>
 										{/*body*/}
@@ -273,6 +273,7 @@ export const ManageStaffPage = () => {
 													Ngày vào làm:
 												</p>
 												<DatePicker
+													className='flex-1'
 													format='DD/MM/YYYY'
 													value={editStaffModal.startDate}
 													onChange={editStaffModal.handleChangeStartDate}

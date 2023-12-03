@@ -191,7 +191,7 @@ export const ManagePromotionPage = () => {
 															id=''
 															cols=''
 															rows=''
-															className='w-[300px] h-[150px]  border-2 px-3 border-primary rounded-lg focus:outline-none resize-none'
+															className='w-[300px] h-[150px]  border-2 px-3 p-4 border-primary rounded-lg focus:outline-none resize-none'
 															value={
 																editPromotionModal.description
 															}

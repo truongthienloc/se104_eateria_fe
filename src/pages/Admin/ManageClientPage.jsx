@@ -3,6 +3,7 @@ import ClientDetail from '~/components/ClientDetail_ManageClient/ClientDetail'
 import iconNotification from '~/assets/images/icon_notification.svg'
 import { Link } from 'react-router-dom'
 import { api } from '~/services/axios'
+import { toast } from 'react-toastify'
 
 export const ManageClientPage = () => {
 	const [showModalAdd, setShowModalAdd] = React.useState(false)
@@ -66,6 +67,13 @@ export const ManageClientPage = () => {
 							className=' placeholder:opacity-90
 					 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 						/>
+					</div>
+					<div className='flex items-end'>
+						<button
+							className='px-4 py-3 h-min bg-primary text-white rounded-xl transition-opacity hover:opacity-80'
+							onClick={() => toast.info('Chức năng chưa được hỗ trợ')}>
+							LỌC
+						</button>
 					</div>
 				</div>
 			</div>
