@@ -66,7 +66,7 @@ function RootRoute() {
 					</Route>
 					<Route path='/about' element={<AboutPage />} />
 					<Route path='/product' element={<ProductPage />} />
-					<Route path='/product-detail' element={<ProductDetail />} />
+					<Route path='/product-detail/:id' element={<ProductDetail />} />
 					<Route index element={<Navigate to={'/home'} replace />} />
 				</Route>
 			</Routes>
