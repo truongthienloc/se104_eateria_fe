@@ -12,7 +12,7 @@ function useEditStaffModal() {
 	const handleChangeId = (e) => setId(e.target.value)
 	const handleChangeName = (e) => setName(e.target.value)
 	const handleChangePosition = (e) => setPosition(e.target.value)
-	const handleChangeStartDate = (e) => setStartDate(e.target.value)
+	const handleChangeStartDate = (date) => setStartDate(date)
 	const handleChangeSalary = (e) => setSalary(e.target.value)
 	const handleChangeShift = (e) => setShift(e.target.value)
 	const handleChangePhoneNumber = (e) => setPhoneNumber(e.target.value)

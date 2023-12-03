@@ -1,4 +1,6 @@
 import EditNoteIcon from '@mui/icons-material/EditNote'
+import dayjs from 'dayjs'
+
 function PromotionDetail({
 	id,
 	description,
@@ -20,10 +22,10 @@ function PromotionDetail({
 				<center>{percent}</center>
 			</td>
 			<td className='py-4 px-2 border-b border-gray-200 '>
-				<center>{startDay}</center>
+				<center>{dayjs(startDay).format('DD/MM/YYYY')}</center>
 			</td>
 			<td className='py-4 px-2 border-b border-gray-200 text-center'>
-				<p className=' text-primary'>{endDay}</p>
+				<p className=''>{dayjs(endDay).format('DD/MM/YYYY')}</p>
 			</td>
 			<td className='py-4 px-2 border-b border-gray-200'>
 				<EditNoteIcon

@@ -8,6 +8,8 @@ import { AddStaffModal } from '~/components/Modal/AddStaffModal'
 import useStaffInfo from '~/hooks/useStaffInfo'
 import iconNotification from '~/assets/images/icon_notification.svg'
 import { Link } from 'react-router-dom'
+import dayjs from 'dayjs'
+import { DatePicker } from '@mui/x-date-pickers'
 
 export const ManageStaffPage = () => {
 	const [showModalAdd, setShowModalAdd] = useState(false)
@@ -36,8 +38,8 @@ export const ManageStaffPage = () => {
 		editStaffModal.setAll(
 			staff.staffCode,
 			staff.employeeName,
-			staff.employeePossition,
-			staff.startWorkingDay,
+			staff.employeePosition,
+			dayjs(staff.startWorkingDay),
 			staff.salary,
 			staff.workShift,
 			staff.phoneNumber
@@ -149,7 +151,7 @@ export const ManageStaffPage = () => {
 					<table className='text-lg bg-third '>
 						<thead className='text-primary '>
 							<th className='text-left border-b border-gray-200'></th>
-							<th className='py-4 pl-4 text-left border-b border-gray-200'>
+							<th className='py-4 pl-4 text-center border-b border-gray-200 whitespace-nowrap'>
 								Mã nhân viên
 							</th>
 							<th className='py-4 px-4 text-left border-b border-gray-200'>
@@ -221,7 +223,7 @@ export const ManageStaffPage = () => {
 										{/*header*/}
 										<div className='flex  justify-center p-5 border-b border-solid'>
 											<h3 className='text-2xl font-medium text-primary '>
-												Thêm nhân viên
+												Sửa nhân viên
 											</h3>
 										</div>
 										{/*body*/}
@@ -270,11 +272,11 @@ export const ManageStaffPage = () => {
 												<p className='w-[160px] font-medium'>
 													Ngày vào làm:
 												</p>
-												<input
-													type='text'
-													className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
+												<DatePicker
+													className='flex-1'
+													format='DD/MM/YYYY'
 													value={editStaffModal.startDate}
-													onChange={editStaffModal.startDate}
+													onChange={editStaffModal.handleChangeStartDate}
 												/>
 											</div>
 											<div className='flex gap-8 items-center text-lg '>
