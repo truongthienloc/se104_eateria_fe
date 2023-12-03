@@ -42,7 +42,7 @@ function FoodItems({ item }) {
 			<div className='w-[150px] h-[150px] flex rounded-xl overflow-hidden'>
 				<img
 					className='object-fill'
-					src={item.images[0]?.imageLink}
+					src={item.images?.[0]?.imageLink}
 					alt={item.dishName}
 				/>
 			</div>
