@@ -45,7 +45,7 @@ export function AdminLoginPage() {
 
 			localStorage.setItem('access-token', accessToken)
 			setTimeout(() => {
-				navigate('/admin/sales-info');
+				navigate('/admin/sales-info')
 			}, 1000)
 		} catch (error) {
 			console.log(error)
@@ -60,7 +60,7 @@ export function AdminLoginPage() {
 
 	const handlePasswordKeyDown = (e) => {
 		if (e.key !== 'Enter') {
-			return 
+			return
 		}
 
 		e.preventDefault()

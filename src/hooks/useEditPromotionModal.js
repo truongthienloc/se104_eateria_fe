@@ -40,7 +40,8 @@ function useEditPromotionModal() {
 		handleChangeStartDay,
 		endDay,
 		handleChangeEndDay,
-		setAll, validate
+		setAll,
+		validate,
 	}
 }
 

@@ -1,1 +1,1 @@
-export { default as DeleteTableModal } from './DeleteTableModal' 
+export { default as DeleteTableModal } from './DeleteTableModal'

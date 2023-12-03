@@ -36,12 +36,9 @@ export const ReservationPage = () => {
 					value.id !== e.table_id ? value : { ...value, tableStatus: 2 }
 				)
 				setTableData(newTable)
-			}
-			else if (e.message === 'Table is occupied') {
+			} else if (e.message === 'Table is occupied') {
 				toast.error('Bàn không có sẵn')
-			}
-			else if (e.message === 'A table booked') {
-				
+			} else if (e.message === 'A table booked') {
 			}
 		})
 	}, [])

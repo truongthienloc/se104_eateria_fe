@@ -3,8 +3,8 @@ import userReducer from '~/features/user/userSlice'
 import cartReducer from '~/features/cart/cartSlice'
 
 export const store = configureStore({
-    reducer: {
-        user: userReducer,
-        cart: cartReducer,
-    },
+	reducer: {
+		user: userReducer,
+		cart: cartReducer,
+	},
 })

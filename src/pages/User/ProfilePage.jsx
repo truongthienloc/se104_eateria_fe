@@ -33,7 +33,9 @@ export const ProfilePage = () => {
 			headers: { 'content-type': 'multipart/form-data' },
 		})
 		if (res.data.status === 200) {
-			dispatch(initUserValue({username: data.username, phoneNumber: data.phoneNumber}))
+			dispatch(
+				initUserValue({ username: data.username, phoneNumber: data.phoneNumber })
+			)
 			toast.success('Cập nhật thông tin thành công')
 		}
 	}

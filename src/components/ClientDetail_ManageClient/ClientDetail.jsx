@@ -1,4 +1,4 @@
-function ClientDetail({id, name, point, timeEat, phoneNumber}) {
+function ClientDetail({ id, name, point, timeEat, phoneNumber }) {
 	return (
 		<tr>
 			<td className='py-4 px-8 border-b border-gray-200 text-lg text-primary'>

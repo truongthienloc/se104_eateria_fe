@@ -42,7 +42,7 @@ export const User_Sidebar = () => {
 		<div className='flex flex-col items-center gap-8 bg-third shadow-lg w-[340px] h-[800px] ml-[40px] rounded-lg my-8 border-slate-900 border flex-shrink-0'>
 			<div className='w-full flex flex-col justify-center items-center'>
 				<div className='w-[120px] rounded-[50%] overflow-hidden mt-[30px]'>
-					<img src={user.avatar || defaultProfileImg} alt="" />
+					<img src={user.avatar || defaultProfileImg} alt='' />
 				</div>
 				<p className='text-second mt-3'>{user.username}</p>
 			</div>

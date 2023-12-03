@@ -9,7 +9,6 @@ import { DeleteDishModal } from '~/components/Modal/DeleteDishModal'
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 
-
 export const ManageDishPage = () => {
 	const [showModalAdd, setShowModalAdd] = useState(false)
 	const [showModalEdit, setShowModalEdit] = useState(false)
@@ -21,7 +20,7 @@ export const ManageDishPage = () => {
 	const fetchDish = async () => {
 		try {
 			const res = await api.get('/dish/')
-			const dishes = res.data.data.map(value => ({...value, isCheck: false}))
+			const dishes = res.data.data.map((value) => ({ ...value, isCheck: false }))
 			setDishesData(dishes)
 		} catch (error) {
 			console.log(error)
@@ -49,11 +48,11 @@ export const ManageDishPage = () => {
 	}
 
 	const handleCheck = (e, id) => {
-		const newDishes = dishesData.map(dish => {
-			if (dish.id !== id) return dish 
-			return {...dish, isCheck: !dish.isCheck}
+		const newDishes = dishesData.map((dish) => {
+			if (dish.id !== id) return dish
+			return { ...dish, isCheck: !dish.isCheck }
 		})
-		setDishesData(newDishes) 
+		setDishesData(newDishes)
 	}
 
 	const handleEditDishSubmit = async () => {
@@ -70,10 +69,12 @@ export const ManageDishPage = () => {
 			const excutePromise = new Promise(async (resolve, reject) => {
 				try {
 					if (editDishModal.deletedImages.length > 0) {
-						await Promise.all(editDishModal.deletedImages.map(async (image) => {
-							console.log(image);
-							await api.delete(`/dish/images/${image.id}`)
-						}))
+						await Promise.all(
+							editDishModal.deletedImages.map(async (image) => {
+								console.log(image)
+								await api.delete(`/dish/images/${image.id}`)
+							})
+						)
 					}
 
 					const res = await api.put(`/dish/${editDishModal.id}`, formData, {
@@ -88,15 +89,11 @@ export const ManageDishPage = () => {
 				}
 			})
 
-
-			const res = await toast.promise(
-				excutePromise,
-				{
-					pending: 'Đang sửa thông tin món ăn',
-					success: 'Sửa thông tin món ăn thành công',
-					error: 'Sửa thông tin món ăn thất bại',
-				}
-			)
+			const res = await toast.promise(excutePromise, {
+				pending: 'Đang sửa thông tin món ăn',
+				success: 'Sửa thông tin món ăn thành công',
+				error: 'Sửa thông tin món ăn thất bại',
+			})
 
 			await fetchDish()
 			setShowModalEdit(false)
@@ -127,19 +124,22 @@ export const ManageDishPage = () => {
 			formData.append('dishDescription', addDishModal.description)
 			// console.log(addDishModal.imageFiles);
 			for (const image of addDishModal.imageFiles) {
-				console.log(image);
+				console.log(image)
 				formData.append('images', image)
 			}
 
-			const res = await toast.promise(api.post('/dish/', formData, {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			}), {
-				pending: 'Đang thêm món ăn',
-				success: 'Thêm món ăn thành công',
-				error: 'Thêm món ăn thất bại',
-			})
+			const res = await toast.promise(
+				api.post('/dish/', formData, {
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					},
+				}),
+				{
+					pending: 'Đang thêm món ăn',
+					success: 'Thêm món ăn thành công',
+					error: 'Thêm món ăn thất bại',
+				}
+			)
 
 			await fetchDish()
 			setShowModalAdd(false)
@@ -149,50 +149,46 @@ export const ManageDishPage = () => {
 	}
 
 	const handleDeleteButtonClick = () => {
-		const deletedDishes = dishesData.filter(dish => dish.isCheck === true);
+		const deletedDishes = dishesData.filter((dish) => dish.isCheck === true)
 		if (deletedDishes.length === 0) {
 			toast.error('Chưa chọn bất cứ món ăn nào để xóa')
-			return 
+			return
 		}
-		setShowModalRemove(true);
+		setShowModalRemove(true)
 	}
 
 	const handleDeleteDishSubmit = async () => {
-		const deletedDishes = dishesData.filter(dish => dish.isCheck === true);
+		const deletedDishes = dishesData.filter((dish) => dish.isCheck === true)
 		if (deletedDishes.length === 0) {
 			toast.error('Chưa chọn bất cứ món ăn nào để xóa')
-			return 
+			return
 		}
-		
+
 		try {
-			const promises = deletedDishes.map(async(dish) => {
+			const promises = deletedDishes.map(async (dish) => {
 				await api.delete(`/dish/${dish.id}`)
 			})
-	
-			await toast.promise(
-				Promise.all(promises),
-				{
-					pending: 'Đang xóa món ăn',
-					success: 'Xóa thành công',
-					error: 'Xóa thất bại'
-				}
-			)
+
+			await toast.promise(Promise.all(promises), {
+				pending: 'Đang xóa món ăn',
+				success: 'Xóa thành công',
+				error: 'Xóa thất bại',
+			})
 
 			await fetchDish()
 			setShowModalRemove(false)
 		} catch (error) {
-			console.log(error);
+			console.log(error)
 			setShowModalRemove(false)
 		}
-		
 	}
 
 	return (
 		<div className='pt-9 w-[1200px]	pl-10 h-full bg-[#f8f8f8]'>
 			<div className='mb-12 flex justify-between'>
 				<p className='text-primary text-2xl font-normal'>Quản lý món ăn</p>
-				<Link to="/admin/notification">
-						<img src={iconNotification} alt="" className='hover:cursor-pointer' />
+				<Link to='/admin/notification'>
+					<img src={iconNotification} alt='' className='hover:cursor-pointer' />
 				</Link>
 			</div>
 
@@ -233,7 +229,7 @@ export const ManageDishPage = () => {
 									onEditButtonClick={() =>
 										handleEditButtonClick(dish.id)
 									}
-									onCheck={e => handleCheck(e, dish.id)}
+									onCheck={(e) => handleCheck(e, dish.id)}
 								/>
 							))}
 						</tbody>

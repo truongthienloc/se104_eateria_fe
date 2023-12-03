@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { OutlinedInput, styled } from '@mui/material'
 import { api } from '~/services/axios'
 import { toast } from 'react-toastify'
@@ -24,10 +24,10 @@ const FormInput = styled(OutlinedInput)`
 `
 
 export default function ForgotPasswordPage() {
-	const navigate = useNavigate();
-	const [email, setEmail] = useState('');
+	const navigate = useNavigate()
+	const [email, setEmail] = useState('')
 
-	const handleChangeEmail = (e) => setEmail(e.target.value);
+	const handleChangeEmail = (e) => setEmail(e.target.value)
 
 	const handleSubmit = async () => {
 		if (email === '') {
@@ -38,25 +38,24 @@ export default function ForgotPasswordPage() {
 		try {
 			const res = await toast.promise(
 				api.post('/user/forgot-password', {
-					email: email
+					email: email,
 				}),
 				{
 					pending: 'Đang gửi yêu cầu',
 					success: 'Gửi thành công, vui lòng check mail',
-					error: 'Gửi thất bại'
+					error: 'Gửi thất bại',
 				}
 			)
 
 			setTimeout(() => {
 				navigate('/login')
 			}, 1000)
-			
 		} catch (error) {
-			console.log(error);
+			console.log(error)
 			if (error.response) {
 				const status = error.response.status
 				if (status === 404) {
-					toast.error('Email không tồn tại');
+					toast.error('Email không tồn tại')
 				}
 			}
 		}
@@ -64,7 +63,6 @@ export default function ForgotPasswordPage() {
 
 	return (
 		<div className='flex flex-row font justify-evenly py-16'>
-
 			<div className='flex flex-col gap-4 p-14 bg-[#FFEFD5] border-primary border-[2px] items-center rounded-lg'>
 				<h2 className='font-bold text-2xl'>QUÊN MẬT KHẨU</h2>
 				<div className='flex flex-col gap-1 items-center'>
@@ -77,12 +75,12 @@ export default function ForgotPasswordPage() {
 						onChange={handleChangeEmail}
 					/>
 				</div>
-				
-                <p>Mật khẩu mới sẽ được gửi đến email của bạn!</p>
 
-				<button className='px-6 py-3 bg-primary text-white text-lg'
-					onClick={handleSubmit}
-				>
+				<p>Mật khẩu mới sẽ được gửi đến email của bạn!</p>
+
+				<button
+					className='px-6 py-3 bg-primary text-white text-lg'
+					onClick={handleSubmit}>
 					Gửi mật khẩu
 				</button>
 			</div>

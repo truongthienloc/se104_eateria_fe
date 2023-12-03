@@ -3,7 +3,7 @@ import CloseIcon from '@mui/icons-material/Close'
 
 export default function EditDishModal({ isOpen, editDishModal, onClose, onSubmit }) {
 	const [images, setImages] = useState([])
-	console.log(editDishModal);
+	console.log(editDishModal)
 	const handleAddImageClick = () => {
 		const input = document.createElement('input')
 		input.type = 'file'

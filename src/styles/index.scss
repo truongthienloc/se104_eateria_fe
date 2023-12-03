@@ -100,23 +100,22 @@ button {
 
 #admin-sidebar.active {
 	color: var(--primary-color);
-
 }
 .scrollable-div {
 	overflow-y: scroll; /* Enable scrolling */
 	scrollbar-width: thin; /* Set the width of the scrollbar */
 	scrollbar-color: transparent transparent; /* Set the color of the thumb and track */
-  }
-  
-  /* Hide the scrollbar */
-  .scrollable-div::-webkit-scrollbar {
+}
+
+/* Hide the scrollbar */
+.scrollable-div::-webkit-scrollbar {
 	width: 0.5em; /* Set the width of the scrollbar */
-  }
-  
-  .scrollable-div::-webkit-scrollbar-thumb {
+}
+
+.scrollable-div::-webkit-scrollbar-thumb {
 	background-color: transparent; /* Set the color of the thumb */
-  }
-  
-  .scrollable-div::-webkit-scrollbar-track {
+}
+
+.scrollable-div::-webkit-scrollbar-track {
 	background-color: transparent; /* Set the color of the track */
-  }
+}

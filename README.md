@@ -27,6 +27,9 @@ npm install
 
 ### Run code
 
+Make *.env* file, copy all in *.env.example* file to *.env*.
+Then, fill values to variables in *.env* file.
+
 Use this command to run code in dev environment:
 
 ```shell

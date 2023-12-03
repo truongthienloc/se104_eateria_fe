@@ -99,7 +99,9 @@ function Homepage() {
 						{menuList.length > 0 &&
 							menuList.map((menu, index) => {
 								return (
-									<div key={menu} className='flex items-center hover:opacity-70'>
+									<div
+										key={menu}
+										className='flex items-center hover:opacity-70'>
 										<button
 											id='mainMenu'
 											className={
@@ -110,23 +112,20 @@ function Homepage() {
 											onClick={() => HandleOnClick(menu)}>
 											{menu}
 										</button>
-										{ index !== menuList.length-1 && <div className='border border-second h-[42px] mx-4'></div> }
+										{index !== menuList.length - 1 && (
+											<div className='border border-second h-[42px] mx-4'></div>
+										)}
 									</div>
-									
 								)
 							})}
 					</div>
 
 					<div className='w-[1400px] mt-14'>
 						<div className='flex flex-row justify-center gap-7 flex-wrap'>
-							{foods.length > 0 && foods.map((item) => {
-								return(
-									<FoodItems 
-									key={item.id}
-									item={item}
-									/>
-								)
-							})}
+							{foods.length > 0 &&
+								foods.map((item) => {
+									return <FoodItems key={item.id} item={item} />
+								})}
 						</div>
 					</div>
 

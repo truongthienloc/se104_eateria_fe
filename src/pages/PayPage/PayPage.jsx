@@ -17,12 +17,14 @@ import formattedMoney from '~/utils/formatMoney'
 import { deleteAll } from '~/features/cart/cartSlice'
 
 export const PayPage = () => {
-	const user = useSelector((state) =>state.user);
+	const user = useSelector((state) => state.user)
 	const cart = useSelector((state) => state.cart)
 	if (!user.id) {
-		toast.error('Bạn cần đăng nhập để thực hiện chức năng này!!!',{toastId: 'needLoginID'})
-		return (<Navigate to={'/login'} replace />)
-	} 
+		toast.error('Bạn cần đăng nhập để thực hiện chức năng này!!!', {
+			toastId: 'needLoginID',
+		})
+		return <Navigate to={'/login'} replace />
+	}
 	let Total = 0
 	let Discount = 0
 	const navigate = useNavigate()
@@ -67,7 +69,13 @@ export const PayPage = () => {
 		return { dishID, imgLink, dishName, price, quantity, total }
 	}
 	const rows = cart.cartList.map((item) => {
-		return createData(item.id, item?.images?.[0]?.imageLink, item.dishName, item.dishPrice, item.quantity)
+		return createData(
+			item.id,
+			item?.images?.[0]?.imageLink,
+			item.dishName,
+			item.dishPrice,
+			item.quantity
+		)
 	})
 	return (
 		<div className='flex flex-col pb-10 pt-1 items-center'>
@@ -79,7 +87,7 @@ export const PayPage = () => {
 				<p className='text-second font-bold text-2xl mr-auto'>Giỏ hàng của bạn</p>
 			</div>
 			<div>
-			<TableContainer
+				<TableContainer
 					component={Paper}
 					className='flex justify-center shadow-none'>
 					<Table
@@ -110,10 +118,16 @@ export const PayPage = () => {
 											/>
 										</div>
 									</StyledTableCell>
-									<StyledTableCell className='uppercase'>{row.dishName}</StyledTableCell>
-									<StyledTableCell>{formattedMoney(row.price)}</StyledTableCell>
+									<StyledTableCell className='uppercase'>
+										{row.dishName}
+									</StyledTableCell>
+									<StyledTableCell>
+										{formattedMoney(row.price)}
+									</StyledTableCell>
 									<StyledTableCell>{row.quantity}</StyledTableCell>
-									<StyledTableCell>{formattedMoney(row.total)}</StyledTableCell>
+									<StyledTableCell>
+										{formattedMoney(row.total)}
+									</StyledTableCell>
 								</StyledTableRow>
 							))}
 						</TableBody>
@@ -145,7 +159,7 @@ export const PayPage = () => {
 						<div className='bg-primary w-full h-1 '></div>
 						<div className='flex flex-row justify-between'>
 							<p>Tổng tiền</p>
-							<p>{formattedMoney(Total-Discount)}</p>
+							<p>{formattedMoney(Total - Discount)}</p>
 						</div>
 						<button
 							className='bg-primary text-third'
