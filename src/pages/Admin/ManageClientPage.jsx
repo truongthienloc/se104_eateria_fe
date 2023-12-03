@@ -1,12 +1,30 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import ClientDetail from '~/components/ClientDetail_ManageClient/ClientDetail'
 import iconNotification from '~/assets/images/icon_notification.svg'
 import { Link } from 'react-router-dom'
+import { api } from '~/services/axios'
+import { toast } from 'react-toastify'
 
 export const ManageClientPage = () => {
 	const [showModalAdd, setShowModalAdd] = React.useState(false)
 	const [showModalEdit, setShowModalEdit] = React.useState(false)
 	const [showModalRemove, setShowModalRemove] = React.useState(false)
+	const [clientData, setClientData] = useState([])
+
+	const fetchClient = async () => {
+		try {
+			const res = await api.get('/user/')
+			const data = res.data.data.filter((client) => !client.isAdmin)
+			setClientData(data)
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	useEffect(() => {
+		fetchClient()
+	}, [])
+
 	return (
 		<div className='pt-9 w-[1200px] pl-10 h-full bg-[#f8f8f8]'>
 			<div className='mb-8'>
@@ -50,6 +68,13 @@ export const ManageClientPage = () => {
 					 placeholder:text-second w-[264px] h-[48px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 						/>
 					</div>
+					<div className='flex items-end'>
+						<button
+							className='px-4 py-3 h-min bg-primary text-white rounded-xl transition-opacity hover:opacity-80'
+							onClick={() => toast.info('Chức năng chưa được hỗ trợ')}>
+							LỌC
+						</button>
+					</div>
 				</div>
 			</div>
 
@@ -74,13 +99,16 @@ export const ManageClientPage = () => {
 							</th>
 						</thead>
 						<tbody>
-							<ClientDetail
-								id={'485001'}
-								name={'Trần Đình Khánh'}
-								point={'100'}
-								timeEat={'01'}
-								phoneNumber={'0945236468'}
-							/>
+							{clientData.length > 0
+								? clientData.map((client) => (
+										<ClientDetail
+											key={client.id}
+											id={client.id}
+											name={client.username}
+											phoneNumber={client.phoneNumber}
+										/>
+								  ))
+								: null}
 						</tbody>
 					</table>
 				</div>

@@ -1,4 +1,5 @@
 import EditNoteIcon from '@mui/icons-material/EditNote'
+import dayjs from 'dayjs'
 
 function SaleDetail({ billId, time, name, price, status, onStatusClick }) {
 	return (
@@ -9,7 +10,10 @@ function SaleDetail({ billId, time, name, price, status, onStatusClick }) {
 			<td className='py-4 border-b border-gray-200 text-lg text-primary text-center'>
 				{billId}
 			</td>
-			<td className='py-4 border-b border-gray-200 text-center'>{time}</td>
+			<td className='py-4 border-b border-gray-200 text-center'>
+				<p>{dayjs(time).format('DD/MM/YYYY')}</p>
+				<p>({dayjs(time).format('HH:mm')})</p>
+			</td>
 			<td className='py-4 border-b border-gray-200 text-center'>{name}</td>
 			<td className='py-4 border-b border-gray-200 text-right'>
 				<center>{price}</center>

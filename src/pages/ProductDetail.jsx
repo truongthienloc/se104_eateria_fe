@@ -60,7 +60,6 @@ export const ProductDetail = () => {
 		}
 		fetchDishData()
 	}, [])
-
 	return (
 		<div className='flex flex-col pb-10 pt-1 items-center'>
 			<div className='w-full h-[160px] mt-1 mb-5 bg-headerBanner bg-no-repeat bg-cover flex flex-col justify-center items-center gap-5'>
