@@ -8,6 +8,8 @@ import { AddStaffModal } from '~/components/Modal/AddStaffModal'
 import useStaffInfo from '~/hooks/useStaffInfo'
 import iconNotification from '~/assets/images/icon_notification.svg'
 import { Link } from 'react-router-dom'
+import dayjs from 'dayjs'
+import { DatePicker } from '@mui/x-date-pickers'
 
 export const ManageStaffPage = () => {
 	const [showModalAdd, setShowModalAdd] = useState(false)
@@ -36,8 +38,8 @@ export const ManageStaffPage = () => {
 		editStaffModal.setAll(
 			staff.staffCode,
 			staff.employeeName,
-			staff.employeePossition,
-			staff.startWorkingDay,
+			staff.employeePosition,
+			dayjs(staff.startWorkingDay),
 			staff.salary,
 			staff.workShift,
 			staff.phoneNumber
@@ -270,11 +272,10 @@ export const ManageStaffPage = () => {
 												<p className='w-[160px] font-medium'>
 													Ngày vào làm:
 												</p>
-												<input
-													type='text'
-													className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
+												<DatePicker
+													format='DD/MM/YYYY'
 													value={editStaffModal.startDate}
-													onChange={editStaffModal.startDate}
+													onChange={editStaffModal.handleChangeStartDate}
 												/>
 											</div>
 											<div className='flex gap-8 items-center text-lg '>

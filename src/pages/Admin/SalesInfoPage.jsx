@@ -130,7 +130,7 @@ export function SalesInfoPage() {
 					</div>
 					<div className='flex items-end'>
 						<button
-							className='px-4 py-1 h-min bg-primary text-white rounded-xl'
+							className='px-4 py-3 h-min bg-primary text-white rounded-xl'
 							onClick={handleFilterButtonClick}>
 							LỌC
 						</button>
