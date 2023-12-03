@@ -276,7 +276,9 @@ export const ManageStaffPage = () => {
 													className='flex-1'
 													format='DD/MM/YYYY'
 													value={editStaffModal.startDate}
-													onChange={editStaffModal.handleChangeStartDate}
+													onChange={
+														editStaffModal.handleChangeStartDate
+													}
 												/>
 											</div>
 											<div className='flex gap-8 items-center text-lg '>

@@ -99,14 +99,16 @@ export const ManageClientPage = () => {
 							</th>
 						</thead>
 						<tbody>
-							{clientData.length > 0 ? clientData.map(client =>
-								<ClientDetail
-									key={client.id}
-									id={client.id}
-									name={client.username}
-									phoneNumber={client.phoneNumber}
-								/>
-							) : null}
+							{clientData.length > 0
+								? clientData.map((client) => (
+										<ClientDetail
+											key={client.id}
+											id={client.id}
+											name={client.username}
+											phoneNumber={client.phoneNumber}
+										/>
+								  ))
+								: null}
 						</tbody>
 					</table>
 				</div>

@@ -7,7 +7,7 @@ import formattedMoney from '~/utils/formatMoney'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css';
+import 'swiper/css'
 import { useDispatch } from 'react-redux'
 import { increasement } from '~/features/cart/cartSlice'
 import { toast } from 'react-toastify'
@@ -18,11 +18,11 @@ export const ProductDetail = () => {
 	const [rating, setRating] = useState(null)
 	const [hover, setHover] = useState(null)
 	const [dish, setDish] = useState()
-	const [dishImage, setDishImage] = useState([]);
+	const [dishImage, setDishImage] = useState([])
 	let { id } = useParams()
 
 	const onAdd = () => {
-		console.log('here');
+		console.log('here')
 		dispatch(increasement(dish))
 		toast.success(`Thêm ${dish.dishName.toUpperCase()} vào giỏ hàng`)
 		const pushItemToCart = async () => {
@@ -46,7 +46,7 @@ export const ProductDetail = () => {
 		}
 		fetchData()
 	}, [])
-	console.log(dishImage);
+	console.log(dishImage)
 	return (
 		<div className='flex flex-col pb-10 pt-1 items-center'>
 			<div className='w-full h-[160px] mt-1 mb-5 bg-headerBanner bg-no-repeat bg-cover flex flex-col justify-center items-center gap-5'>
@@ -59,16 +59,18 @@ export const ProductDetail = () => {
 				<div className='flex flex-col w-[600px]'>
 					<div className='rounded-xl overflow-hidden'>
 						<Swiper slidesPerView={1}>
-							{dishImage.length > 0 && dishImage.map((item) => {
-								return(
-								<SwiperSlide key={item.id}>
-									<img 
-									className="w-full h-full"
-									src={item?.imageLink} 
-									alt={dish?.dishName} />
-								</SwiperSlide>
-								)
-							})}
+							{dishImage.length > 0 &&
+								dishImage.map((item) => {
+									return (
+										<SwiperSlide key={item.id}>
+											<img
+												className='w-full h-full'
+												src={item?.imageLink}
+												alt={dish?.dishName}
+											/>
+										</SwiperSlide>
+									)
+								})}
 						</Swiper>
 					</div>
 				</div>
@@ -85,7 +87,7 @@ export const ProductDetail = () => {
 						<p className='my-6 text-second text-xl font-extrabold pt-3'>
 							{formattedMoney(dish?.dishPrice)}
 						</p>
-						<button 
+						<button
 							onClick={onAdd}
 							className='flex items-center justify-center font-normal text-2xl text-third bg-primary w-[150px] h-[50px] hover:opacity-75'>
 							Thêm

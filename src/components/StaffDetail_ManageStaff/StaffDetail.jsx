@@ -25,9 +25,7 @@ function StaffDetail({
 				<center>{position}</center>
 			</td>
 			<td className='py-4 px-8 border-b border-gray-200'>
-				<center>
-					{dayjs(startDate).format('DD/MM/YYYY')}
-				</center>
+				<center>{dayjs(startDate).format('DD/MM/YYYY')}</center>
 			</td>
 			<td className='py-4 px-8 border-b border-gray-200'>
 				<center>{salary}</center>
