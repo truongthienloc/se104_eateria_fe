@@ -12,13 +12,13 @@ export function SalesInfoPage() {
 	const [saleData, setSaleData] = useState([])
 	const [username, setUsername] = useState('')
 	const [billId, setBillId] = useState('')
-	const [startDate, setStartDate] = useState(dayjs(new Date()))
-	const [endDate, setEndDate] = useState(dayjs(new Date()))
+	const [startDate, setStartDate] = useState(null)
+	const [endDate, setEndDate] = useState(null)
 
 	const handleChangeUsername = (e) => setUsername(e.target.value)
 	const handleChangeBillId = (e) => setBillId(e.target.value)
-	const handleChangeStartDate = (e) => setStartDate(e.target.value)
-	const handleChangeEndDate = (e) => setEndDate(e.target.value)
+	const handleChangeStartDate = (date) => setStartDate(date)
+	const handleChangeEndDate = (date) => setEndDate(date)
 
 	const fetchSale = async () => {
 		try {
@@ -38,14 +38,16 @@ export function SalesInfoPage() {
 	}, [saleData])
 
 	const handleFilterButtonClick = async () => {
+		
 		try {
+			
 			const res = await toast.promise(
 				api.get('/bill/all/filter', {
 					params: {
 						username: username !== '' ? username : undefined,
 						id: billId !== '' ? billId : undefined,
-						fromDay: startDate.toISOString(),
-						toDay: endDate.toISOString(),
+						fromDay: startDate || undefined,
+						toDay: endDate || undefined,
 					},
 				}),
 				{
@@ -130,7 +132,7 @@ export function SalesInfoPage() {
 					</div>
 					<div className='flex items-end'>
 						<button
-							className='px-4 py-3 h-min bg-primary text-white rounded-xl'
+							className='px-4 py-3 h-min bg-primary text-white rounded-xl transition-opacity hover:opacity-80'
 							onClick={handleFilterButtonClick}>
 							LỌC
 						</button>

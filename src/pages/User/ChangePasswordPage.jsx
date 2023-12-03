@@ -5,18 +5,18 @@ import { api } from '~/services/axios'
 import { toast } from 'react-toastify'
 
 export const ChangePasswordPage = () => {
-	const [isShowCurPassword, setIsShowCurPassword] = useState(false);
-	const [isShowNewPassword, setIsShowNewPassword] = useState(false);
-	const [isShowRePassword, setIsShowRePassword] = useState(false);
-	const [curPassword, setCurPassword] = useState('');
-	const [newPassword, setNewPassword] = useState('');
-	const [rePassword, setRePassword] = useState('');
+	const [isShowCurPassword, setIsShowCurPassword] = useState(false)
+	const [isShowNewPassword, setIsShowNewPassword] = useState(false)
+	const [isShowRePassword, setIsShowRePassword] = useState(false)
+	const [curPassword, setCurPassword] = useState('')
+	const [newPassword, setNewPassword] = useState('')
+	const [rePassword, setRePassword] = useState('')
 
-	const handleChangeCurPassword = e => setCurPassword(e.target.value)
-	const handleChangeNewPassword = e => setNewPassword(e.target.value)
-	const handleChangeRePassword = e => setRePassword(e.target.value)
-	
-	const togglePassword = prev => !prev
+	const handleChangeCurPassword = (e) => setCurPassword(e.target.value)
+	const handleChangeNewPassword = (e) => setNewPassword(e.target.value)
+	const handleChangeRePassword = (e) => setRePassword(e.target.value)
+
+	const togglePassword = (prev) => !prev
 
 	const handleSubmit = async () => {
 		if (!curPassword) {
@@ -35,13 +35,13 @@ export const ChangePasswordPage = () => {
 		try {
 			const res = await toast.promise(
 				api.post('/user/change-password', {
-					password : curPassword,
-					newPassword : newPassword
+					oldPassword: curPassword,
+					newPassword: newPassword,
 				}),
 				{
 					pending: 'Đang thay đổi mật khẩu',
 					success: 'Đổi mật khẩu thành công',
-					error: 'Đổi mật khẩu thất bại'
+					error: 'Đổi mật khẩu thất bại',
 				}
 			)
 
@@ -56,6 +56,15 @@ export const ChangePasswordPage = () => {
 				}
 			}
 		}
+	}
+
+	const handleRePasswordKeyDown = (e) => {
+		if (e.key !== 'Enter') {
+			return 
+		}
+
+		e.preventDefault()
+		handleSubmit()
 	}
 
 	return (
@@ -103,10 +112,10 @@ export const ChangePasswordPage = () => {
 							<input
 								id='new-password'
 								className='bg-third h-full w-full outline-none py-2'
-								type={isShowNewPassword ? 'text' : 'password'} 
+								type={isShowNewPassword ? 'text' : 'password'}
 								value={newPassword}
 								onChange={handleChangeNewPassword}
-								/>
+							/>
 							{isShowNewPassword ? (
 								<div
 									className='cursor-pointer'
@@ -126,17 +135,18 @@ export const ChangePasswordPage = () => {
 					</div>
 
 					<div>
-						<label className='flex mb-2' htmlFor='new-password'>
+						<label className='flex mb-2' htmlFor='re-password'>
 							Xác nhận mật khẩu mới:{' '}
 						</label>
 						<div className='text-second bg-third w-[300px] h-[42px] cursor-text flex flex-row justify-center items-center border-2 border-primary border-solid rounded-md px-4'>
 							<input
-								id='new-password'
+								id='re-password'
 								className='bg-third h-full w-full outline-none py-2'
-								type={isShowRePassword ? 'text' : 'password'} 
+								type={isShowRePassword ? 'text' : 'password'}
 								value={rePassword}
 								onChange={handleChangeRePassword}
-								/>
+								onKeyDown={handleRePasswordKeyDown}
+							/>
 							{isShowRePassword ? (
 								<div
 									className='cursor-pointer'
@@ -155,9 +165,9 @@ export const ChangePasswordPage = () => {
 						</div>
 					</div>
 
-					<button className='w-[150px] h-[50px] rounded-[10px] mt-5 text-third bg-primary outline-none'
-						onClick={handleSubmit}
-					>
+					<button
+						className='w-[150px] h-[50px] rounded-[10px] mt-5 text-third bg-primary outline-none'
+						onClick={handleSubmit}>
 						Đổi mật khẩu
 					</button>
 					<a href='/forgot-password'>Quên mật khẩu ?</a>
