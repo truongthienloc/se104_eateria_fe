@@ -60,6 +60,10 @@ npm run dev
 
 ## Production
 
+Link production: https://4food.vercel.app/
+
+***Chú ý:*** Vì API server đang sử dụng bản miễn phí, nên sẽ có thể mất vài phút để khởi động khi truy cập website.
+
 ### Build code
 
 ### Deploy
