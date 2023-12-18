@@ -17,6 +17,10 @@ export function AdminLoginPage() {
 		setShowPassword(!showPassword)
 	}
 
+	useEffect(() => {
+		localStorage.removeItem('access-token')
+	}, [])
+
 	const handleSubmit = async () => {
 		if (email === '') {
 			toast.error('Vui lòng không để trống email')
@@ -30,9 +34,27 @@ export function AdminLoginPage() {
 
 		try {
 			const res = await toast.promise(
-				api.post('/auth/login', {
-					email: email,
-					password: password,
+				new Promise(async (resolve, reject) => {
+					try {
+						const res = await api.post('/auth/login', {
+							email: email,
+							password: password,
+						})
+
+						const accessToken = res.data.accessToken
+						localStorage.setItem('access-token', accessToken)
+
+						const res_cur = await api.get('user/me/info')
+
+						if (res_cur.data.data.isAdmin) {
+							resolve(res)
+						} else {
+							localStorage.removeItem('access-token')
+							reject({ response: { status: 411 } })
+						}
+					} catch (error) {
+						reject(error)
+					}
 				}),
 				{
 					pending: 'Đang đăng nhập',
@@ -53,6 +75,8 @@ export function AdminLoginPage() {
 				const status = error.response.status
 				if (status === 401) {
 					toast.error('Email hoặc password sai')
+				} else if (status === 411) {
+					toast.error('Tài khoản của bạn không có quyền admin')
 				}
 			}
 		}

@@ -33,18 +33,18 @@ export const ProductDetail = () => {
 		}
 	}
 	useEffect(() => {
-        const fetchData = async (menuId) => {
-            try {
-                const res = await api.get('/dish')
+		const fetchData = async (menuId) => {
+			try {
+				const res = await api.get('/dish')
 				let foods = res.data.data.filter((item) => item.menuId === dish.menuId)
-                setdata(foods)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        if (!dish || !dish.menuId) return;
-        fetchData(dish.menuId)
-    }, [dish?.menuId])
+				setdata(foods)
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		if (!dish || !dish.menuId) return
+		fetchData(dish.menuId)
+	}, [dish?.menuId])
 
 	useEffect(() => {
 		const fetchDishData = async () => {

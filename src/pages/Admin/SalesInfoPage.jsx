@@ -80,7 +80,7 @@ export function SalesInfoPage() {
 						<p>Khách hàng</p>
 						<input
 							type='text'
-							className='  placeholder:opacity-90
+							className='bg-white placeholder:opacity-90
 						 placeholder:text-second w-[264px] h-[57px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 							placeholder='Nhập tên khách hàng'
 							value={username}
@@ -92,7 +92,7 @@ export function SalesInfoPage() {
 						<input
 							type='text'
 							placeholder='Nhập mã hóa đơn'
-							className=' placeholder:opacity-90
+							className='bg-white placeholder:opacity-90
 						 placeholder:text-second w-[264px] h-[57px] border-2 py-[18px] pl-6 pr-[30px] rounded-lg outline-0'
 							value={billId}
 							onChange={handleChangeBillId}
