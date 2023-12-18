@@ -40,7 +40,7 @@ export const ManageClientPage = () => {
 						/>
 					</Link>
 				</div>
-				<div className='mt-9 flex gap-6 text-lg font-normal text-second'>
+				<div className='mt-9 flex gap-6 text-lg font-normal text-second [&_input]:bg-white'>
 					<div className='flex flex-col gap-5'>
 						<p>Mã khách hàng</p>
 						<input
