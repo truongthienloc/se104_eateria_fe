@@ -5,11 +5,22 @@ import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { Navigate } from 'react-router-dom'
 import { api } from '~/services/axios'
-import { useSocket } from '~/services/websocket'
+// import { useSocket } from '~/services/websocket'
+import useSocket from '~/hooks/useSocket'
+import dayjs from 'dayjs'
 
 export const ReservationPage = () => {
 	const [tableData, setTableData] = useState([])
-	const socket = useSocket()
+	const { socket } = useSocket()
+	const [tableId, setTableId] = useState(null)
+	const [date, setDate] = useState(null)
+	const [time, setTime] = useState(null)
+	const [count, setCount] = useState('')
+	const [tableName, setTableName] = useState('')
+	const [isOpen, setIsOpen] = useState(false)
+
+	const handleCountChange = (e) => setCount(e.target.value)
+	const handleClose = () => setIsOpen(false)
 
 	const fetchTable = async () => {
 		try {
@@ -29,19 +40,82 @@ export const ReservationPage = () => {
 
 	useEffect(() => {
 		fetchTable()
-		socket.setSocketListener((e) => {
-			if (e.message === 'Book table successfully') {
+	}, [])
+
+	useEffect(() => {
+		if (socket) {
+			const handleBookFail = () => {
+				toast.error('Bàn không có sẵn')
+			}
+
+			const handleTwiceBook = () => {
+				toast.error('Bạn đã đặt bàn rồi')
+			}
+
+			socket.on('Table is occupied', handleBookFail)
+			socket.on('You have booked a table', handleTwiceBook)
+
+			return () => {
+				socket.off('Table is occupied', handleBookFail)
+				socket.off('You have booked a table', handleTwiceBook)
+			}
+		}
+	}, [socket])
+
+	useEffect(() => {
+		if (socket) {
+			const handleBookSuccess = (data) => {
 				toast.success('Đặt bàn thành công')
 				const newTable = tableData.map((value) =>
-					value.id !== e.table_id ? value : { ...value, tableStatus: 2 }
+					value.id !== data.table_id ? value : { ...value, tableStatus: 2 }
 				)
 				setTableData(newTable)
-			} else if (e.message === 'Table is occupied') {
-				toast.error('Bàn không có sẵn')
-			} else if (e.message === 'A table booked') {
 			}
-		})
-	}, [])
+
+			const handleBroadcastBooked = (data) => {
+				const newTable = tableData.map((value) =>
+					value.id !== data.table_id ? value : { ...value, tableStatus: 2 }
+				)
+				setTableData(newTable)
+			}
+
+			const handleBroadcastCancel = (data) => {
+				const newTable = tableData.map((value) =>
+					value.id !== data.table_id ? value : { ...value, tableStatus: 1 }
+				)
+				setTableData(newTable)
+			}
+
+			socket.on('Book table successfully', handleBookSuccess)
+			socket.on('A table booked', handleBroadcastBooked)
+			socket.on('A table booking was canceled', handleBroadcastCancel)
+
+			return () => {
+				socket.off('Book table successfully', handleBookSuccess)
+				socket.off('A table booked', handleBroadcastBooked)
+				socket.off('A table booking was canceled', handleBroadcastCancel)
+			}
+		}
+	}, [socket, tableData])
+
+	const handleTableClick = (data) => {
+		setTableId(data.id)
+		setDate(null)
+		setTime(null)
+		setCount('')
+		setTableName(data.tablePosition)
+		setIsOpen(true)
+	}
+
+	const handleSubmit = () => {
+		if (socket) {
+			const bookingTime = date + time
+			socket.emit('BOOK_TABLE', {
+				table_id: tableId,
+				booking_time: dayjs(bookingTime).toISOString(),
+			})
+		}
+	}
 
 	const user = useSelector((state) => state.user)
 	if (!user.id) {
@@ -55,11 +129,26 @@ export const ReservationPage = () => {
 			<div className='flex flex-col w-[50%] gap-4 items-center'>
 				{/* <ReservationGroup title={'Tầng 1'} data={tableData.floor1}/>
 				<ReservationGroup title={'Tầng 2'} data={tableData.floor2}/> */}
-				<ReservationGroup title={'Tầng 1'} data={tableData} />
+				<ReservationGroup
+					title={'Tầng 1'}
+					data={tableData}
+					onTableClick={handleTableClick}
+				/>
 				<ReservationExp />
 			</div>
 			<div className='flex flex-col pt-16'>
-				<ReservationForm />
+				<ReservationForm
+					isOpen={isOpen}
+					date={date}
+					time={time}
+					count={count}
+					tableName={tableName}
+					onDateChange={setDate}
+					onTimeChange={setTime}
+					onCountChange={handleCountChange}
+					onSubmit={handleSubmit}
+					onClose={handleClose}
+				/>
 			</div>
 		</div>
 	)

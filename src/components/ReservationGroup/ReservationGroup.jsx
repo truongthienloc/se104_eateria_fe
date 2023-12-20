@@ -1,7 +1,7 @@
 import React from 'react'
 import clsx from 'clsx'
 
-export default function ReservationGroup({ title, data }) {
+export default function ReservationGroup({ title, data, onTableClick }) {
 	return (
 		<div className='w-96 flex flex-col gap-4 items-center border-primary border p-4 pb-8'>
 			<p className='font-bold'>{title}</p>
@@ -11,6 +11,7 @@ export default function ReservationGroup({ title, data }) {
 						key={value.id}
 						name={value.tablePosition}
 						status={value.tableStatus}
+						onClick={() => onTableClick(value)}
 					/>
 				))}
 			</div>
