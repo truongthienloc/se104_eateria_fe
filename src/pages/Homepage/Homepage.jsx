@@ -13,7 +13,7 @@ import popularDishes_picture5 from '~/assets/images/homePage/popularDishes/image
 import { useState, useEffect } from 'react'
 import HomeBanner from '~/components/Carousel/HomeBanner'
 import { api } from '~/services/axios'
-import { useSearchParams } from 'react-router-dom'
+import { NavLink, useNavigate, useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import slugifyFn from '~/utils/slugifyFn'
 
@@ -23,6 +23,7 @@ function Homepage() {
 	const [data, setdata] = useState([])
 	const [foodItem, setfoodItem] = useState([])
 	const [searchParams, setSearchParams] = useSearchParams()
+	const navigate = useNavigate()
 	const selectMenu = searchParams.get('menu') || menuList[0] || ''
 	const foods =
 		data.filter((item) => {
@@ -78,11 +79,41 @@ function Homepage() {
 						Món Ăn Phổ Biến
 					</p>
 					<div className='flex gap-x-5'>
-						<img src={popularDishes_picture1} alt='' />
-						<img src={popularDishes_picture2} alt='' />
-						<img src={popularDishes_picture3} alt='' />
-						<img src={popularDishes_picture4} alt='' />
-						<img src={popularDishes_picture5} alt='' />
+						<NavLink to={'/product-detail/23'}>
+							<img
+								src={popularDishes_picture1}
+								alt='Best seller'
+								className='transition-all hover:scale-110 hover:-translate-y-5'
+							/>
+						</NavLink>
+						<NavLink to={'/product-detail/49'}>
+							<img
+								src={popularDishes_picture2}
+								alt='Best seller'
+								className='transition-all hover:scale-110 hover:-translate-y-5'
+							/>
+						</NavLink>
+						<NavLink to={'/product-detail/51'}>
+							<img
+								src={popularDishes_picture3}
+								alt='Best seller'
+								className='transition-all hover:scale-110 hover:-translate-y-5'
+							/>
+						</NavLink>
+						<NavLink to={'/product-detail/50'}>
+							<img
+								src={popularDishes_picture4}
+								alt='Best seller'
+								className='transition-all hover:scale-110 hover:-translate-y-5'
+							/>
+						</NavLink>
+						<NavLink to={'/product-detail/34'}>
+							<img
+								src={popularDishes_picture5}
+								alt='Best seller'
+								className='transition-all hover:scale-110 hover:-translate-y-5'
+							/>
+						</NavLink>
 					</div>
 				</div>
 
@@ -130,9 +161,11 @@ function Homepage() {
 					</div>
 
 					<div className='flex justify-center mb-16 mt-12'>
-						<button className='font-normal text-2xl text-third bg-primary leading-6 justify-center p-3 w-[150px]'>
-							Xem thêm
-						</button>
+						<NavLink to={'/product'} >
+							<button className='font-normal text-2xl text-third bg-primary leading-6 justify-center p-3 w-[150px] hover:opacity-80'>
+								Xem thêm
+							</button>
+						</NavLink>
 					</div>
 				</div>
 			</div>

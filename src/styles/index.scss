@@ -27,7 +27,13 @@
 	--fourth-color: #eee7de;
 	--link-color: #4bff3c;
 }
-
+input, textarea, select{
+	background-color: #f9f9f9;
+	color: #213547;
+}
+textarea{
+	padding: 5px 10px;
+}
 a {
 	font-weight: 500;
 	color: #646cff;
