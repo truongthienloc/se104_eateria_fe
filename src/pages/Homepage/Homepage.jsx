@@ -86,12 +86,12 @@ function Homepage() {
 					</div>
 				</div>
 
-				<div className='flex flex-col items-center'>
+				<div className='flex flex-col items-center justify-center'>
 					<div>
 						<p className='mt-10 text-second text-4xl font-bold'>
 							Thực đơn của chúng tôi
 						</p>
-						<p className='mt-3 text-second text-xl font-normal mb-12'>
+						<p className='mt-3 text-second text-xl font-normal mb-12 text-center'>
 							Thank you for choosing Our Restaurant
 						</p>
 					</div>

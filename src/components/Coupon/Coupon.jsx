@@ -14,8 +14,7 @@ export const Coupon = ({ code, detail, release, expired }) => {
 					Từ ngày {release} đến ngày {expired}
 				</p>
 				<div
-					className='w-[130px] h-[44px] bg-primary text-third flex items-center justify-center
-            text-base hover:opacity-80'
+					className='w-[130px] h-[44px] bg-primary text-third flex items-center justify-center text-base hover:opacity-80'
 					role='button'>
 					Áp mã
 				</div>
