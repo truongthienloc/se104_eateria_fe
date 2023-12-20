@@ -76,12 +76,6 @@ export default function AddDishModal({ isOpen, onClose, onSubmit, addDishModal }
 							</div>
 							<div className='flex gap-8 items-center text-lg '>
 								<p className='w-[160px] font-medium'>Phân loại món ăn:</p>
-								{/* <input
-									type='text'
-									className='w-[300px] h-[40px] border-2 px-3 border-primary rounded-lg focus:outline-none'
-									value={addDishModal.kind}
-									onChange={addDishModal.handleChangeKind}
-								/> */}
 								<select name="kind" id="kind" 
 								value={addDishModal.kind} 
 								onChange={addDishModal.handleChangeKind} 
