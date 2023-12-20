@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 function useEditDishModal() {
 	const [id, setId] = useState(-1)
 	const [name, setName] = useState('')
-	const [kind, setKind] = useState('')
+	const [kind, setKind] = useState('Thức uống')
 	const [imgs, setImgs] = useState([])
 	const [price, setPrice] = useState('')
 	const [description, setDescription] = useState('')
