@@ -1,8 +1,8 @@
-function BookingDetail({ id, tableName, status, time, numOfClient, clientName, email }) {
+function BookingDetail({ id, isCheck, tableName, status, time, numOfClient, clientName, email, onCheck }) {
 	return (
 		<tr>
 			<td className='py-4 px-4  border-b border-gray-200 text-lg text-primary'>
-				<input className='mr-6' type='checkbox' /> {id}
+				<input className='mr-6' type='checkbox' checked={isCheck} onChange={onCheck} /> {id}
 			</td>
 			<td className='py-4 px-4 text-center border-b border-gray-200'>
 				{tableName}
