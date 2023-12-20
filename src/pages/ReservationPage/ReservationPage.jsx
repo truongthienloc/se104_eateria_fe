@@ -21,7 +21,13 @@ export const ReservationPage = () => {
 	const [isOpen, setIsOpen] = useState(false)
 
 	const handleCountChange = (e) => setCount(e.target.value)
-	const handleClose = () => setIsOpen(false)
+	const handleClose = () => {
+		const newTableData = tableData.map((value) =>
+			value.id !== tableId ? value : { ...value, tableStatus: 'Available' }
+		)
+		setTableData(newTableData)
+		setIsOpen(false)
+	}
 
 	const fetchTable = async () => {
 		try {
@@ -69,21 +75,27 @@ export const ReservationPage = () => {
 			const handleBookSuccess = (data) => {
 				toast.success('Đặt bàn thành công')
 				const newTable = tableData.map((value) =>
-					value.id !== data.table_id ? value : { ...value, tableStatus: 2 }
+					value.id !== data.table_id
+						? value
+						: { ...value, tableStatus: 'Occupied' }
 				)
 				setTableData(newTable)
 			}
 
 			const handleBroadcastBooked = (data) => {
 				const newTable = tableData.map((value) =>
-					value.id !== data.table_id ? value : { ...value, tableStatus: 2 }
+					value.id !== data.table_id
+						? value
+						: { ...value, tableStatus: 'Occupied' }
 				)
 				setTableData(newTable)
 			}
 
 			const handleBroadcastCancel = (data) => {
 				const newTable = tableData.map((value) =>
-					value.id !== data.table_id ? value : { ...value, tableStatus: 1 }
+					value.id !== data.table_id
+						? value
+						: { ...value, tableStatus: 'Available' }
 				)
 				setTableData(newTable)
 			}
@@ -101,6 +113,14 @@ export const ReservationPage = () => {
 	}, [socket, tableData])
 
 	const handleTableClick = (data) => {
+		const newTableData = tableData.map((value) =>
+			value.id !== data.id ? value : { ...value, tableStatus: 'Chose' }
+		)
+		setTableData(
+			newTableData.map((value) =>
+				value.id !== tableId ? value : { ...value, tableStatus: 'Available' }
+			)
+		)
 		setTableId(data.id)
 		setDate(null)
 		setTime(null)
@@ -128,20 +148,20 @@ export const ReservationPage = () => {
 	}
 
 	const groupData = useMemo(() => groupDataByTableFloor(tableData), [tableData])
-	console.log('groupData: ', groupData);
 
 	return (
 		<div className='flex flex-row p-8'>
 			<div className='flex flex-col w-[50%] gap-4 items-center'>
-				{groupData.length > 0 && groupData.map((floorData) => (
-					<ReservationGroup
-						key={floorData[0].tableFloor}
-						title={floorData[0].tableFloor}
-						data={floorData}
-						onTableClick={handleTableClick}
-					/>
-				))}
-				
+				{groupData.length > 0 &&
+					groupData.map((floorData) => (
+						<ReservationGroup
+							key={floorData[0].tableFloor}
+							title={floorData[0].tableFloor}
+							data={floorData}
+							onTableClick={handleTableClick}
+						/>
+					))}
+
 				<ReservationExp />
 			</div>
 			<div className='flex flex-col pt-16'>
