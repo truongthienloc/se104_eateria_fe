@@ -79,6 +79,7 @@ export const ReservationPage = () => {
 						? value
 						: { ...value, tableStatus: 'Occupied' }
 				)
+				setTableId(null)
 				setTableData(newTable)
 			}
 
@@ -131,10 +132,13 @@ export const ReservationPage = () => {
 
 	const handleSubmit = () => {
 		if (socket) {
-			const bookingTime = date + time
+			const bookingTime = `${dayjs(date).format('YYYY-MM-DD')} ${dayjs(time).format(
+				'HH:mm:ss'
+			)}`
+
 			socket.emit('BOOK_TABLE', {
 				table_id: tableId,
-				booking_time: dayjs(bookingTime).toISOString(),
+				booking_time: dayjs(new Date(bookingTime)).toISOString(),
 			})
 		}
 	}
