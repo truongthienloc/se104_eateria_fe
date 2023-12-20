@@ -141,27 +141,29 @@ export function ManageBookingPage() {
 				<div className='grid '>
 					<table className='text-lg bg-third '>
 						<thead className='text-primary '>
-							<th className='py-4 px-4 text-left border-b border-gray-200'>
-								Mã đặt bàn
-							</th>
-							<th className='py-4 px-4 text-center border-b border-gray-200'>
-								Mã bàn
-							</th>
-							<th className='py-4 px-4 text-center border-b border-gray-200'>
-								Tình trạng
-							</th>
-							<th className='py-4 px-4 text-center border-b border-gray-200'>
-								Thời gian đặt
-							</th>
-							<th className='py-4 px-4 text-center border-b border-gray-200'>
-								Số lượng khách
-							</th>
-							<th className='py-4 px-4 text-center border-b border-gray-200'>
-								Tên
-							</th>
-							<th className='py-4 px-4 text-center border-b border-gray-200'>
-								Số điện thoại
-							</th>
+							<tr>
+								<th className='py-4 px-4 text-left border-b border-gray-200'>
+									Mã đặt bàn
+								</th>
+								<th className='py-4 px-4 text-center border-b border-gray-200'>
+									Mã bàn
+								</th>
+								<th className='py-4 px-4 text-center border-b border-gray-200'>
+									Tình trạng
+								</th>
+								<th className='py-4 px-4 text-center border-b border-gray-200'>
+									Thời gian đặt
+								</th>
+								<th className='py-4 px-4 text-center border-b border-gray-200'>
+									Số lượng khách
+								</th>
+								<th className='py-4 px-4 text-center border-b border-gray-200'>
+									Tên
+								</th>
+								<th className='py-4 px-4 text-center border-b border-gray-200'>
+									Số điện thoại
+								</th>
+							</tr>
 						</thead>
 						<tbody>
 							{bookingData.map((booking) => (
