@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Navigate, Outlet } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Admin_Sidebar } from '~/components/Admin_Sidebar/Admin_Sidebar'
+import { ScrollToTopButton } from '~/components/ScrollToTop'
 
 export const AdminLayout = () => {
 	const user = useSelector((state) => state.user)
@@ -22,6 +23,7 @@ export const AdminLayout = () => {
 			<div className='flex'>
 				<Admin_Sidebar />
 				<Outlet />
+				<ScrollToTopButton />
 			</div>
 		</div>
 	)
