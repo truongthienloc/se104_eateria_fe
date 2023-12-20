@@ -6,8 +6,10 @@ import { Admin_Sidebar } from '~/components/Admin_Sidebar/Admin_Sidebar'
 
 export const AdminLayout = () => {
 	const user = useSelector((state) => state.user)
-	if (!user.isAdmin || !user.id) {
-		toast.error('Bạn cần đăng nhập để thực hiện việc quản lý!!!', {
+	console.log(user);
+	if (!user.id) {
+		console.log('hre');
+		toast.error('Bạn cần đăng nhập quyền admin để truy cập chức năng này !!!', {
 			toastId: 'needLoginAdmin',
 		})
 		return <Navigate to={'/admin/login'} replace />

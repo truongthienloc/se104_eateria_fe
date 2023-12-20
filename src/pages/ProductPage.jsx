@@ -24,7 +24,7 @@ export const ProductPage = () => {
 	}
 
 	const handleSearch = () => {
-		if (!inputValue.trim()) return;
+		if (!inputValue?.trim()) return;
 		setSearchParams({q: inputValue})
 	}
 	const handlePrice = (e) => {
@@ -56,7 +56,14 @@ export const ProductPage = () => {
 		fetchData()
 		const fetchSearchInput = async (search) =>{
 			try {
-				const res = await api.get('/dish/all/search',{keyword: {search}})
+				const res = await api.get('/dish/all/search',
+				new URLSearchParams({
+					'keyword': {search},
+				}), {
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					  }
+				})
 				setfirstList(res.data.data)
 				console.log(res.data);
 			} catch (error) {
@@ -64,7 +71,7 @@ export const ProductPage = () => {
 			}
 		}
 		const search = searchParams.get('q');
-		search.trim() ? fetchSearchInput(search) : fetchData();
+		search?.trim() ? fetchSearchInput(search) : fetchData();
 	}, [searchParams.get('q')])
 
 	return (
@@ -77,9 +84,9 @@ export const ProductPage = () => {
 					Hãy lựa chọn và thưởng thức món ngon bạn yêu thích !!
 				</p>
 				<div className='w-full flex justify-center'>
-					<div className='w-[460px] h-[80px] flex items-center justify-between my-8 bg-third border-4 rounded-2xl border-primary'>
+					<div className='w-[560px] h-[80px] flex items-center justify-between my-8 bg-third border-4 rounded-2xl border-primary'>
 						<input
-							className=' bg-third px-4 text-2xl font-normal outline-none'
+							className=' bg-third px-6 text-2xl font-normal outline-none'
 							type='text'
 							placeholder='Bạn muốn tìm món gì?'
 							value={inputValue}
@@ -93,7 +100,7 @@ export const ProductPage = () => {
 
 				<div className='flex items-center justify-center text-second mt-10'>
 					<select
-						className='w-[230px] h-[50px] bg-third border-2 rounded-xl border-primary pl-3 mr-4'
+						className='w-[230px] h-[50px] bg-third border-2 rounded-xl border-primary pl-3 mr-4 outline-none'
 						onChange={handlePrice}
 						value={price}>
 						<option value='' disabled hidden>
@@ -106,7 +113,7 @@ export const ProductPage = () => {
 					</select>
 
 					<select
-						className='w-[230px] h-[50px] bg-third border-2 rounded-xl border-primary pl-3 mr-4'
+						className='w-[230px] h-[50px] bg-third border-2 rounded-xl border-primary pl-3 mr-4 outline-none'
 						onChange={handleCategory}
 						value={category}>
 						<option value='' disabled hidden>
