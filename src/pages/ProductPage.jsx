@@ -3,6 +3,8 @@ import FoodItems from '~/components/Food_Items_ProductPage/FoodItems'
 import { FaSearch } from 'react-icons/fa'
 import { api } from '~/services/axios'
 import { toast } from 'react-toastify'
+import { useSearchParams } from 'react-router-dom'
+
 
 export const ProductPage = () => {
 	const [inputValue, setInputValue] = useState('')
@@ -11,6 +13,7 @@ export const ProductPage = () => {
 	const [data, setdata] = useState([])
 	const [firstList, setfirstList] = useState([])
 	const [secondList, setsecondList] = useState([])
+	const [searchParams, setSearchParams] = useSearchParams()
 	const HandleOnClick = (name) => {
 		setSearchParams({
 			menu: slugifyFn(name),
@@ -21,15 +24,8 @@ export const ProductPage = () => {
 	}
 
 	const handleSearch = () => {
-		// Handle the search logic here
-		console.log(
-			'Searching for:',
-			inputValue,
-			'in category:',
-			price,
-			'sorted by:',
-			selectedSortOption
-		)
+		if (!inputValue.trim()) return;
+		setSearchParams({q: inputValue})
 	}
 	const handlePrice = (e) => {
 		setPrice(e.target.value)
@@ -37,7 +33,13 @@ export const ProductPage = () => {
 	const handleCategory = (e) => {
 		setCategory(e.target.value)
 	}
-
+	// useEffect(() => {
+	// 	console.log('i',inputValue)
+	// 	console.log('s',searchParams.get('q'))
+	// 	if (inputValue === searchParams.get('q')) return;
+	// 	console.log('here');
+	// 	setInputValue(searchParams.get('q'));
+	// }, [searchParams.get('q')]);
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -52,7 +54,18 @@ export const ProductPage = () => {
 			}
 		}
 		fetchData()
-	}, [])
+		// const fetchSearchInput = async (search) =>{
+		// 	try {
+		// 		const res = await api.get(`/dish/all/search?keyword=${search}`)
+		// 		setfirstList(res.data.data)
+		// 		console.log(res.data);
+		// 	} catch (error) {
+		// 		console.log(error);
+		// 	}
+		// }
+		// const search = searchParams.get('q');
+		// search.trim() ? fetchSearchInput(search) : fetchData();
+	}, [searchParams.get('q')])
 
 	return (
 		<div className='flex-1 flex-col justify-center'>
@@ -69,10 +82,12 @@ export const ProductPage = () => {
 							className=' bg-third px-4 text-2xl font-normal outline-none'
 							type='text'
 							placeholder='Bạn muốn tìm món gì?'
-							// value={inputValue}
+							value={inputValue}
 							onChange={handleChange}
 						/>
-						<FaSearch className='mx-8 cursor-pointer text-xl text-second' />
+						<FaSearch 
+						className='mx-8 cursor-pointer text-xl text-second'
+						onClick={handleSearch} />
 					</div>
 				</div>
 

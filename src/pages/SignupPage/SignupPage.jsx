@@ -127,6 +127,9 @@ export default function SignupPage() {
 				if (status === 409) {
 					toast.error('Tài khoản đã tồn tại')
 				}
+				if (status === 403) {
+					toast.error('Mật khẩu ít nhất 8 kí tự bao gồm số và chữ cái')
+				}
 			}
 		}
 	}

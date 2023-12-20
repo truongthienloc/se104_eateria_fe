@@ -28,10 +28,12 @@ import { StatisticPage } from '~/pages/Admin/StatisticPage'
 import { PayPage } from '~/pages/PayPage/PayPage'
 import { BillDetailPage } from '~/pages/BillDetailPage'
 import { Notification } from '~/pages/Admin/Notification'
+import { ScrollToTop } from '~/components/ScrollToTop'
 
 function RootRoute() {
 	return (
 		<>
+		<ScrollToTop />
 			<Routes>
 				<Route path='/admin/login' element={<AdminLoginPage />} />
 				<Route path='/admin' element={<AdminLayout />}>

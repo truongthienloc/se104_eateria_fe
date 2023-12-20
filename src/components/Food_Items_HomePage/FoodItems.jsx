@@ -1,25 +1,33 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { increasement } from '~/features/cart/cartSlice'
 import { toast } from 'react-toastify'
 import { api } from '~/services/axios'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 function FoodItems({ item }) {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
+	const user = useSelector((state) => state.user)
 	const onNavigate = () => {
 		navigate(`/product-detail/${item.id}`)
 	}
 	const onAdd = (e) => {
 		e.stopPropagation()
-		dispatch(increasement(item))
-		toast.success(`Thêm ${item.dishName.toUpperCase()} vào giỏ hàng`)
-		const pushItemToCart = async () => {
-			try {
-				const post = await api.post('/bill/dish/add')
-			} catch (error) {
-				console.log(error)
-			}
+		if (!user.id) {
+			toast.error('Bạn cần đăng nhập để thực hiện chức năng này!!!', {
+				toastId: 'needLoginID',
+			})
+			navigate('/login')
+			return
+		}
+			dispatch(increasement(item))
+			toast.success(`Thêm ${item.dishName.toUpperCase()} vào giỏ hàng`)
+			const pushItemToCart = async () => {
+				try {
+					const post = await api.post('/bill/dish/add')
+				} catch (error) {
+					console.log(error)
+				}
 		}
 	}
 	const formattedMoney = (number) => {
@@ -42,7 +50,7 @@ function FoodItems({ item }) {
 					{item.dishName}
 				</p>
 				<p className='text-second text-xl font-normal'>
-					{formattedMoney(item.dishPrice)}
+					Giá {formattedMoney(item.dishPrice)}
 				</p>
 			</div>
 			<div className='flex justify-center items-center w-full pb-7'>

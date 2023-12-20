@@ -9,39 +9,39 @@ import { useSocket } from '~/services/websocket'
 
 export const ReservationPage = () => {
 	const [tableData, setTableData] = useState([])
-	const socket = useSocket()
+	// const socket = useSocket()
 
-	const fetchTable = async () => {
-		try {
-			const res = await api.get('/table/all')
-			const res2 = await api.get('/table/user')
-			const data2 = res2.data.data
-			const data = res.data.data.map((value) => {
-				if (!data2) return value
-				if (data2.some((data) => data.id === value.id)) {
-					return { ...value, tableStatus: 2 }
-				}
-				return value
-			})
-			setTableData(data)
-		} catch (error) {}
-	}
+	// const fetchTable = async () => {
+	// 	try {
+	// 		const res = await api.get('/table/all')
+	// 		const res2 = await api.get('/table/user')
+	// 		const data2 = res2.data.data
+	// 		const data = res.data.data.map((value) => {
+	// 			if (!data2) return value
+	// 			if (data2.some((data) => data.id === value.id)) {
+	// 				return { ...value, tableStatus: 2 }
+	// 			}
+	// 			return value
+	// 		})
+	// 		setTableData(data)
+	// 	} catch (error) {}
+	// }
 
-	useEffect(() => {
-		fetchTable()
-		socket.setSocketListener((e) => {
-			if (e.message === 'Book table successfully') {
-				toast.success('Đặt bàn thành công')
-				const newTable = tableData.map((value) =>
-					value.id !== e.table_id ? value : { ...value, tableStatus: 2 }
-				)
-				setTableData(newTable)
-			} else if (e.message === 'Table is occupied') {
-				toast.error('Bàn không có sẵn')
-			} else if (e.message === 'A table booked') {
-			}
-		})
-	}, [])
+	// useEffect(() => {
+	// 	fetchTable()
+	// 	socket.setSocketListener((e) => {
+	// 		if (e.message === 'Book table successfully') {
+	// 			toast.success('Đặt bàn thành công')
+	// 			const newTable = tableData.map((value) =>
+	// 				value.id !== e.table_id ? value : { ...value, tableStatus: 2 }
+	// 			)
+	// 			setTableData(newTable)
+	// 		} else if (e.message === 'Table is occupied') {
+	// 			toast.error('Bàn không có sẵn')
+	// 		} else if (e.message === 'A table booked') {
+	// 		}
+	// 	})
+	// }, [])
 
 	const user = useSelector((state) => state.user)
 	if (!user.id) {

@@ -3,7 +3,7 @@ import CallIcon from '@mui/icons-material/Call'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import logo from '~/assets/images/logo.svg'
 import deliveryImg from '~/assets/images/delivery.svg'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 function NavBar() {
 	return (
@@ -29,7 +29,7 @@ function NavBar() {
 						</Link>
 					</div>
 					{/* Update các endpoint vào của các trang vào đây */}
-					<NavItem href={'/'} text={'TRANG CHỦ'} />
+					<NavItem href={'/home'} text={'TRANG CHỦ'} />
 					<NavItem href={'/product'} text={'SẢN PHẨM'} />
 					<NavItem href={'/reservation'} text={'ĐẶT BÀN'} />
 					<NavItem href={'/about'} text={'GIỚI THIỆU'} />
@@ -64,8 +64,10 @@ export default NavBar
 
 function NavItem({ href, text }) {
 	return (
-		<Link to={href} className='uppercase text-second font-bold'>
+		<NavLink to={href} 
+			className='uppercase text-second font-bold hover:text-primary [&.active]:text-primary'
+		>
 			{text}
-		</Link>
+		</NavLink>
 	)
 }

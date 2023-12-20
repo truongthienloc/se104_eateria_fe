@@ -98,6 +98,10 @@ button {
 	}
 }
 
+#navbar.active {
+	color: var(--primary-color);
+}
+
 #admin-sidebar.active {
 	color: var(--primary-color);
 }
