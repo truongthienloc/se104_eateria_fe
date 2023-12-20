@@ -102,6 +102,9 @@ export default function LoginPage() {
 				if (status === 401) {
 					toast.error('Sai email hoặc password')
 				}
+				else if (status === 403) {
+					toast.error('Mật khẩu phải ít nhất 8 ký tự, bao gồm số và chữ cái')
+				}
 			}
 		}
 	}

@@ -14,6 +14,7 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 
 export const ProductDetail = () => {
+	const user = useSelector((state) => state.user)
 	const dispatch = useDispatch()
 	const [rating, setRating] = useState(null)
 	const [hover, setHover] = useState(null)
@@ -22,6 +23,13 @@ export const ProductDetail = () => {
 	const [data, setdata] = useState([])
 	let { id } = useParams()
 	const onAdd = () => {
+		if (!user.id) {
+			toast.error('Bạn cần đăng nhập để thực hiện chức năng này!!!', {
+				toastId: 'needLoginID',
+			})
+			// navigate('/login')
+			return
+		}
 		dispatch(increasement(dish))
 		toast.success(`Thêm ${dish.dishName.toUpperCase()} vào giỏ hàng`)
 		const pushItemToCart = async () => {
@@ -58,8 +66,9 @@ export const ProductDetail = () => {
 				console.log(error)
 			}
 		}
+		if (!id) return;
 		fetchDishData()
-	}, [])
+	}, [id])
 	return (
 		<div className='flex flex-col pb-10 pt-1 items-center'>
 			<div className='w-full h-[160px] mt-1 mb-5 bg-headerBanner bg-no-repeat bg-cover flex flex-col justify-center items-center gap-5'>
@@ -98,7 +107,7 @@ export const ProductDetail = () => {
 					<p className='max-w-xl font-normal'>{dish?.dishDescription}</p>
 					<div className='ml-80'>
 						<p className='my-6 text-second text-xl font-extrabold pt-3'>
-							{formattedMoney(dish?.dishPrice)}
+							Giá {formattedMoney(dish?.dishPrice)}
 						</p>
 						<button
 							onClick={onAdd}

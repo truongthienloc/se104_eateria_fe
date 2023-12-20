@@ -58,7 +58,7 @@ export const CartPage = () => {
 	const handleRemoveCartItem = (productID) => {
 		dispatch(deleteItem(productID))
 		let item = cart.cartList.filter((item) => item.id === productID)
-		toast.success(`Xóa toàn bô ${item?.[0].dishName.toUpperCase()} khỏi giỏ hàng`)
+		toast.success(`Xóa toàn bộ ${item?.[0].dishName.toUpperCase()} khỏi giỏ hàng`)
 	}
 
 	const handleDecQuantity = (productID) => {
@@ -74,6 +74,10 @@ export const CartPage = () => {
 	}
 
 	const handleOrderBtn = () => {
+		if (cart.total === 0 ) { 
+			toast.error('Giỏ hàng của bạn đang trống  !!! Hãy thêm sản phẩm vào giỏ hàng')
+			return;
+		}
 		setopenModal(true)
 	}
 	const handleCloseModal = () => {
@@ -205,8 +209,7 @@ export const CartPage = () => {
 						<div className='modal-container bg-fourth py-8 px-20 rounded-md'>
 							<h2 className='text-2xl font-bold mb-8'>Bạn muốn ?</h2>
 							<p className='italic mb-8'>
-								*Lưu ý: Mã giảm giá chỉ có thể áp dụng khi thanh toán trực
-								tuy
+								*Lưu ý: Mã giảm giá chỉ có thể áp dụng khi thanh toán trực tuyến
 							</p>
 							<div className='flex justify-center flex-col items-center gap-10'>
 								<div className='flex flex-row'>

@@ -1,16 +1,28 @@
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { increasement } from '~/features/cart/cartSlice'
 import { toast } from 'react-toastify'
 
 function FoodItems({ item }) {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
+	const user = useSelector((state) => state.user)
 	const onNavigate = () => {
 		navigate(`/product-detail/${item.id}`)
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth',
+		})
 	}
 	const onAdd = (e) => {
 		e.stopPropagation()
+		if (!user.id) {
+			toast.error('Bạn cần đăng nhập để thực hiện chức năng này!!!', {
+				toastId: 'needLoginID',
+			})
+			// navigate('/login')
+			return
+		}
 		dispatch(increasement(item))
 		toast.success(`Thêm ${item.dishName.toUpperCase()} vào giỏ hàng`)
 	}
@@ -22,7 +34,8 @@ function FoodItems({ item }) {
 	return (
 		<div
 			onClick={onNavigate}
-			className='flex flex-row w-[590px] h-[180px] border border-third rounded-2xl shadow-xl items-center justify-center gap-5 bg-fourth cursor-pointer hover:opacity-90'>
+			className='flex flex-row w-[590px] h-[180px] border border-third rounded-2xl shadow-xl items-center justify-center gap-5 bg-fourth cursor-pointer hover:opacity-90
+			'>
 			<div className='flex flex-col w-[400px] gap-8'>
 				<p className='text-primary font-normal text-2xl uppercase'>
 					{item.dishName}

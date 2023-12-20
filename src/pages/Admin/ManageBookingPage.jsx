@@ -7,9 +7,9 @@ import BookingDetail from '~/components/BookingDetail_ManageBooking/BookingDetai
 import { AddTableModal } from '~/components/Modal/AddTableModal'
 import { DeleteTableModal } from '~/components/Modal/DeleteTableModal'
 import { toast } from 'react-toastify'
-import { useSocket } from '~/services/websocket'
 import { DatePicker } from '@mui/x-date-pickers'
 import { Link } from 'react-router-dom'
+import useSocket from '~/hooks/useSocket'
 
 export function ManageBookingPage() {
 	const [showModalAdd, setShowModalAdd] = useState(false)
@@ -19,12 +19,21 @@ export function ManageBookingPage() {
 	const [bookingData, setBookingData] = useState([])
 	const [addingTableName, setAddingTableName] = useState('')
 
-	const socket = useSocket()
+	const { socket } = useSocket()
 
 	const fetchBooking = async () => {
 		try {
 			const res = await api.get('/table/all')
-			const booking = res.data.data
+			const booking = res.data.data.map((value) => ({ ...value, isCheck: false }))
+
+			// await Promise.all(
+			// 	res.data.data.map(async (value) => {
+			// 		const res_user = await api.get(`/user/${value.userId}`)
+			// 		const data = res.data
+			// 		return { ...value, isCheck: false, username: data.username, email: data.email }
+			// 	})
+			// )
+
 			setBookingData(booking)
 		} catch (error) {
 			console.log(error)
@@ -32,27 +41,44 @@ export function ManageBookingPage() {
 	}
 	useEffect(() => {
 		fetchBooking()
-		const handleMessage = (e) => {
-			if (e.message === 'Cancle table booking successfully') {
+	}, [])
+
+	useEffect(() => {
+		if (socket) {
+			const handleCancelSuccess = () => {
 				toast.success('Hủy đặt bàn thành công')
 				fetchBooking()
-				return
-			} else if (
-				e.message === 'Someone booked this table' ||
-				e.message === 'Table has not been booked yet'
-			) {
+			}
+
+			const handleCancelFail = () => {
 				toast.error('Hủy đặt bàn thất bại')
-				return
-			} else if (
-				e.message === 'A table booked' ||
-				e.message === 'A table booking was canceled'
-			) {
+			}
+
+			const handleOtherBooking = () => {
 				fetchBooking()
 			}
-		}
 
-		socket.sendMessage(handleMessage)
-	}, [])
+			socket.on('Cancle table booking successfully', handleCancelSuccess)
+			socket.on('Someone booked this table', handleCancelFail)
+			socket.on('Table has not been booked yet', handleCancelFail)
+			socket.on('A table booked', handleOtherBooking)
+			socket.on('A table booking was canceled', handleOtherBooking)
+
+			return () => {
+				socket.off('Cancle table booking successfully', handleCancelSuccess)
+				socket.off('Someone booked this table', handleCancelFail)
+				socket.off('Table has not been booked yet', handleCancelFail)
+				socket.off('A table booked', handleOtherBooking)
+				socket.off('A table booking was canceled', handleOtherBooking)
+			}
+		}
+	}, [socket])
+
+	const handleCheck = (id) => {
+		const booking = bookingData.find((value) => value.id === id)
+		booking.isCheck = !booking.isCheck
+		setBookingData([...bookingData])
+	}
 
 	const handleMouseEnter = () => {
 		setIsHovered(true)
@@ -80,6 +106,23 @@ export function ManageBookingPage() {
 			await fetchBooking()
 			setShowModalAdd(false)
 		} catch (error) {}
+	}
+
+	const handleBookingCancel = () => {
+		if (!socket) {
+			toast.error('Hủy đặt bàn thất bại')
+		}
+		try {
+			const checkedBooking = bookingData.filter((value) => value.isCheck)
+
+			checkedBooking.forEach((booking) => {
+				socket.emit('CANCEL_TABLE', { table_id: booking.id })
+			})
+
+			setShowModalCancel(false)
+		} catch (error) {
+			console.log('error: ', error)
+		}
 	}
 
 	return (
@@ -141,35 +184,48 @@ export function ManageBookingPage() {
 				<div className='grid '>
 					<table className='text-lg bg-third '>
 						<thead className='text-primary '>
-							<th className='py-4 px-4 text-left border-b border-gray-200'>
-								Mã đặt bàn
-							</th>
-							<th className='py-4 px-4 text-center border-b border-gray-200'>
-								Mã bàn
-							</th>
-							<th className='py-4 px-4 text-center border-b border-gray-200'>
-								Tình trạng
-							</th>
-							<th className='py-4 px-4 text-center border-b border-gray-200'>
-								Thời gian đặt
-							</th>
-							<th className='py-4 px-4 text-center border-b border-gray-200'>
-								Số lượng khách
-							</th>
-							<th className='py-4 px-4 text-center border-b border-gray-200'>
-								Tên
-							</th>
-							<th className='py-4 px-4 text-center border-b border-gray-200'>
-								Số điện thoại
-							</th>
+							<tr>
+								<th className='py-4 px-4 text-left border-b border-gray-200'>
+									Mã đặt bàn
+								</th>
+								<th className='py-4 px-4 text-center border-b border-gray-200'>
+									Mã bàn
+								</th>
+								<th className='py-4 px-4 text-center border-b border-gray-200'>
+									Tình trạng
+								</th>
+								<th className='py-4 px-4 text-center border-b border-gray-200'>
+									Thời gian đặt
+								</th>
+								<th className='py-4 px-4 text-center border-b border-gray-200'>
+									Số lượng khách
+								</th>
+								<th className='py-4 px-4 text-center border-b border-gray-200'>
+									Tên
+								</th>
+								<th className='py-4 px-4 text-center border-b border-gray-200'>
+									Số điện thoại
+								</th>
+							</tr>
 						</thead>
 						<tbody>
 							{bookingData.map((booking) => (
 								<BookingDetail
 									key={booking.id}
 									id={booking.id}
+									isCheck={booking.isCheck}
 									tableName={booking.tablePosition}
 									status={booking.tableStatus}
+									time={booking.users.length > 0
+										? booking.users[0].table_booking.bookingTime
+										: null}
+									clientName={
+										booking.users.length > 0
+											? booking.users[0].username
+											: null
+									}
+									// email={booking.users[0].email}
+									onCheck={() => handleCheck(booking.id)}
 								/>
 							))}
 						</tbody>
@@ -198,7 +254,7 @@ export function ManageBookingPage() {
 						hover:bg-primary focus:outline-none'
 							onClick={() => {
 								setShowModalCancel(true)
-								toast.info('Chức năng này vẫn đang được phát triền')
+								// toast.info('Chức năng này vẫn đang được phát triền')
 							}}>
 							Hủy đặt bàn
 						</button>
@@ -288,7 +344,8 @@ export function ManageBookingPage() {
 													className='bg-white text-primary  border-primary border-2 font-bold uppercase rounded-lg text-sm px-4 py-2 outline-none hover:bg-primary hover:border-primary hover:text-white  focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
 													type='button'
 													onClick={() =>
-														setShowModalCancel(false)
+														// setShowModalCancel(false)
+														handleBookingCancel()
 													}>
 													Xác nhận
 												</button>

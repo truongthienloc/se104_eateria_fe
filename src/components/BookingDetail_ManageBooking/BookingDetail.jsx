@@ -1,8 +1,26 @@
-function BookingDetail({ id, tableName, status, time, numOfClient, clientName, email }) {
+import dayjs from 'dayjs'
+
+function BookingDetail({
+	id,
+	isCheck,
+	tableName,
+	status,
+	time,
+	numOfClient,
+	clientName,
+	email,
+	onCheck,
+}) {
 	return (
 		<tr>
 			<td className='py-4 px-4  border-b border-gray-200 text-lg text-primary'>
-				<input className='mr-6' type='checkbox' /> {id}
+				<input
+					className='mr-6'
+					type='checkbox'
+					checked={isCheck}
+					onChange={onCheck}
+				/>{' '}
+				{id}
 			</td>
 			<td className='py-4 px-4 text-center border-b border-gray-200'>
 				{tableName}
@@ -19,7 +37,13 @@ function BookingDetail({ id, tableName, status, time, numOfClient, clientName, e
 				)}
 			</td>
 			<td className='py-4 px-4 text-center border-b border-gray-200'>
-				{time || <div className='w-10 h-[1px] bg-black m-auto'></div>}
+				{time ? (
+					<pre className='font-roboto'>{`${dayjs(time).format(
+						'DD/MM/YYYY'
+					)}\n${dayjs(time).format('HH:mm')}`}</pre>
+				) : (
+					<div className='w-10 h-[1px] bg-black m-auto'></div>
+				)}
 			</td>
 			<td className='py-4 px-4 text-center border-b border-gray-200'>
 				{numOfClient || <div className='w-10 h-[1px] bg-black m-auto'></div>}

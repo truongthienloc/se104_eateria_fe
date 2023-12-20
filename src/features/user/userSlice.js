@@ -21,6 +21,7 @@ export const userSlice = createSlice({
 			return { ...state, ...actions.payload }
 		},
 		resetUserValue: () => {
+			localStorage.removeItem('access-token')
 			return initialState
 		},
 	},
