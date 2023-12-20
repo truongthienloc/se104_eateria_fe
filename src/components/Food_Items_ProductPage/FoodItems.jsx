@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { increasement } from '~/features/cart/cartSlice'
 import { toast } from 'react-toastify'
 
 function FoodItems({ item }) {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
+	const user = useSelector((state) => state.user)
 	const onNavigate = () => {
 		navigate(`/product-detail/${item.id}`)
 		window.scrollTo({
@@ -15,6 +16,13 @@ function FoodItems({ item }) {
 	}
 	const onAdd = (e) => {
 		e.stopPropagation()
+		if (!user.id) {
+			toast.error('Bạn cần đăng nhập để thực hiện chức năng này!!!', {
+				toastId: 'needLoginID',
+			})
+			// navigate('/login')
+			return
+		}
 		dispatch(increasement(item))
 		toast.success(`Thêm ${item.dishName.toUpperCase()} vào giỏ hàng`)
 	}

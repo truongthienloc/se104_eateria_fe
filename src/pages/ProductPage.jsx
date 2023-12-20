@@ -33,13 +33,13 @@ export const ProductPage = () => {
 	const handleCategory = (e) => {
 		setCategory(e.target.value)
 	}
-	// useEffect(() => {
-	// 	console.log('i',inputValue)
-	// 	console.log('s',searchParams.get('q'))
-	// 	if (inputValue === searchParams.get('q')) return;
-	// 	console.log('here');
-	// 	setInputValue(searchParams.get('q'));
-	// }, [searchParams.get('q')]);
+	useEffect(() => {
+		console.log('i',inputValue)
+		console.log('s',searchParams.get('q'))
+		if (inputValue === searchParams.get('q')) return;
+		console.log('here');
+		setInputValue(searchParams.get('q'));
+	}, [searchParams.get('q')]);
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -54,17 +54,17 @@ export const ProductPage = () => {
 			}
 		}
 		fetchData()
-		// const fetchSearchInput = async (search) =>{
-		// 	try {
-		// 		const res = await api.get(`/dish/all/search?keyword=${search}`)
-		// 		setfirstList(res.data.data)
-		// 		console.log(res.data);
-		// 	} catch (error) {
-		// 		console.log(error);
-		// 	}
-		// }
-		// const search = searchParams.get('q');
-		// search.trim() ? fetchSearchInput(search) : fetchData();
+		const fetchSearchInput = async (search) =>{
+			try {
+				const res = await api.get('/dish/all/search',{keyword: {search}})
+				setfirstList(res.data.data)
+				console.log(res.data);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		const search = searchParams.get('q');
+		search.trim() ? fetchSearchInput(search) : fetchData();
 	}, [searchParams.get('q')])
 
 	return (
