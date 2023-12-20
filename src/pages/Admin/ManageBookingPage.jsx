@@ -25,6 +25,15 @@ export function ManageBookingPage() {
 		try {
 			const res = await api.get('/table/all')
 			const booking = res.data.data.map((value) => ({ ...value, isCheck: false }))
+
+			// await Promise.all(
+			// 	res.data.data.map(async (value) => {
+			// 		const res_user = await api.get(`/user/${value.userId}`)
+			// 		const data = res.data
+			// 		return { ...value, isCheck: false, username: data.username, email: data.email }
+			// 	})
+			// )
+
 			setBookingData(booking)
 		} catch (error) {
 			console.log(error)
@@ -207,6 +216,15 @@ export function ManageBookingPage() {
 									isCheck={booking.isCheck}
 									tableName={booking.tablePosition}
 									status={booking.tableStatus}
+									time={booking.users.length > 0
+										? booking.users[0].table_booking.bookingTime
+										: null}
+									clientName={
+										booking.users.length > 0
+											? booking.users[0].username
+											: null
+									}
+									// email={booking.users[0].email}
 									onCheck={() => handleCheck(booking.id)}
 								/>
 							))}

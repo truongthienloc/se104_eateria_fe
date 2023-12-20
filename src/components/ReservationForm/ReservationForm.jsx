@@ -48,7 +48,7 @@ export default function ReservationForm({
 					</label>
 					<OutlinedInput
 						className='flex-[2] [&_input]:text-center'
-						placeholder='2'
+						placeholder='0'
 						value={count}
 						onChange={onCountChange}
 					/>

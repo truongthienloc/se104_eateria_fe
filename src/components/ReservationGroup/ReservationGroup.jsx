@@ -22,6 +22,7 @@ export default function ReservationGroup({ title, data, onTableClick }) {
 function ReservationItem({ name, status, onClick }) {
 	return (
 		<button
+			disabled={status === 'Occupied'}
 			className={clsx(
 				'w-16 h-10 flex items-center justify-center bg-[#ECECEC] border-none rounded hover:opacity-80 transition-opacity',
 				{
