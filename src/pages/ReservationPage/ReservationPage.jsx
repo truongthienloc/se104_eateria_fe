@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { ReservationGroup, ReservationExp } from '~/components/ReservationGroup'
 import { ReservationForm } from '~/components/ReservationForm'
 import { useSelector } from 'react-redux'
@@ -8,6 +8,7 @@ import { api } from '~/services/axios'
 // import { useSocket } from '~/services/websocket'
 import useSocket from '~/hooks/useSocket'
 import dayjs from 'dayjs'
+import { groupDataByTableFloor } from '~/helpers/reservation'
 
 export const ReservationPage = () => {
 	const [tableData, setTableData] = useState([])
@@ -26,14 +27,15 @@ export const ReservationPage = () => {
 		try {
 			const res = await api.get('/table/all')
 			const res2 = await api.get('/table/user')
-			const data2 = res2.data.data
-			const data = res.data.data.map((value) => {
-				if (!data2) return value
-				if (data2.some((data) => data.id === value.id)) {
-					return { ...value, tableStatus: 2 }
-				}
-				return value
-			})
+			// const data2 = res2.data.data
+			const data = res.data.data
+			// .map((value) => {
+			// 	if (!data2) return value
+			// 	if (data2.some((data) => data.id === value.id)) {
+			// 		return { ...value, tableStatus:  }
+			// 	}
+			// 	return value
+			// })
 			setTableData(data)
 		} catch (error) {}
 	}
@@ -124,16 +126,22 @@ export const ReservationPage = () => {
 		})
 		return <Navigate to={'/login'} replace />
 	}
+
+	const groupData = useMemo(() => groupDataByTableFloor(tableData), [tableData])
+	console.log('groupData: ', groupData);
+
 	return (
 		<div className='flex flex-row p-8'>
 			<div className='flex flex-col w-[50%] gap-4 items-center'>
-				{/* <ReservationGroup title={'Tầng 1'} data={tableData.floor1}/>
-				<ReservationGroup title={'Tầng 2'} data={tableData.floor2}/> */}
-				<ReservationGroup
-					title={'Tầng 1'}
-					data={tableData}
-					onTableClick={handleTableClick}
-				/>
+				{groupData.length > 0 && groupData.map((floorData) => (
+					<ReservationGroup
+						key={floorData[0].tableFloor}
+						title={floorData[0].tableFloor}
+						data={floorData}
+						onTableClick={handleTableClick}
+					/>
+				))}
+				
 				<ReservationExp />
 			</div>
 			<div className='flex flex-col pt-16'>

@@ -25,8 +25,8 @@ function ReservationItem({ name, status, onClick }) {
 			className={clsx(
 				'w-16 h-10 flex items-center justify-center bg-[#ECECEC] border-none rounded hover:opacity-80 transition-opacity',
 				{
-					'bg-unreserve text-white': status === 1,
-					'bg-reserved text-white': status === 2,
+					'bg-unreserve text-white': status === 'Occupied',
+					'bg-reserved text-white': status === 'Chose',
 				}
 			)}
 			onClick={onClick}>
