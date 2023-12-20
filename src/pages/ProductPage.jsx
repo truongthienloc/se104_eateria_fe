@@ -24,8 +24,12 @@ export const ProductPage = () => {
 	}
 
 	const handleSearch = () => {
-		if (!inputValue.trim()) return;
-		setSearchParams({q: inputValue})
+		if (!inputValue?.trim()) return;
+		setSearchParams({keyword: inputValue})
+	}
+	const onKeyDown = (e) => {
+		if (e.key !== 'Enter') return;
+		handleSearch()
 	}
 	const handlePrice = (e) => {
 		setPrice(e.target.value)
@@ -34,12 +38,10 @@ export const ProductPage = () => {
 		setCategory(e.target.value)
 	}
 	useEffect(() => {
-		console.log('i',inputValue)
-		console.log('s',searchParams.get('q'))
-		if (inputValue === searchParams.get('q')) return;
-		console.log('here');
-		setInputValue(searchParams.get('q'));
-	}, [searchParams.get('q')]);
+		if (inputValue === searchParams.get('keyword')) return;
+		setInputValue(searchParams.get('keyword'));
+	}, [searchParams.get('keyword')]);
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -53,20 +55,22 @@ export const ProductPage = () => {
 				console.log(error)
 			}
 		}
-		fetchData()
 		const fetchSearchInput = async (search) =>{
 			try {
-				const res = await api.get('/dish/all/search',{keyword: {search}})
+				const res = await api.get('/dish/all/search',{params: { 'keyword' : search}})
 				setfirstList(res.data.data)
+				setsecondList([])
 				console.log(res.data);
 			} catch (error) {
 				console.log(error);
 			}
 		}
-		const search = searchParams.get('q');
-		search.trim() ? fetchSearchInput(search) : fetchData();
-	}, [searchParams.get('q')])
+		const search = searchParams.get('keyword');
+		console.log('search',search);
+		search?.trim() ? fetchSearchInput(search) : fetchData();
+	}, [searchParams.get('keyword')])
 
+	console.log('1stlist',firstList);
 	return (
 		<div className='flex-1 flex-col justify-center'>
 			<div>
@@ -77,13 +81,14 @@ export const ProductPage = () => {
 					Hãy lựa chọn và thưởng thức món ngon bạn yêu thích !!
 				</p>
 				<div className='w-full flex justify-center'>
-					<div className='w-[460px] h-[80px] flex items-center justify-between my-8 bg-third border-4 rounded-2xl border-primary'>
+					<div className='w-[560px] h-[80px] flex items-center justify-between my-8 bg-third border-4 rounded-2xl border-primary'>
 						<input
-							className=' bg-third px-4 text-2xl font-normal outline-none'
+							className=' bg-third px-6 text-2xl font-normal outline-none'
 							type='text'
 							placeholder='Bạn muốn tìm món gì?'
 							value={inputValue}
 							onChange={handleChange}
+							onKeyDown={onKeyDown}
 						/>
 						<FaSearch 
 						className='mx-8 cursor-pointer text-xl text-second'
@@ -93,7 +98,7 @@ export const ProductPage = () => {
 
 				<div className='flex items-center justify-center text-second mt-10'>
 					<select
-						className='w-[230px] h-[50px] bg-third border-2 rounded-xl border-primary pl-3 mr-4'
+						className='w-[230px] h-[50px] bg-third border-2 rounded-xl border-primary pl-3 mr-4 outline-none'
 						onChange={handlePrice}
 						value={price}>
 						<option value='' disabled hidden>
@@ -106,7 +111,7 @@ export const ProductPage = () => {
 					</select>
 
 					<select
-						className='w-[230px] h-[50px] bg-third border-2 rounded-xl border-primary pl-3 mr-4'
+						className='w-[230px] h-[50px] bg-third border-2 rounded-xl border-primary pl-3 mr-4 outline-none'
 						onChange={handleCategory}
 						value={category}>
 						<option value='' disabled hidden>
@@ -120,7 +125,7 @@ export const ProductPage = () => {
 
 				<div className='max-w-[1400px] mx-auto my-10 flex flex-wrap gap-12 items-center justify-center'>
 					{firstList.length > 0 &&
-						data.map((item) => {
+						firstList.map((item) => {
 							return <FoodItems key={item.id} item={item} />
 						})}
 				</div>
@@ -134,7 +139,7 @@ export const ProductPage = () => {
 				</div>
 				<div className='max-w-[1400px] mx-auto my-10 flex flex-wrap gap-12 items-center justify-center'>
 					{secondList.length > 0 &&
-						data.map((item) => {
+						secondList.map((item) => {
 							return <FoodItems key={item.id} item={item} />
 						})}
 				</div>

@@ -4,9 +4,12 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { api } from '~/services/axios'
+import { initUserValue } from '~/features/user/userSlice'
+import { useDispatch } from 'react-redux'
 
 export function AdminLoginPage() {
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [showPassword, setShowPassword] = useState(false)
@@ -47,6 +50,7 @@ export function AdminLoginPage() {
 						const res_cur = await api.get('user/me/info')
 
 						if (res_cur.data.data.isAdmin) {
+							dispatch(initUserValue(res_cur.data.data))
 							resolve(res)
 						} else {
 							localStorage.removeItem('access-token')
