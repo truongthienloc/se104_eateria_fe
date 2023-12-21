@@ -132,6 +132,10 @@ export const ReservationPage = () => {
 
 	const handleSubmit = () => {
 		if (socket) {
+			if (!date || !time) {
+				toast.error('Không được để trống thời gian')
+				return 
+			}
 			const bookingTime = `${dayjs(date).format('YYYY-MM-DD')} ${dayjs(time).format(
 				'HH:mm:ss'
 			)}`
