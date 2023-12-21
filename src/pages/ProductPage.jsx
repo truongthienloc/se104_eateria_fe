@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react'
 import FoodItems from '~/components/Food_Items_ProductPage/FoodItems'
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { FaSearch } from 'react-icons/fa'
 import { api } from '~/services/axios'
 import { toast } from 'react-toastify'
@@ -30,6 +31,9 @@ export const ProductPage = () => {
 	const onKeyDown = (e) => {
 		if (e.key !== 'Enter') return;
 		handleSearch()
+	}
+	const clearInput = () =>{
+		setInputValue('')
 	}
 	const handlePrice = (e) => {
 		setPrice(e.target.value)
@@ -70,7 +74,7 @@ export const ProductPage = () => {
 		search?.trim() ? fetchSearchInput(search) : fetchData();
 	}, [searchParams.get('keyword')])
 
-	console.log('1stlist',firstList);
+	console.log('1stlist',inputValue);
 	return (
 		<div className='flex-1 flex-col justify-center'>
 			<div>
@@ -90,9 +94,12 @@ export const ProductPage = () => {
 							onChange={handleChange}
 							onKeyDown={onKeyDown}
 						/>
+						<div className='flex flex-row justify-center'>
+						{inputValue && <HighlightOffIcon onClick={clearInput} className='cursor-pointer'/>}
 						<FaSearch 
 						className='mx-8 cursor-pointer text-xl text-second'
 						onClick={handleSearch} />
+						</div>
 					</div>
 				</div>
 
