@@ -22,6 +22,7 @@ export function SalesInfoPage() {
 
 	const fetchSale = async () => {
 		try {
+			username.includes()
 			const res = await api.get('/bill/all')
 			const sale = res.data.data
 			setSaleData(sale)

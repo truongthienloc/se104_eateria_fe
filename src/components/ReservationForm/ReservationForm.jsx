@@ -68,7 +68,7 @@ export default function ReservationForm({
 			<button
 				className='py-2 bg-primary text-white transition-opacity hover:opacity-80 border-none'
 				onClick={onSubmit}>
-				Kiểm tra thông tin đặt bàn
+				Đặt bàn
 			</button>
 		</div>
 	)
