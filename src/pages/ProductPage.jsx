@@ -4,6 +4,7 @@ import { FaSearch } from 'react-icons/fa'
 import { api } from '~/services/axios'
 import { toast } from 'react-toastify'
 import { useSearchParams } from 'react-router-dom'
+import bannerImage from '~/assets/images/productPage/banner/image_itemsList_ooffer_2.svg'
 
 
 export const ProductPage = () => {
@@ -133,7 +134,7 @@ export const ProductPage = () => {
 				<div className='max-w-[1400px] mx-auto'>
 					<img
 						className='w-full object-fill'
-						src='src\assets\images\productPage\banner\image_itemsList_ooffer_2.svg'
+						src={bannerImage}
 						alt='banner image'
 					/>
 				</div>
